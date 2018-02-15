@@ -1,0 +1,221 @@
+<?page title="UEM - Gabinete de Planificação"?>
+<?link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"?>
+<?link rel="icon" href="/images/favicon.ico" type="image/x-icon"?>
+
+<!--css-->
+<?link href="css/clndr.css" rel="stylesheet"?>
+<?link href="css/style.css" rel="stylesheet"?>
+<?link href="css/style-responsive.css" rel="stylesheet"?>
+<?link href="css/components.css" rel="stylesheet"?>
+<?link href="css/zkCalendar.css" rel="stylesheet" ?>
+<?link href="css/sipma.css" rel="stylesheet"?>
+<?link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" ?>
+<?link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" ?>
+<?link href="js/data-tables/DT_bootstrap.css" rel="stylesheet" ?>
+<?link href="js/iCheck/skins/flat/red.css" rel="stylesheet"?>
+<?link href="css/dataTables.tableTools.css" rel="stylesheet"?>
+
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?taglib uri="http://www.zkoss.org/zkspring/security" prefix="sec"?>
+<?meta content="text/html; charset=UTF-8" pageEncoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.spring.DelegatingVariableResolver"?>
+ <zk xmlns:x="xhtml" xmlns:zk="zk" sclass="row">
+ 	<div apply="org.zkoss.bind.BindComposer" id="main"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.MainVM')">
+		<x:section>
+			<div sclass="left-side sticky-left-side">
+			    <div sclass="logo" style=" margin-bottom: 15%;">
+			    	<x:center>
+			    		<image src="/images/logo-uemmm.png" width="99.6%" style="background-color: #f0f2f7; border-right: 1px solid #ccc"></image><x:p></x:p>
+			        	<label  style="color: #65cea7; font-family: 'Agent fb'; font-size: 20px;">${c:l('appName')}</label><x:br/>
+			        	<label  value="Gabinete de Planificacao" style="color: white; font-family: 'Agent fb'; font-size: 20px; "></label>
+			   		 </x:center>
+			    </div>
+			    <div sclass="left-side-inner">
+			        <x:ul class="nav nav-pills nav-stacked custom-nav">
+			        	<x:br/>
+			            <x:li class="active">
+			            	<x:a href="#" onClick="@command('home')"><x:i class="fa fa-home"></x:i> <x:span>${c:l('initialPage')}</x:span></x:a>
+			            </x:li>
+			            <x:li class="menu-list" 
+			            	if="${sec:isAnyGranted('MANEGE_ACCOUNT,MANAGE_CRITICAL_AREAS,MANAGE_CRITERIAS,MANAGE_PHASES,MANAGE_SOURCES,MANAGE_STRATEGIC_OBJECTIVES,MANAGE_ORGANS,MANAGE_ORGAN_ROLES, MANAGE_SECTORS, MANAGE_ORGAN_TYPES,MANEGE_ATTACHMENT')}">
+			            	<x:a href=""><x:i class="fa fa-building-o"></x:i> <x:span>${c:l('parameterization')}</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                	<x:li if="${sec:isAnyGranted('MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('registerAttachmentType')"><x:i class="fa fa-spinner"></x:i>Tipo de Domumento</x:a></x:li>
+			                	<x:li if="${sec:isAnyGranted('MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('registerAttachment')"><x:i class="fa fa-spinner"></x:i>Documento</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_CRITICAL_AREAS,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('criticalAreas')"><x:i class="fa fa-bar-chart-o"></x:i>${c:l('areaOfManagement')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_CRITERIAS,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('criteria')"><x:i class="fa fa-crop"></x:i>${c:l('activitiesCriteria')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_PHASES,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('phases')"><x:i class="fa fa-exchange"></x:i>${c:l('activitiesPhases')}</x:a></x:li>
+			                   	<x:li if="${sec:isAnyGranted('IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('registerProjectInvestiment')"><x:i class="fa fa-spinner"></x:i>Projecto de Investimento</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('registerCategoria')"><x:i class="fa fa-spinner"></x:i>Categoria</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('registerSuperRubric')"><x:i class="fa fa-spinner"></x:i>Super Rúbrica</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('registerRubric')"><x:i class="fa fa-spinner"></x:i> Grande Rúbrica</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('registerSubRubric')"><x:i class="fa fa-spinner"></x:i>Rúbrica</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_SOURCES,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('font')"><x:i class="fa fa-money"></x:i>${c:l('budgetSources')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_STRATEGIC_OBJECTIVES,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('strategicObjectives')"><x:i class="fa fa-globe"></x:i>${c:l('strategicObjectives')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_ORGAN_TYPES,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('profession')"><x:i class="fa fa-info-circle"></x:i>Função</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_ORGAN_TYPES,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('registerOrganType')"><x:i class="fa fa-info-circle"></x:i>Tipo de Unidade/Orgão</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_ORGANS,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('registerOrgan')"><x:i class="fa fa-suitcase"></x:i>Unidade/Orgão</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_ORGAN_ROLES,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('role')"><x:i class="fa fa-paperclip"></x:i>${c:l('role')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_SECTORS,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('registerSector')"><x:i class="fa fa-suitcase"></x:i> ${c:l('registerSector')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_SECTORS,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('registerSubSector')"><x:i class="fa fa-suitcase"></x:i>${c:l('registerSubSector')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANEGE_ACCOUNT')}"><x:a href="#" onClick="@command('accountType')"><x:i class="fa fa-spinner"></x:i>${c:l('registerAccountType')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANEGE_ACCOUNT')}"><x:a href="#" onClick="@command('registerBank')"><x:i class="fa fa-spinner"></x:i>${c:l('registerBank')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANEGE_ACCOUNT')}"><x:a href="#" onClick="@command('registerConter')"><x:i class="fa fa-spinner"></x:i>${c:l('registerCounter')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANEGE_ACCOUNT')}"><x:a href="#" onClick="@command('registerCoin')"><x:i class="fa fa-spinner"></x:i>${c:l('registerCoin')}</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANEGE_ACCOUNT')}"><x:a href="#" onClick="@command('registerPurpose')"><x:i class="fa fa-spinner"></x:i>${c:l('registerPurpose')}</x:a></x:li>
+			                  </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('MANAGE_CYCLES,IS_SUPER_ADMIN,MANAGE_ACTIONS')}">
+			            	<x:a href=""><x:i class="fa fa-clock-o"></x:i> <x:span>Criação de Ciclo</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li if="${sec:isAnyGranted('MANAGE_CRITICAL_AREAS,IS_SUPER_ADMIN,MANAGE_CYCLES')}"><x:a href="#" onClick="@command('registerCycle')"><x:i class="fa fa-plus"></x:i> Registo de Ciclo</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_CRITICAL_AREAS,IS_SUPER_ADMIN,MANAGE_CYCLES')}"><x:a href="#" onClick="@command('listCycle')"><x:i class="fa fa-list"></x:i> Listar Ciclos</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_CRITICAL_AREAS,IS_SUPER_ADMIN,MANAGE_CYCLES,MANAGE_ACTIONS')}"><x:a href="#" onClick="@command('detailCycle')"><x:i class="fa fa-list"></x:i>Detalhes do Ciclo</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('MANAGE_ACTIONS,IS_SUPER_ADMIN')}">
+			            	<x:a href=""><x:i class="fa fa-flask"></x:i> <x:span>Actividade</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('registerAction')"><x:i class="fa fa-tasks"></x:i> Actividades</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('listAction')"><x:i class="fa fa-tasks"></x:i> Detalhes das Actividades</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('listActionBudget')"><x:i class="fa fa-tasks"></x:i> Plano Orcamental</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('integAction')"><x:i class="fa fa-thumbs-o-up"></x:i> Integrar Actividade</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('SECTOR_ALLOCATIONS,EMPLOYEE_ALLOCATIONS,MANAGE_ACTIONS,IS_SUPER_ADMIN,IS_EMPLOYEE')}">
+			            	<x:a href=""><x:i class="fa fa-map-marker"></x:i> <x:span>Alocacao de Actividades</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li if="${sec:isAnyGranted('SECTOR_ALLOCATIONS,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('allocationToSector')"><x:i class="fa fa-mail-forward"></x:i> Alocacao ao Sector</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('EMPLOYEE_ALLOCATIONS,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('allocationToEmployee')"><x:i class="fa fa-mail-forward"></x:i> Alocar aos Funcionarios</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('IS_EMPLOYEE,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('employeeExecution')"><x:i class="fa fa-check-square-o"></x:i> Execução Funcionario</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('SectorChief,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('sectorChiefExecution')"><x:i class="fa fa-check-square-o"></x:i> Execução Sector</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_ACTIONS,IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}"><x:a href="#" onClick="@command('organExecution')"><x:i class="fa fa-check-square-o"></x:i> Execução Orgao</x:a></x:li>
+			                    <x:li if="${sec:isAnyGranted('MANAGE_ACTIONS,IS_SUPER_ADMIN')}"><x:a href="#" onClick="@command('reportExecution')"><x:i class="fa fa-question-circle"></x:i> Reportar Realização da Fase</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('PLANNING_OFFICE')}">
+			            	<x:a href=""><x:i class="fa fa-search"></x:i> <x:span>Monitorar</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('phaseMonitor')"><x:i class="fa fa-spinner"></x:i> Monitorar Fase</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('activitiesMonitor')"><x:i class="fa fa-spinner"></x:i> Monitoria de Actividades</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('PLANNING_OFFICE')}">
+			            	<x:a href=""><x:i class="fa fa-tasks"></x:i> <x:span>Plano de Actividades</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('planningActions')"><x:i class="fa fa-tasks"></x:i> Ver Plano</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('showDetails')"><x:i class="fa fa-tasks"></x:i> Ver Detalhes</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('showBudget')"><x:i class="fa fa-tasks"></x:i> Ver Orcamentos</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('MANAGE_EMPLOYEES,IS_SUPER_ADMIN')}">
+			            	<x:a href=""><x:i class="fa fa-user"></x:i> <x:span>Funcionários</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('newEmployee')"><x:i class="fa fa-plus"></x:i> Adicionar Novo</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('showEmployees')"><x:i class="fa fa-list"></x:i> Ver Todos</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('IS_SUPER_ADMIN')}">
+			            	<x:a href=""><x:i class="fa fa-key"></x:i> <x:span>Administração</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('permissions')"><x:i class="fa fa-lock"></x:i> Permissões</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('userRoles')"><x:i class="fa fa-male"></x:i> Perfis de Utilizadores</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('adminUsers')"><x:i class="fa fa-users"></x:i> Utilizadores</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('PLANNING_OFFICE,SectorChief,OrganChief')}">
+			            	<x:a href=""><x:i class="fa fa-sun-o"></x:i> <x:span>Delegações</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('delegateEmployees')"><x:i class="fa fa-unlock"></x:i> Delegar Funcionários</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('PLANNING_OFFICE')}">
+			            	<x:a href=""><x:i class="fa fa-ellipsis-h"></x:i><x:span>Personalização</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('notifications')"><x:i class="fa fa-volume-up"></x:i> Notificações</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('IS_SUPER_ADMIN,MANEGE_ATTACHMENT')}">
+			            	<x:a href=""><x:i class="fa fa-ellipsis-h"></x:i><x:span>Documentos</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('listDocument')"><x:i class="fa fa-volume-up"></x:i>Detalhes de Documentos  </x:a></x:li>
+			                </x:ul>
+			            </x:li>
+				            <x:li class="menu-list" if="${sec:isAnyGranted('PLANNING_OFFICE,SectorChief,OrganChief')}">
+			            	<x:a href=""><x:i class="fa fa-bar-chart-o"></x:i><x:span>Estatisticas</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('teachingStaff')"><x:i class="fa fa-spinner"></x:i> Corpo Docente</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('enrollment')"><x:i class="fa fa-spinner"></x:i>Matriculas</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('receptions')"><x:i class="fa fa-spinner"></x:i>Admissoes</x:a></x:li>
+			                    <x:li><x:a href="#" onClick="@command('planning')"><x:i class="fa fa-spinner"></x:i>Planificacao</x:a></x:li>
+			                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('MANEGE_ACCOUNT')}">
+			            	<x:a href=""><x:i class="fa fa-bar-chart-o"></x:i><x:span>Contactos</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                    <x:li><x:a href="#" onClick="@command('registerCellPhone')"><x:i class="fa fa-spinner"></x:i>Contactos Balcao</x:a></x:li>
+		                </x:ul>
+			            </x:li>
+			            <x:li class="menu-list" if="${sec:isAnyGranted('MANEGE_ACCOUNT')}">
+			            	<x:a href=""><x:i class="fa fa-bar-chart-o"></x:i><x:span>Financas</x:span></x:a>
+			                <x:ul class="sub-menu-list">
+			                  <x:li><x:a href="#" onClick="@command('registerAccount')"><x:i class="fa fa-spinner"></x:i>Registar Conta</x:a></x:li>
+			                  <x:li><x:a href="#" onClick="@command('detailAccount')"><x:i class="fa fa-spinner"></x:i>Detalhes da Conta</x:a></x:li>
+		                </x:ul>
+			            </x:li>
+			             <x:li class="">
+			            	<x:a href="#" onClick="@command('helpdesk')"><x:i class="fa fa-comment"></x:i> <x:span>HelpDesk <x:label class="label label-danger">novo</x:label></x:span></x:a>
+			            </x:li>
+			        </x:ul>
+			    </div>
+			</div>
+			<div sclass="main-content" >
+			    <div sclass="header-section">
+			        <div sclass="menu-right">
+			            <x:ul class="notification-menu">
+			            	<x:li if="${vm.notifications.size() != 0}">
+		                        <x:a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+		                            <x:i class="fa fa-envelope-o"></x:i>
+		                            <x:span class="badge">${vm.notifications.size()}</x:span>
+		                        </x:a>
+		                        <x:div class="dropdown-menu dropdown-menu-head pull-right">
+		                            <x:h5 class="title">Você tem ${vm.notifications.size()} Notificações </x:h5>
+		                            <x:ul class="dropdown-list normal-list">
+		                                <x:li class="new" forEach="${vm.notifications}">
+		                                    <x:a href="" onClick="@command('allNotifications')">
+		                                        <x:span class="thumb"></x:span>
+		                                        <x:span class="desc"><x:i class="fa fa-info-circle"></x:i>
+		                                          <x:span class="name">${each.title}</x:span>
+		                                          <x:span class="msg">${each.description.substring(0, 70)}...</x:span>
+		                                        </x:span>
+		                                    </x:a>
+		                                </x:li>
+		                                <x:li class="new"><x:a href="" onClick="@command('allNotifications')">Visualizar todas notificações</x:a></x:li>
+		                            </x:ul>
+		                        </x:div>
+		                    </x:li>
+			                <x:li>
+			                    <x:a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			                        <image src="/images/u70.png"/>
+			                        ${authentication.name}
+			                        <x:span class="caret"></x:span>
+			                    </x:a>
+			                    <x:ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+			                        <x:li><x:a href="#" onClick="@command('userProfile')"><x:i class="fa fa-user"></x:i>Perfil </x:a></x:li>
+			                        <x:li><x:a href="j_spring_security_logout" ><x:i class="fa fa-sign-out"></x:i> Sair</x:a></x:li>
+			                    </x:ul>
+			                </x:li>
+			            </x:ul>
+			        </div>
+			    </div>
+			    <div sclass="col-md-12" id="breadcrumb"></div>
+			    <div sclass="wrapper" id="mainlayout"></div>
+			    <x:footer>
+			        2015 CIUEM - Centro de Informática da Universidade Eduardo Mondlane
+			    </x:footer>
+			</div>
+		</x:section>
+	</div>
+	<include src="scripts.zul" id="scriptsInclude"></include>
+</zk>

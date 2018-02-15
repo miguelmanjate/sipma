@@ -1,0 +1,84 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" 
+		        viewModel="@id('vm')@init('mz.ciuem.sipma.vm.DelegationVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Detalhes Delegações
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">           
+			<div sclass="col-lg-12">
+				<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Funcionário</x:th>
+				            <x:th>Permissões</x:th>
+				            <x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.delegations)">
+				        	<template name="children">
+				        		<custom-attributes delId = "${each.id}"/>
+						        <x:tr class="gradeX">
+						            <x:td>${each.employee.fullName()}</x:td>
+						            <x:td><x:li forEach="${each.permissions}">${each.permissionname}</x:li></x:td>
+						            <x:td>
+						            	<button zclass="btn btn-danger btn-xs" onClick="@command('removeDelegation', delegationId = delId)" iconSclass="fa fa-minus">
+						            		<custom-attributes delId = "${each.id}"/>
+						            	</button>
+						            </x:td>
+						        </x:tr>
+					        </template>
+				        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+			</div>
+		 	<div sclass="form-horizontal col-lg-12"  
+		        form="@id('fx') @load(vm.delegation) @save(vm.delegation, before='delegate')">
+	             <div sclass="form-horizontal">
+	             	 <div sclass="form-group">
+	             	 	<x:label class="col-lg-1 col-sm-2 control-label">Funcionário</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox onSelect="@command('correctPermissions', emp=self.selectedItem.value)" selectedItem="@bind(fx.employee)" model="@load(vm.employees)" mold="select" sclass="form-control m-bot15">
+			                    <template name="model" var="e">
+			                 		<listitem label="${e.fullName()}" value="${e}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	             	 </div>
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Permissões</x:label>
+	                      <div sclass="col-sm-8">
+	                      	  <dualListBox id="selectedPermissions" model="@load(vm.permissions)"></dualListBox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Observação</x:label>
+	                      <div sclass="col-sm-8">
+	                          <textbox sclass="form-control no-resize" rows="3" value="@bind(fx.comment)"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="col-md-12"><x:br/>
+			             <div sclass="form-group">
+			             	<x:label class="col-lg-1 col-sm-2 control-label" ></x:label>
+			                <div sclass="col-lg-4 col-lg-2">
+			                  <button disabled="@load(empty fx.employee)" zclass="btn btn-success btn-sm" iconSclass="fa fa-unlock-alt" onClick="@command('delegate')"  label="Delegar"></button>
+			              	</div>
+			             </div>
+		             </div>
+	             </div> 
+			 </div>
+		  </div>
+        </x:section>
+	</div>
+</div>
+</zk>

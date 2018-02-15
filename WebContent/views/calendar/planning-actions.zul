@@ -1,0 +1,27 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row" apply="mz.ciuem.sipma.controller.PlanningController">
+	    <div class="col-md-12">
+            <div sclass="panel">
+                <x:header class="panel-heading">
+                    Plano de Actividades
+                </x:header>
+                <div sclass="panel-body">
+                	<x:code>Legenda: </x:code><x:p></x:p>
+                	<label sclass="label label-primary">A</label> = Act. de Outros Orgãos <x:p></x:p>
+                    <label sclass="label label-primary" style="background-color: #65CEA7;">A</label> = Act. do Gebinete <separator height="30px"></separator>
+		            <hlayout sclass="z-valign-middle">
+		                <button id="today" zclass="btn btn-sm btn-default" label="Hoje" />
+		                <button id="prev" zclass="btn btn-sm btn-default" iconSclass="fa fa-angle-double-left"/>
+		                <button id="next" zclass="btn btn-sm btn-default" iconSclass="fa fa-angle-double-right"/>
+		                <separator width="50px" />
+		                <x:label><x:i class="fa fa-filter"></x:i>Filtrar :</x:label>
+		                <textbox id="filter" sclass="form-control"/>
+		                <button id="applyFilter" zclass="btn btn-sm btn-default" iconSclass="fa fa-search" label="Aplicar"/>
+		                <button id="resetFilter" zclass="btn btn-sm btn-default" label="Limpar"/>
+		            </hlayout><separator width="60px" />
+                    <calendars id="calendars" height="600px" mold="month" firstDayOfWeek="Sunday" readonly="true"></calendars>
+                </div>
+            </div>
+        </div>
+   </div>
+</zk>

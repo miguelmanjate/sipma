@@ -1,0 +1,46 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window id="win" width="45%"
+	    position="center" action="show: slideDown({duration: 100}); hide: slideUp({duration: 100})">
+	    <div sclass="row">
+			<div sclass="col-md-12">
+				<x:section class="panel">
+		          <x:header class="panel-heading">
+		             Comentar
+		              <x:span class="tools pull-right">
+		                  <a class="fa fa-times" href="javascript:;" onClick="win.detach()"></a>
+		              </x:span>
+		          </x:header>
+		          <div sclass="panel-body">
+		             <div sclass="form-horizontal col-lg-12">
+			             <x:label></x:label>
+			             <div sclass="form-horizontal">
+							 <div sclass="form-group">
+			                      <x:label class="col-lg-2 col-sm-2 control-label">Orgão</x:label>
+			                      <div sclass="col-sm-4">
+			                          <x:b><x:code>${vm.loggedOrgan.designation}</x:code></x:b>
+			                      </div>
+			                  </div>
+			                  <div sclass="form-group">
+			                      <x:label class="col-lg-2 col-sm-2 control-label">Comentários</x:label>
+			                      <div sclass="col-sm-8">
+			                         <textbox value="@bind(vm.comment.comment)" sclass="form-control no-resize" rows="5"> </textbox>
+			                      <custom-attributes comment ="ao.comment.id"/>
+			                      </div>
+			                  </div>
+			                  <div sclass="col-md-12">
+			                  	<x:label class="col-lg-2 col-sm-2 control-label"></x:label>
+					             <div sclass="form-group">
+					                <div sclass="col-lg-4 col-lg-1">
+					                  <button zclass="btn btn-success btn-sm" onClick="@command('commentAllocation')"
+					                  	 iconSclass="fa fa-save" label="Gravar"></button>
+					              	</div>
+					             </div>
+				             </div>
+			             </div> 
+		             </div>
+		          </div>
+		        </x:section>
+		    </div>
+		 </div>    
+	</window>
+</zk>

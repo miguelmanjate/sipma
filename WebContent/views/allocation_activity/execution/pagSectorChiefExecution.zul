@@ -1,0 +1,132 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+    <div sclass="row" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('mz.ciuem.sipma.vm.SectorExecutionVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Analisar Execuções dos funcionários e reportar progresso
+	          </x:header>
+	          <div sclass="panel-body">
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+	             	<x:table class="display table table-bordered table-striped" id="dynamic-table">
+                           <x:thead>
+                           <x:tr>
+                           	   <x:th></x:th>
+                               <x:th>Actividades do sector</x:th>
+                               <x:th class="hidden-phone">Data de Inicio</x:th>
+                               <x:th>Data de Fim</x:th>
+                               <x:th>Percentagem</x:th>
+                               <x:th>Reportar</x:th>
+                           </x:tr>
+                           </x:thead>
+                           <x:tbody>
+                           	<radiogroup id="rgChosed">
+                           		<div
+                           			children="@load(vm.allocations)">
+                           			<template name="children"
+                           				var="alloc">
+                           				<custom-attributes
+                           					allocation="${alloc.id}" />
+                           				<x:tr>
+                           					<x:td>
+                           						<x:center>
+                           							<custom-attributes
+                           								actId="${alloc.id}" />
+                           							<x:label
+                           								class="btn-success iradio_flat-red"
+                           								style="margin-top: 35%">
+                           								<separator
+                           									height="1.5px">
+                           								</separator>
+                           								<radio
+                           									onCheck="@command('chooseSectorAllocation', allocId = actId)" />
+                           							</x:label>
+                           						</x:center>
+                           					</x:td>
+                           					<x:td>
+                           						${alloc.task}
+                           					</x:td>
+                           					<x:td>
+                           						${vm.sdf.format(alloc.startDate)}
+                           					</x:td>
+                           					<x:td>
+                           						${vm.sdf.format(alloc.endDate)}
+                           					</x:td>
+                           					<x:td>${vm.rate}</x:td>
+                           					<x:td>
+                           						<custom-attributes
+                           							actId="${alloc.id}" />
+                           						<button
+                           							zclass="btn btn-default btn-sm"
+                           							iconSclass="fa fa-info"
+                           							onClick="@command('reportPage', alloc = actId, tgt = mainlayout, bc = breadcrumb)"
+                           							label="Reportar">
+                           						</button>
+                           					</x:td>
+                           				</x:tr>
+                           			</template>
+                           		</div>
+                           	</radiogroup>
+                           </x:tbody>
+                       </x:table>
+	             </div>
+	            
+	             <div id="tbl" visible="@load(not empty vm.empAllocs)">
+		             <x:table class="table table-bordered">
+					 		<x:tr>
+					 			<x:th></x:th>
+					 			<x:th>Nível de Execução das tarefas</x:th>
+					 			<x:th>Prazo</x:th>
+					 			<x:th>Funcionário</x:th>
+					 			<x:th>%</x:th>
+					 		</x:tr>
+					 		<radiogroup>
+					 		<div children="@load(vm.empAllocs)">
+					 			<template name="children" var="ea">
+							 		<x:tr>
+							 			<x:td><x:center>
+                           					<custom-attributes empAllocId = "${ea.id}"/>
+                           					<x:label class="btn-success iradio_flat-red" style="margin-top: 25%">
+                           						<separator height="1.5px"></separator>
+						                 		<radio onCheck="@command('findEmpExecutions', allocId = empAllocId)"/>
+						                 	</x:label>
+                           				</x:center></x:td>
+							 			<x:td>${ea.task}</x:td>
+							 			<x:td>${vm.sdf.format(ea.endDate)}</x:td>
+							 			<x:td>${ea.responsible.fullName()}</x:td>
+							 			<x:td>${ea.rate()}</x:td>
+							 		</x:tr>
+						 		</template>
+					 		</div></radiogroup>
+					 	</x:table>
+				 </div><separator height="30px"></separator>
+				 <div id="master" visible="@load(not empty vm.empExecs)">
+				 	 <x:code>Tarefas Desenvolvidas</x:code>
+		             <x:table class="table table-bordered">
+					 		<x:tr>
+					 			<x:th>Data</x:th>
+					 			<x:th>Actividades Realizadas</x:th>
+					 			<x:th>Anexos</x:th>
+					 		</x:tr>
+					 		<radiogroup>
+					 		<div children="@load(vm.empExecs)">
+					 			<template name="children" var="ee">
+							 		<x:tr>
+							 			<x:td>${vm.sdf.format(ee.date)}</x:td>
+							 			<x:td>${ee.taskAlso}</x:td>
+							 			<x:td>
+							 				<x:li forEach="${ee.attachments}">
+							 					<custom-attributes file="${each.id}"/>
+							 					<x:a href="#" onClick="@command('download', attachId = file)">${each.fileName}</x:a>
+							 				</x:li>
+							 			</x:td>
+							 		</x:tr>
+						 		</template>
+					 		</div></radiogroup>
+					 	</x:table>
+				 </div>
+	            </div>
+	        </x:section>
+	    </div>
+	 </div>
+</zk>

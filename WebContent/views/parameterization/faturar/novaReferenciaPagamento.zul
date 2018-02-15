@@ -1,0 +1,160 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.NovaReferenciaPagVM')" >
+
+		<div sclass="col-md-12">
+			<x:section class="panel">
+
+				<div sclass="panel-body">
+					<x:header class="panel-heading">
+						Cliente
+					</x:header>
+
+					<div sclass="form-horizontal" id="" >
+						<div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Nome</x:label>
+	                      <div sclass="col-sm-2">
+	                           <x:label class="col-lg-2 col-sm-2 control-label "></x:label>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Telefone</x:label>
+	                      <div sclass="col-sm-2">
+	                          <x:label class="col-lg-2 col-sm-2 control-label "></x:label>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+                        <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">NUIT</x:label>
+	                      <div sclass="col-sm-2">
+	                           <x:label class="col-lg-2 col-sm-2 control-label "></x:label>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Emeil</x:label>
+	                      <div sclass="col-sm-2">
+	                          <x:label class="col-lg-2 col-sm-2 control-label "></x:label>
+	                      </div>
+	                    </div>
+	                  </div>
+
+					</div>
+
+					<x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Fatura
+					</x:header>
+					
+					<div sclass="form-horizontal" id="" >
+						<div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Numero</x:label>
+	                      <div sclass="col-sm-2">
+	                           <x:label class="col-lg-2 col-sm-2 control-label "></x:label>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Validade</x:label>
+	                      <div sclass="col-sm-2">
+	                          <x:label class="col-lg-2 col-sm-2 control-label "></x:label>
+	                      </div>
+	                  </div>
+					</div>
+					
+					<x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Serviços da Factura
+					</x:header>
+					
+					<div sclass="form-group">
+
+						<div sclass="col-sm-12">
+							<div sclass="form-group col-lg-12">
+
+								<div>
+									<listbox id="" checkmark=""
+										rows="4" multiple="true"
+										emptyMessage="Sem dados pesquisados no momento">
+										<listhead>
+											<listheader label=" "
+												width="6%" />
+											<listheader
+												label="Serviço" sort="auto(name)" width="25%" />
+											<listheader
+												label="Descrição" sort="auto(description)" />
+											<listheader label="Codigo" />
+											<listheader label="Preço Unitário" />
+											<listheader label="Quantidade" />
+											<listheader label="Total" />
+	
+										</listhead>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+						
+										</listitem>										
+									</listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+				    <div sclass="form-group">
+
+									<div sclass="col-lg-12"
+										align="right">
+										<button
+											zclass="btn btn-default btn-sm" iconSclass=""
+											id="" onClick=" "
+											label="Referencias Anterios">
+										</button>
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass="fa fa-print"
+											id="btnPrint" onClick=""
+											label="Visualizar Toda Lista">
+										</button>
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass="fa fa-print"
+											id="" onClick="" label="Imprimir Lista">
+										</button>
+
+									</div>
+					</div>
+					<x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Emitir Nova Referencia de Pagamento
+					</x:header>			
+                  	<div sclass="form-horizontal" id="" >
+                      <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Valor Pago</x:label>
+	                      <div sclass="col-sm-2">
+                             <x:label class="col-lg-2 col-sm-2 control-label"> </x:label>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Valor Restante</x:label>
+	                      <div sclass="col-sm-2">
+	                           <x:label class="col-lg-2 col-sm-2 control-label"> </x:label>
+	                      </div>
+	                        <x:label
+								class="col-lg-1 col-sm-1 control-label">
+							</x:label>
+	                       <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="" label="Emitir" onClick=""></button>
+	                  </div>
+                      
+                        <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Valor a Pago</x:label>
+	                      <div sclass="col-sm-2">
+	                           <textbox value=""  sclass="form-control" placeholder=" MT"></textbox>
+	                      </div>
+                          <x:label class="col-lg-2 col-sm-2 control-label">Descrição</x:label>
+                       	  <div sclass="col-sm-2">
+	                           <textbox value="" rows="3" sclass="form-control"></textbox>
+	                      </div>
+	                      	<x:label
+								class="col-lg-1 col-sm-1 control-label">
+							</x:label>
+	                          <button zclass="btn btn-default btn-sm" iconSclass="" id="" label="Cancelar" onClick="@command('voltarPagamento', tgt = mainlayout, bc = breadcrumb)"></button>
+	                    </div>              
+					</div>
+                  
+				</div>
+			</x:section>
+		</div>
+	</div>
+</zk>

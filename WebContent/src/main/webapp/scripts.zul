@@ -1,0 +1,17 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<x:script src="js/jquery-1.10.2.min.js" type="text/javascript"></x:script>
+	<x:script src="js/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></x:script>
+	<x:script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></x:script>
+	<x:script src="js/bootstrap.min.js" type="text/javascript"></x:script>
+	<x:script src="js/modernizr.min.js" type="text/javascript"></x:script>
+	<x:script src="js/jquery.nicescroll.js" type="text/javascript"></x:script>
+	<x:script src="js/underscore-min.js" type="text/javascript"></x:script>
+	<x:script src="js/scripts.js" type="text/javascript"></x:script>
+	<x:script src="js/jquery.dataTables.js" type="text/javascript"></x:script>
+	<x:script src="js/data-tables/DT_bootstrap.js" type="text/javascript"></x:script>
+	<x:script src="js/dataTables.tableTools.js"></x:script>
+	<x:script src="js/dynamic_table_init.js" type="text/javascript"></x:script>
+	<x:script src="js/jquery.mousewheel.min.js"></x:script>
+	<x:script src="js/iCheck/jquery.icheck.js"></x:script>
+	<x:script src="js/icheck-init.js"></x:script>
+</zk>

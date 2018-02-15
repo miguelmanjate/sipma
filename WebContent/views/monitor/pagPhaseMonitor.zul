@@ -1,0 +1,56 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+			  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.PhaseMonitorVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Monitorar Fases
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<x:span class="tools pull-right">
+	          		<button iconSclass="fa fa-print" zclass="btn btn-default btn-sm" onClick="@command('reprotByOrgan')">Por Orgão</button>
+	          		<separator orient="vertical"></separator>
+	          		<button iconSclass="fa fa-print" zclass="btn btn-default btn-sm">Por Fases</button><x:br/>
+	          	</x:span><x:br/><x:br/>
+	          	<div class="adv-table" id="monitFases" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Ciclo</x:th>
+				            <x:th>Fase</x:th>
+				            <x:th>Data</x:th>
+				            <x:th class="hidden-phone">Orgao</x:th>
+				            <x:th class="hidden-phone">Acusar Recepcao?</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        	<div children="@load(vm.phasesOrganCycle)">
+				        		<template name="children" var="pc">
+				        			<x:tr>
+					        			<custom-attributes mdlId = "${pc.id}" /> 
+					        			<x:td>${pc.phaseCycle.cycle}</x:td>
+							            <x:td>${pc.phaseCycle.phase.designacao}</x:td>
+							            <x:td>${vm.sdf.format(pc.realizationDate)}</x:td>
+							            <x:td>${pc.organ.initials}</x:td>
+							        	<x:td class="center hidden-phone">
+							        		<checkbox sclass="todo-check" checked="${pc.acepted}" visible="@load(pc.acepted eq 'success')" onCheck="@command('acept', phaseId = mdlId)"></checkbox>
+							        		<x:label class="label label-success" visible="@load(pc.acepted and pc.successfully)">Recebido</x:label>
+							        		<button label="Ver" iconSclass="fa fa-eye" visible="${!pc.successfully}" onClick="@command('extendPhase', phaseId = mdlId)" zclass="btn btn-default btn-sm"></button>
+							        	</x:td>
+						        	</x:tr>
+				        		</template>
+				        	</div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+			     <iframe id="iframe" width="100%" height="90%"/>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

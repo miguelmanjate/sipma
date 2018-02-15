@@ -1,0 +1,45 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('mz.ciuem.sipma.vm.CicleVM')">
+		
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Ciclos
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Ciclo</x:th>
+				            <x:th class="hidden-phone">Fases do Ciclo</x:th>
+				            <x:th>Orgaos Participantes</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.cycles)">
+		                    <template name="children">
+				               <x:tr class="gradeX">
+				                      <x:td>${each.subject}</x:td>
+				                     <x:td>
+							              <x:li forEach="${each.phaseCycles}">${each.phase.designacao}</x:li>
+							          </x:td>
+					                   <x:td>
+							              <x:li forEach="${each.organs}">${each.designation}</x:li>
+							          </x:td>
+				                </x:tr>
+				            </template>
+				         </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

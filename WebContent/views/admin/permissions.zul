@@ -1,0 +1,68 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.PermissionVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Permissões
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="phase">
+      <!--    	 <div sclass="form-horizontal" form="@id('fx') @load(vm.permission) @save(vm.permission, before='save')">
+				 <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Permissão</x:label>
+                      <div sclass="col-sm-6">
+                          <textbox sclass="form-control uppercase" constraint="no empty" value="@bind(fx.permissionname)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Descrição</x:label>
+                      <div sclass="col-sm-6">
+                          <textbox sclass="form-control" rows="5" value="@bind(fx.description)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                  	<separator></separator>
+                  	<div sclass="col-lg-2 col-lg-2"></div>
+                      <div sclass="col-lg-2 col-lg-2">
+                          <button zclass="btn btn-success" iconSclass="fa fa-check" id="btnSave" label="Registar" onClick="@command('save')"></button>
+                      </div>
+                      <div sclass="col-lg-1 col-lg-2">
+                          <button zclass="btn btn-default" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+                      </div>
+                      <div sclass="col-lg-2 col-lg-2">
+	                      <button zclass="btn btn-warning" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+	                  </div>
+                  </div>
+             </div>  --> 
+             <div sclass="form-group col-lg-12">
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				        	<x:th>Permissão</x:th>
+				        	<x:th>Descrição</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+					         <div children="@load(vm.permissions)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.permissionname}</x:td>
+							            <x:td>${each.description}</x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

@@ -1,0 +1,301 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.NewFactura')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Registar Fatura
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">
+          	 <div sclass="col-md-6">
+          	 		<x:header class="panel-heading">
+						Detalhes da Factura
+					</x:header>
+					   	 
+             <div sclass="form-horizontal" >
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Numero de Fatura</x:label>
+                      <div sclass="col-sm-3">
+                          <x:label class="col-lg-2 col-sm-1 control-label"></x:label>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Descricao da Fatura</x:label>
+                       <div sclass="col-sm-4">
+	                      <textbox value=""  sclass="form-control" placeholder="Assunto da factura"></textbox>
+	                   </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Inicio</x:label>
+                      <div sclass="col-lg-4">
+                          <datebox width="100%" format="dd-MM-yyyy" ></datebox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Fim</x:label>
+                      <div sclass="col-lg-4">
+                          <datebox width="100%" format="dd-MM-yyyy" ></datebox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-3 control-label">Razao do desconto/Multa</x:label>
+                          <div sclass="col-sm-4">
+                             <listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+                      </div>
+                  </div>
+
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Observacoes</x:label>
+                      <div sclass="col-lg-6">
+                          <textbox sclass="form-control no-resize" rows="2" placeholder="Observacoes//" ></textbox>
+                      </div>
+                  </div>
+                  
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-3 control-label">Moeda</x:label>
+                          <div sclass="col-sm-4">
+                             <listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+                      </div>
+                  </div>
+
+              </div>
+             </div>
+             <div sclass="col-md-6">
+                	<x:header class="panel-heading">
+						Detalhes do Cliente
+					</x:header>
+					
+                 <div sclass="form-horizontal" >
+                  <div sclass="form-group">
+                      <div sclass="col-sm-4">
+                          <textbox value=""  sclass="form-control" placeholder="codigo, nome, apelido"></textbox>
+                      </div>
+                      <div sclass="col-sm-4">
+                         <button zclass="btn btn-success btn-sm" iconSclass="fa fa-plus"
+							id="" onClick="@command('viewCustomer', tgt = mainlayout, bc = breadcrumb)" label="Registar | Pesquisar Cliente">
+						</button>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Cliente</x:label>
+                       <div sclass="col-sm-8">
+	                      <x:label class="col-lg-4 col-sm-4 control-label"></x:label>
+	                   </div>
+                  </div>
+                  <div sclass="form-group">
+                   <x:label class="col-lg-4 col-sm-4 control-label">Tipo</x:label>
+                       <div sclass="col-sm-4">
+	                      <x:label class="col-lg-2 col-sm-2 control-label"></x:label>
+	                   </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">NUIT</x:label>
+                      <div sclass="col-lg-4">
+                          <x:label class="col-lg-4 col-sm-4 control-label"></x:label>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Email</x:label>
+                      <div sclass="col-lg-6">
+                          <x:label class="col-lg-4 col-sm-4 control-label"></x:label>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Contacto</x:label>
+                      <div sclass="col-lg-8">
+                          <x:label class="col-lg-4 col-sm-4 control-label"></x:label>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-4 col-sm-4 control-label">Endereco</x:label>
+                      <div sclass="col-lg-8">
+                          <x:label class="col-lg-6 col-sm-6 control-label"></x:label>
+                      </div>
+                  </div>
+
+              </div>
+             </div>
+             
+              <div sclass="col-sm-12">					
+                       <x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Itens da Factura
+					   </x:header>
+					   
+				<div sclass="form-group">
+                      <div sclass="col-sm-4">
+                          <textbox value=""  sclass="form-control" placeholder="codigo, descricao, rubrica"></textbox>
+                      </div>
+                      <div sclass="col-sm-4">
+                         <button zclass="btn btn-success btn-sm" iconSclass="fa fa-plus"
+							id="" onClick="@command('viewAddItens')" label="Adicionar Itens">
+						</button>
+                      </div>
+                  </div>                             
+						    <div sclass="form-group">
+							<div sclass="form-group col-lg-12">
+
+								<div>
+									<listbox id="" checkmark=""
+										rows="4" multiple="true"
+										emptyMessage="Sem dados pesquisados no momento">
+										<listhead>
+											<listheader label=" "
+												width="6%" />
+											<listheader
+												label="Codigo Item" sort="auto(name)" width="15%" />
+											<listheader
+												label="Serviço " sort="auto(description)" />
+											<listheader label="Descrição do Serviço" />
+											<listheader label="Preço Un" />
+											<listheader label="Quantidade" />
+											<listheader label="Plano de Pagamento" />
+											<listheader label="SubTotal" />
+	
+										</listhead>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+						
+										</listitem>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="Valor" />
+											<listcell label="MT" />
+						
+										</listitem>
+										
+									</listbox>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				<div sclass="col-md-12">
+				
+					  <x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Itens da Factura
+					   </x:header>
+				 <div sclass="form-horizontal" > 
+                  <div sclass="form-group"> 
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Forma de Pagamento</x:label>
+	                      <div sclass="col-sm-2">
+                             <listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+	                    </div>
+                  </div>
+                 </div>
+				 <div sclass="col-md-6"> 
+                     <div sclass="form-group">
+							<div sclass="form-group col-lg-12">
+
+								<div>
+									<listbox id="" checkmark=""
+										rows="4" multiple="true"
+										emptyMessage="Sem dados pesquisados no momento">
+										<listhead>
+											<listheader label=" "
+												width="6%" />
+											<listheader
+												label="Entidade" sort="auto(name)" width="20%" />
+											<listheader
+												label="Referencia " sort="auto(description)" />
+											<listheader label="Banco" />
+								
+										</listhead>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+										</listitem>
+										
+									</listbox>
+								</div>
+							</div>
+						</div>
+				 
+				 </div>
+				  <div sclass="col-md-6">
+				     <div sclass="form-group">
+							<div sclass="form-group col-lg-12">
+
+								<div>
+									<listbox id="" checkmark=""
+										rows="4" multiple="true"
+										emptyMessage="Sem dados pesquisados no momento">
+										<listhead>
+											<listheader label=" "
+												width="6%" />
+											<listheader
+												label="Conta" sort="auto(name)" width="35%" />
+											<listheader
+												label="Banco " sort="auto(description)" />
+	
+										</listhead>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+						
+										</listitem>
+										
+									</listbox>
+								</div>
+							</div>
+						</div>
+						
+				  </div>
+				  		<div sclass="form-group">
+							<x:label
+								class="col-lg-2 col-sm-1 control-label">
+							</x:label>
+								<div sclass="col-lg-12"
+									align="right">
+
+									<button
+										zclass="btn btn-default btn-sm" iconSclass="fa fa-cancel"
+										id="btnPrint" onClick="@command('faturar', tgt = mainlayout, bc = breadcrumb)"
+										label="Voltar">
+									</button>
+									<button
+										zclass="btn btn-success btn-sm" iconSclass="fa fa-save"
+										id="" onClick="@command('novaFatura', tgt = mainlayout, bc = breadcrumb)" label="Save">
+									</button>
+
+								</div>
+						</div>
+				</div>	
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

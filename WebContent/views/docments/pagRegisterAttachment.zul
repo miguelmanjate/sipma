@@ -1,0 +1,112 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.AttachmentVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Registar Documento
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">
+          	 <div sclass="col-md-8">
+             <div sclass="form-horizontal" form="@id('fx') @load(vm.attach) @save(vm.attach, before='save')">
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Classificador</x:label>
+                      <div sclass="col-sm-8">
+                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.code)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Data</x:label>
+                      <div sclass="col-lg-8">
+                          <datebox width="100%" constraint="no empty" format="dd-MM-yyyy" value="@bind(fx.registrationData)"></datebox>
+                      </div>
+                  </div>
+                    <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label">Tipo</x:label>
+                      <div sclass="col-lg-8">
+                         <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(vm.attach.attachmentType)" model="@load(vm.attachTypes)">
+			                 	<template name="model" var="ot">
+			                 		<listitem label="${ot.type}"></listitem>
+			                 	</template>
+			             </listbox>
+                      </div>
+                     </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Assunto</x:label>
+                      <div sclass="col-lg-8">
+                          <textbox sclass="form-control" constraint="no empty"  value="@bind(fx.subject)"></textbox>
+                      </div>
+                  </div>
+
+                  <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-10">
+                       		<button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" onClick="@command('save')" label="Registar"></button>
+                       </div>
+                  </div>
+              </div>
+             </div>
+             <div sclass="col-md-4">
+                <div sclass="col-sm-12">                    
+                   <button id="btnUpload" zclass="btn btn-default btn-sm" label="Carregar" upload="true" onUpload="@command('doUpload')" />
+                    <separator height="10px"></separator>
+                    <x:table class="display table table-bordered table-striped dataTable" style="width 100%" id="tblList">
+                   		<x:th>Anexos</x:th>
+                   		<x:th></x:th>
+                   		<x:div children="@load(vm.filesList)">
+                   			<template name	="children">
+                   				<x:tr>
+                   					<x:td style="width: 90%">${each.fileName}</x:td>
+                   					<x:td style="width: 10%">
+                   						<button iconSclass="fa fa-minus-circle" zclass="btn btn-xs btn-default" onClick="@command('onDelete', currentFile=each)" />
+                   					</x:td>
+                   				</x:tr>
+                   			</template>
+                   		</x:div>
+                    </x:table>
+                </div>
+             </div>
+             <div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th>Classificador</x:th>
+					            <x:th>Tipo</x:th>
+					            <x:th>Anexos</x:th>
+					            <x:th></x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div children="@load(vm.attachments)">
+		                        <template name="children" var="at">
+							        <x:tr class="gradeX">
+							            <x:td>${at.code}</x:td>
+							            <x:td>${at.attachmentType.type}</x:td>
+							            <x:td>
+							 			   <x:li forEach="${at.files}">
+							 			      <custom-attributes file="${each.id}"/>
+							 			      <x:a href="#" onClick="@command('download', attachId = file)">${each.fileName}</x:a>
+							 			  </x:li>
+							            </x:td>
+							            <x:td class="hidden-phone">
+							            	<button iconSclass="fa fa-edit" onClick="@command('')" zclass="btn btn-warning btn-xs"></button>
+							            </x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+			   </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

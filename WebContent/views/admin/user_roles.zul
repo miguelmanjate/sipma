@@ -1,0 +1,86 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.UserRoleVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Perfis de Utilizadores
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="phase">
+          	 <div sclass="form-horizontal" form="@id('fx') @load(vm.userRole) @save(vm.userRole, before='save')" id="formRoles">
+				 <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Perfil</x:label>
+                      <div sclass="col-sm-6">
+                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.rolename)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Permissões</x:label>
+                      <div sclass="col-sm-9">
+                      	  <dualListBox id="selectedPermissions" model="@load(vm.permissions)">
+                      	  	<template name="model" var="p">
+                     			<listitem label="${p.permissionname}"></listitem>
+                     		</template>
+                      	  </dualListBox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                  	<separator></separator>
+                  	<div sclass="col-lg-2 col-lg-2"></div>
+                      <div sclass="col-lg-2 col-lg-2">
+                          <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" label="Registar" onClick="@command('save')"></button>
+                      </div>
+                      <div sclass="col-lg-1 col-lg-2">
+                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+                      </div>
+                      <div sclass="col-lg-2 col-lg-2">
+	                      <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+	                  </div>
+                  </div>
+             </div>
+             <div sclass="form-group col-lg-12">
+             	<x:header class="panel-heading"></x:header>
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				        	<x:th>Perfil</x:th>
+				        	<x:th>Permissões</x:th>
+				        	<x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+					         <div children="@load(vm.userRoles)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.rolename}</x:td>
+							            <x:td>
+								            <div sclass="tagsinput" style="width: auto;" children="@load(each.permissions)">
+								            	<template name="children" var="perm">
+									            	<span><x:b><x:code>${perm.permissionname},</x:code></x:b></span>
+								            	</template>
+							            	</div>
+						            	</x:td>
+						            	<x:td> <button iconSclass="fa fa-eye" 
+			       								onClick="@command('showRole', roleId = role, tgt = mainlayout)" zclass="btn btn-xs btn-default">
+			       								<custom-attributes role = "${each.id}"/>
+			       							   </button>
+			       					 	</x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

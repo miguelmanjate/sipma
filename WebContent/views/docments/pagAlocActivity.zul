@@ -1,0 +1,56 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<zscript>
+	   mz.ciuem.sipma.entity.Attachment attach = (mz.ciuem.sipma.entity.Attachment) Executions.getCurrent().getArg().get("attach"); 
+	   List attachments = (List) Executions.getCurrent().getArg().get("attachments");
+	</zscript>
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.AttachmentVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	            Detalhes dos  Documentos 
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Classificador</x:th>
+				            <x:th class="hidden-phone">Assunto</x:th>
+				            <x:th>Tipo de Documento</x:th>
+				            <x:th class="hidden-phone">Data de Registo</x:th>
+				            <x:th>Anexos</x:th>
+				             <x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.attachments)">
+		                    <template name="children">
+				               <x:tr class="gradeX">
+				                     <x:td>${each.code}</x:td>
+				                     <x:td>${each.subject}</x:td>
+				                     <x:td>${each.attachmentType.type}</x:td>
+				                     <x:td>${vm.sdf.format(each.registrationData)}</x:td>
+					                 <x:td>
+					                    <x:li forEach="${each.files}">
+					                       <x:a href="#">${each.fileName}</x:a>
+					                    </x:li>
+					                 </x:td>
+					                  <x:td>
+							             <button label="Gerar Actividades" onClick="@command('edit', attachId = modelId, tgt = mainlayout, target = mainlayout, bread = breadcrumb)" zclass="btn btn-xs btn-primary"></button>
+								     </x:td>
+								     <custom-attributes modelId = "${each.id}"/>
+				                </x:tr>
+				            </template>
+				         </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

@@ -1,0 +1,173 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.PagamentoVM')" >
+
+		<div sclass="col-md-12">
+			<x:section class="panel">
+
+				<div sclass="panel-body">
+					<x:header class="panel-heading">
+						Pesquisar Faturas
+					</x:header>
+
+					<div sclass="form-horizontal" id="" >
+						<div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Numero da Factura:</x:label>
+	                      <div sclass="col-sm-2">
+	                          <textbox value=""  sclass="form-control" placeholder="numero da factura"></textbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Data Inicio</x:label>
+	                      <div sclass="col-sm-2">
+	                          <datebox width="100%" format="dd/MM/yyyy" ></datebox>
+	                      </div>
+	                     <x:label class="col-lg-2 col-sm-2 control-label">Data Fim:</x:label>
+	                      <div sclass="col-sm-2">
+	                          <datebox width="100%" format="dd/MM/yyyy" ></datebox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Cliente</x:label>
+	                      <div sclass="col-sm-2">
+                                  <textbox value=""  sclass="form-control" placeholder="Nome, codigo ou Nuit"></textbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Rubrica</x:label>
+	                      <div sclass="col-sm-2">
+                             <listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                      
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Prestacao</x:label>
+	                      <div sclass="col-sm-2">
+                                <radiogroup>
+									<radio label="Não"></radio>
+									<radio label="Sim"></radio>
+								</radiogroup>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+
+	                  </div>
+	                  	  <div sclass="col-lg-2 col-lg-2" style="margin-left:80%" align="right">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-search" id="" label="Procurar" onClick=""></button>
+	                      </div>
+	                  
+					</div>
+
+					<x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Pagamentos
+					</x:header>
+
+					<div sclass="form-group">
+
+						<div sclass="col-sm-12">
+							<div sclass="form-group col-lg-12">
+
+								<div sclass="form-group">
+									<x:label
+										class="col-lg-2 col-sm-1 control-label">
+									</x:label>
+									<div sclass="col-lg-12"
+										align="right">
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass="fa fa-bars"
+											id="" onClick="@command('viewFaturar', tgt = mainlayout, bc = breadcrumb)" label="Facturas">
+										</button>
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass="fa fa-bars"
+											id="" onClick="@command('viewCotacoes', tgt = mainlayout, bc = breadcrumb)" label="Catacoes">
+										</button>
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass="fa fa-bars"
+											id="" onClick="" label="Pagamentos">
+										</button>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+
+					<div sclass="form-group">
+
+						<div sclass="col-sm-12">
+							<div sclass="form-group col-lg-12">
+
+								<div>
+									<listbox id="" checkmark="true"
+										rows="4" multiple="true"
+										emptyMessage="Sem dados pesquisados no momento">
+										<listhead>
+											<listheader label="#"
+												width="6%" />
+											<listheader
+												label="Numero" sort="auto(name)" width="25%" />
+											<listheader
+												label="Descricao do Pagamento" sort="auto(description)" />
+											<listheader label="Cliente" />
+											<listheader label="Valor a Pagar(MT)" />
+											<listheader label="Detalhes" />
+										</listhead>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell>
+												<button
+													iconSclass="fa fa-eye" zclass="btn btn-primary btn-xs"
+													label="detalhes"
+													onClick="">
+												</button>
+											</listcell>
+										</listitem>
+									</listbox>
+								</div>
+
+								<div sclass="form-group">
+									<x:label
+										class="col-lg-2 col-sm-1 control-label">
+									</x:label>
+									<div sclass="col-lg-12"
+										align="right">
+										<button
+											zclass="btn btn-default btn-sm" iconSclass=""
+											id="" onClick="@command('novaReferenciaPag', tgt = mainlayout, bc = breadcrumb)"
+											label="Nova Referencia de Pagamento">
+										</button>
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass="fa fa-print"
+											id="btnPrint" onClick=""
+											label="Imprimir Lista">
+										</button>
+										<button
+											zclass="btn btn-success btn-sm" iconSclass="fa fa-check"
+											id="" onClick="@command('novaFatura', tgt = mainlayout, bc = breadcrumb)" label="Nova Factura">
+										</button>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+
+
+
+				</div>
+			</x:section>
+		</div>
+	</div>
+</zk>

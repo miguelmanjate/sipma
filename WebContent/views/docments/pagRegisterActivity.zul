@@ -1,0 +1,96 @@
+	<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.DocumentActionVM')">
+	        <div sclass="col-md-12" form="@id('fx') @load(vm.specifiedAction) @save(vm.specifiedAction, before='save')">
+               <div sclass="panel">
+                   <x:header class="panel-heading">
+                   #${vm.specifiedAction.attachment.subject}  Documentos
+                   </x:header>
+                   <div sclass="panel-body" >
+						<div sclass="form-group">
+				             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+					          	 <x:table class="display table table-bordered " id="tblBaseCal">
+							        <x:thead>
+							        <x:tr>
+							        	<x:th width="60%">Actividade</x:th>
+							            <x:th width="20%">Inicio</x:th>
+							            <x:th width="20%">Fim</x:th>
+							        </x:tr>
+							        </x:thead>
+							        <x:tbody >
+								         <div  children="@load(vm.specifiedActions)">
+								           <template name="children" var="sa">
+										     <x:tr class="gradeX">
+										         <x:td class="hidden-phone">${sa.designation}</x:td>
+										         <x:td class="hidden-phone">${vm.sdf.format(sa.beginDate)}</x:td>
+										         <x:td class="hidden-phone">${vm.sdf.format(sa.endDate)}</x:td>
+										     </x:tr>
+										   </template>
+								        </div>
+							        </x:tbody>
+							     </x:table>
+						    </div>
+					        </div>
+					     	<div sclass="form-group" >
+				             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+					          	 <x:table class="display table table-bordered ">
+					          	    <x:thead>
+							        <x:tr>
+							        	<x:th width="60%"></x:th>
+							            <x:th width="20%"></x:th>
+							            <x:th width="20%"></x:th>
+							        </x:tr>
+							        </x:thead>
+							        <x:tbody>
+								         <div>
+										     <x:tr class="gradeX">
+										         <x:td class="hidden-phone"><textbox value="@bind(vm.specifiedAction.designation)" class="hidden-phone" width="100%" ></textbox></x:td>
+										         <x:td class="hidden-phone"><datebox value="@bind(vm.specifiedAction.beginDate)" class="hidden-phone" width="61%"></datebox></x:td>
+										         <x:td class="hidden-phone">
+										             <datebox value="@bind(vm.specifiedAction.endDate)" class="hidden-phone" width="61%"></datebox><button iconSclass="fa fa-edit" zclass="btn btn-warning btn-xs" style="margin-left:3px" label="adicionar" onClick="@command('addAction')"></button>
+										         </x:td>
+										     </x:tr>
+								        </div>
+							        </x:tbody>
+							     </x:table>
+						     </div>
+					     </div>
+					       <button zclass="btn btn-sm btn-success" iconSclass="fa fa-check" onClick="@command('save')" label="Registar"></button>
+					    </div>
+					    <div sclass="col-lg-12" style="float:right;">
+					    	<x:hr/>
+					    </div>
+					    <separator orient="vertical" />
+					       <div sclass="form-group">
+				             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+					          	 <x:table class="display table table-bordered ">
+							        <x:thead>
+							        <x:tr>
+							        	<x:th>Documento</x:th>
+							            <x:th>Actividades</x:th>
+							            <x:th>Inicio</x:th>
+							            <x:th>Alocar</x:th>
+							        </x:tr>
+							        </x:thead>
+							        <x:tbody >
+								         <div children="@load(vm.attachments)">
+								            <template name="children" var ="at" >
+										     <x:tr class="gradeX">
+										         <x:td class="hidden-phone">${at.subject}</x:td>
+										         <x:td class="hidden-phone">
+										            <x:li forEach="${at.specifiedActions}">${each.designation}</x:li>
+										         </x:td>
+										         <x:td class="hidden-phone">${vm.sdf.format(at.registrationData)}</x:td>
+										         <x:td class="hidden-phone">
+										           <button iconSclass="fa fa-edit" onClick="@command('edit')" zclass="btn btn-warning btn-xs" style="margin-left:3px" label="alocar" ></button>
+										        </x:td>
+										     </x:tr>
+										  </template>
+								        </div>
+							        </x:tbody>
+							     </x:table>
+						     </div>
+					     </div>
+                   </div>
+               </div>
+           </div>
+</zk>

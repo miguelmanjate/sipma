@@ -1,0 +1,181 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+				<x:header class="panel-heading">
+					Documentos Registados e Alocados
+					<x:span class="tools pull-right">
+						<a class="fa fa-chevron-down"
+							href="javascript:;">
+						</a>
+						<a class="fa fa-times" href="javascript:;"></a>
+					</x:span>
+				</x:header>
+				<div sclass="panel-body">
+
+					<div sclass="col-md-12">
+						<div sclass="form-horizontal">
+
+							<div sclass="form-group">
+								<x:label
+									class="col-lg-2 col-sm-2 control-label">
+									Data de Reg
+								</x:label>
+								<div sclass="col-lg-2">
+									<datebox width="100%"
+										constraint="no empty" format="dd-MM-yyyy KK:mm:ss a">
+									</datebox>
+								</div>
+
+
+
+								<x:label
+									class="col-lg-1 col-sm-1 control-label">
+									Assunto
+								</x:label>
+								<div sclass="col-sm-2">
+									<textbox sclass="form-control"></textbox>
+								</div>
+
+
+								<x:label
+									class="col-lg-1 col-sm-1 control-label">
+									Orgãos
+								</x:label>
+								<div sclass="col-sm-4">
+									<listbox multiple="true" checkmark="true">
+									<listhead>
+									<listheader width="5%">#</listheader>
+									<listheader>Tipo de Orgao</listheader>
+									</listhead>
+										<template name="model">
+											<listitem	label="${each.value}">
+											<listcell></listcell>
+											<listcell label="${each.designation}"></listcell>
+											</listitem>
+										</template>
+									</listbox>
+
+								</div>
+							</div>
+
+
+							<div sclass="form-group">
+								<x:label
+									class="col-lg-2 col-sm-2 control-label">
+									Data Doc
+								</x:label>
+								<div sclass="col-lg-2">
+									<datebox width="100%"
+										constraint="no empty" id="dbxEnd"
+										format="dd-MM-yyyy KK:mm:ss a">
+									</datebox>
+								</div>
+								
+								
+								<x:label
+									class="col-lg-1 col-sm-1 control-label">
+									Tipo Doc
+								</x:label>
+								<div sclass="col-sm-2">
+									<textbox sclass="form-control"></textbox>
+								</div>
+								
+								
+								<x:label
+									class="col-lg-1 col-sm-1 control-label">
+									Periodo
+								</x:label>
+								<div sclass="col-sm-1">
+									<textbox sclass="form-control"></textbox>
+								</div>
+								<div sclass="col-sm-1" align="center">
+								<x:label
+									class="control-label">
+									a
+								</x:label>
+                                </div>
+                                
+                                
+								<div sclass="col-sm-1">
+									<textbox sclass="form-control"></textbox>
+								</div>
+								
+								<div sclass="col-sm-1">
+								<button iconSclass="fa fa-eye"  zclass="btn btn-primary btn-xs">Procurar</button>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+					
+					
+	    <div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+		             <div class="adv-table">
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					         <x:th style="width:5%"></x:th>
+					            <x:th style="width:10%">Código</x:th>
+					            <x:th style="width:20%">DataInicio</x:th>
+					            <x:th style="width:20%">Data fim</x:th>
+					            <x:th style="width:20%">Descrição</x:th>
+					             <x:th style="width:20%">Alocados</x:th>
+					              <x:th style="width:5%">
+					              <button iconSclass="fa fa-plus" zclass="btn btn-info btn-xs"></button>
+					              </x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div >
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td></x:td>
+							             <x:td></x:td>
+							             <x:td></x:td>
+							             <x:td></x:td>
+							             <x:td></x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+			     </div>
+
+
+
+                 <div sclass="form-group col-lg-12">
+                 
+                  <div sclass="form-group">
+	                <div sclass="col-lg-1 col-lg-2">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-print" id="btnSave" label="Imprimir" onClick="@command('print')"></button>
+	                      </div>
+	                      
+	                        <div sclass="col-lg-8 col-lg-8">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-eye"  id="Visualizar" label="Visualizar" onClick="@command('view')"></button>
+	                      </div>
+	                      
+	                      
+	                       <div sclass="col-lg-2 col-lg-2">
+		                      <button zclass="btn btn-success btn-sm" iconSclass="fa fa-edit"  id="btnEdit" label="Novo" onClick="@command('new')" ></button>
+		                  </div>
+	                  </div>
+                 
+                 </div>
+
+				</div>
+			</x:section>
+		</div>
+
+
+
+	</div>
+
+</zk>

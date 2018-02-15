@@ -1,0 +1,109 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" 
+		        viewModel="@id('vm')@init('mz.ciuem.sipma.vm.AllocactionEmployeeVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Actividades alocadas ao funcionário do sector
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">           
+			<div sclass="col-lg-12">
+				<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Tarefas alocadas</x:th>
+				            <x:th>Funcionario</x:th>
+				            <x:th class="hidden-phone">Data Inicio</x:th>
+				            <x:th class="hidden-phone">Data Fim</x:th>
+				            <x:th>%</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.allocationEmployees)">
+				        	<template name="children">
+						        <x:tr class="gradeX">
+						            <x:td>${each.task}</x:td>
+						            <x:td>${each.responsible.fullName()}</x:td>
+						            <x:td>${vm.sdf.format(each.startDate)}</x:td>
+						            <x:td>${vm.sdf.format(each.endDate)}</x:td>
+						            <x:td>${each.rate()}%</x:td>
+						        </x:tr>
+					        </template>
+				        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+			</div>
+			
+			<x:header class="panel-heading">
+             Escolha a actividade e aloque ao funcionário
+            </x:header>
+		 	<div sclass="form-horizontal col-lg-12" style="margin-top:15px" 
+		        form="@id('fx') @load(vm.allocationEmployee) @save(vm.allocationEmployee, before='saveAllocationEmployee')">
+	             <div sclass="form-horizontal">
+	             	 <div sclass="form-group">
+	             	 	<x:label class="col-lg-1 col-sm-2 control-label">Actividade</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" sclass="form-control m-bot15"  onSelect="@command('defineDateRange', alloc = self.selectedItem.value)" 
+	                             selectedItem = "@bind(fx.allocationSector)" model="@load(vm.allocationSectors)">
+			                    <template name="model" var="as">
+			                 		<listitem label="${as.task}"></listitem>
+			                 	</template>
+			                 </listbox>
+			                 <x:b id="term" visible="false">Prazo: <x:code><label value="@load(vm.term)"></label></x:code></x:b>
+	                      </div>
+	                      <x:label class="col-lg-1 col-sm-2 control-label" >Inicio</x:label>
+	                      <div sclass="col-sm-2">
+	                          <datebox width="100%" constraint="no empty" id="dbxBegin" format="dd-MM-yyyy" value="@bind(fx.startDate)"></datebox>
+	                      </div>
+	             	 </div>
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Sub Sector</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" sclass="form-control m-bot15"  model="@load(vm.subSectors)" selectedItem="@bind(fx.subSector)">
+			                    <template name="model" var="ss">
+			                 		<listitem label="${ss.designation}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Fim</x:label>
+	                      <div sclass="col-sm-2">
+	                          <datebox width="100%" constraint="no empty" id="dbxEnd" format="dd-MM-yyyy" value="@bind(fx.endDate)"></datebox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                  	  <x:label class="col-lg-1 col-sm-2 control-label">Funcionario</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(fx.responsible)" model="@load(vm.responsibles)">
+			                	 <template name="model" var="r">
+			                 		<listitem label="${r.fullName()}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	               
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Tarefa</x:label>
+	                        <div sclass="col-sm-4">
+	                          <textbox constraint="no empty" sclass="form-control" rows="2" value="@bind(fx.task)"></textbox>
+	                      </div>
+	                   </div>
+	                  <div sclass="col-md-12"><x:br/>
+			             <div sclass="form-group">
+			             	<x:label class="col-lg-1 col-sm-2 control-label" ></x:label>
+			                <div sclass="col-lg-4 col-lg-2">
+			                  <button disabled="@load(empty fx.responsible)" zclass="btn btn-success" iconSclass="fa fa-map-marker" onClick="@command('saveAllocationEmployee')"  label="Alocar"></button>
+			              	</div>
+			             </div>
+		             </div>
+	             </div> 
+			 </div>
+		  </div>
+        </x:section>
+	</div>
+</div>
+</zk>

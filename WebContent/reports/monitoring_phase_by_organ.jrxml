@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-03-04T07:47:30 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monitoring_phase_by_organ" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4267b690-0c7e-46a0-a99a-4ffd42a554a5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="dWVtZ3BfZGIucGhhc2VfY3ljbGVzIEFTICw0ODYsMTI4LDdkMWQyNDQ5LWVkZmQtNGVmZS04NTRj&#xA;LWYzZjk2NjA0NTEyMjt1ZW1ncF9kYi5vcmdhbnMgQVMgLDI4MiwyLDBmMzcwNGU4LWJjNDEtNDkw&#xA;OS05YzU1LTVlOTkwMmEyOTU5NDt1ZW1ncF9kYi5waGFzZXNfb3JnYW5fY3ljbGVzIEFTICw0OSww&#xA;LDU0OGViODEzLTE5OTItNDMwYy1iYWI1LWFjMmIwY2Q1MDI5Mjs="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<parameter name="Parameter2" class="java.lang.String"/>
+	<parameter name="Parameter3" class="java.lang.String"/>
+	<parameter name="Parameter4" class="java.lang.String"/>
+	<parameter name="Parameter5" class="java.lang.String"/>
+	<parameter name="cycle" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+  c.subject as cycle_name, 
+  o.designation as organ_name,
+  p.designacao as phase_name  
+FROM
+  phases_organ_cycles poc
+  inner join phase_cycles pc on pc.id = poc.phase_cycle_id
+  inner join cycles c on c.id = pc.cycle_id
+  inner join organs o on o.id = poc.organ
+  inner join phases p on p.id = pc.phase_id]]>
+	</queryString>
+	<field name="cycle_name" class="java.lang.String"/>
+	<field name="organ_name" class="java.lang.String"/>
+	<field name="phase_name" class="java.lang.String"/>
+	<group name="cycle_name">
+		<groupExpression><![CDATA[$F{cycle_name}]]></groupExpression>
+	</group>
+	<group name="organ_name">
+		<groupExpression><![CDATA[$F{organ_name}]]></groupExpression>
+	</group>
+	<group name="phase_name">
+		<groupExpression><![CDATA[$F{phase_name}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement x="255" y="14" width="50" height="46" uuid="e5fad1ab-ac12-4455-9320-c716975646c2"/>
+				<imageExpression><![CDATA["/home/mulungo/workspace/reporting/sipma/uem-logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="" positionType="Float" x="82" y="50" width="397" height="20" printWhenGroupChanges="cycle_name" uuid="9bdda8a9-5112-44e1-936b-d6130b18a4ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[GABINETE DE PLANIFICAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" positionType="Float" x="82" y="70" width="397" height="30" printWhenGroupChanges="cycle_name" uuid="1462788e-3e89-4558-9fad-e89b06d69128"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Execucao do Plano de Actividades Pelas Unidades Organica]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="336" splitType="Stretch">
+			<staticText>
+				<reportElement key="" positionType="Float" x="0" y="10" width="82" height="20" printWhenGroupChanges="cycle_name" uuid="9c8a6c11-4520-44a6-acf9-cca93a1d9c8c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciclo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="85" y="10" width="170" height="20" uuid="454ecaf6-e0ec-4457-9547-6b3897ec2155"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cycle_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="45" width="399" height="20" uuid="acaac1d7-2235-4b6a-9f3e-1885f4445005"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{organ_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="93" y="68" width="450" height="20" uuid="2e6fbba6-42c8-40b0-a872-b2513e260ed9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phase_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement key="" positionType="Float" x="280" y="50" width="99" height="20" printWhenGroupChanges="cycle_name" uuid="dd1a9a66-31dc-43a6-a2d9-5a1c2dd80d05"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="styled">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Gerado por:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="380" y="50" width="170" height="20" uuid="1d835e98-80c2-4b7d-86b3-9483d564bea7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

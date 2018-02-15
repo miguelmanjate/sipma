@@ -1,0 +1,109 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<zscript>
+		import mz.ciuem.sipma.util.Carrier;
+		import mz.ciuem.sipma.util.ContactType;
+		
+		ListModelList carrier = new ListModelList(Carrier.values());
+		ListModelList contactType = new ListModelList(ContactType.values());
+	</zscript>
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.CellPhoneVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Associar Contactos do Balcao
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="phase">
+          	 <div sclass="form-horizontal" form="@id('fx') @load(vm.cellPhone) @save(vm.cellPhone, before='save')">
+            <div sclass="form-group">
+              <x:label class="col-lg-2 col-sm-2 control-label">Tipo</x:label>
+                <div sclass="col-sm-4">
+                    <listbox mold="select" model="@load(contactType)" sclass="form-control m-bot15" selectedItem="@bind(fx.type)" id="lstCtp">
+			               <template name="model">
+			                 		<listitem label="${each.value}"></listitem>
+			               </template>
+			         </listbox>
+                   </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Provedor</x:label>
+                  <div sclass="col-sm-4">
+                    <listbox mold="select" model="@load(carrier)" sclass="form-control m-bot15" selectedItem="@bind(fx.carrier)" >
+			               <template name="model">
+			                 		<listitem label="${each.value}"></listitem>
+			               </template>
+			         </listbox>
+                  </div>
+                  </div>
+             	 	 <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Balcao</x:label>
+                      <div sclass="col-sm-4">
+                          <listbox mold="select" selectedItem="@bind(fx.counter)" sclass="form-control" model="@load(vm.counters)">
+                     		<template name="model" var="e">
+                     			<listitem label="${e.counterNm}"></listitem>
+                     		</template>
+                     	</listbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Contacto</x:label>
+                      <div sclass="col-sm-3">
+                          <intbox sclass="form-control" constraint="no empty" value="@bind(fx.value)"></intbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                  	<div sclass="col-lg-2 col-lg-2"></div>
+                      <div sclass="col-lg-2 col-lg-2">
+                          <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" label="Associar" onClick="@command('save')"></button>
+                      </div>
+                      <div sclass="col-lg-1 col-lg-2">
+                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+                      </div>
+                      <div sclass="col-lg-2 col-lg-2">
+	                      <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+	                  </div>
+                  </div>
+             </div>
+             <div sclass="form-group col-lg-12">
+             	<x:header class="panel-heading"></x:header>
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Balcao</x:th>
+				            <x:th>Operadora</x:th>
+				            <x:th>Numero</x:th>
+				            <x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+					         <div children="@load(vm.cellPhones)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.counter.counterNm}</x:td>
+							            <x:td>${each.carrier}</x:td>
+							            <x:td>${each.value} </x:td>
+							            <x:td class="hidden-phone">
+							            	<button iconSclass="fa fa-edit"  zclass="btn btn-warning btn-xs"></button>
+							            	<separator orient="vertical" />
+							            	<button iconSclass="fa fa-eye"  zclass="btn btn-primary btn-xs"></button>
+							            	<custom-attributes modelId = "${each.id}"/>
+							            </x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

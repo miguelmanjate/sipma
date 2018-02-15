@@ -1,0 +1,89 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.SubScriberVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Balcao
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="phase">
+          	 <div sclass="form-horizontal" id="userForm" form="@id('fx') @load(vm.subScriber) @save(vm.subScriber, before='save')  @save(vm.subScriber, before='update')">
+          	     <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label" model="@load(vm.sectors)" selectedItem="@bind(vm.subScriber.sector)">Sector</x:label>
+                      <div sclass="col-sm-4">
+                          <listbox mold="select" sclass="form-control" >
+                     		<template name="model" var="e">
+                     			<listitem label="${e.name}"></listitem>
+                     		</template>
+                     	</listbox>
+                     </div>
+                  </div>
+          	 	  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Assinante</x:label>
+                      <div sclass="col-sm-4">
+                          <listbox mold="select"  sclass="form-control" onSelect="@command('getEmployeeBySector', sector_id = self.selectedItem.value)" model="@load(vm.employees)" selectedItem="@bind(vm.subScriber.employee)">
+                     		<template name="model" var="e">
+                     			<listitem label="${e.name}"></listitem>
+                     		</template>
+                     	</listbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                  	<separator></separator>
+                  	<div sclass="col-lg-2 col-lg-2"></div>
+                      <div sclass="col-lg-2 col-lg-2">
+                          <button zclass="btn btn-success btn-sm"  iconSclass="fa fa-check" id="btnSave" label="Registar" onClick="@command('save')"></button>
+                      </div>
+                      <div sclass="col-lg-1 col-lg-2">
+	                       <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('')"></button>
+	                  </div>
+	                  <div sclass="col-lg-2 col-lg-2">
+		                    <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+		              </div>
+                  </div>
+             </div>
+             <div sclass="form-group col-lg-12">
+             	<x:header class="panel-heading"></x:header>
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				        	<x:th>Assinante</x:th>
+				        	<x:th>Sector</x:th>
+				        	<x:th>Data Inicio</x:th>
+				        	<x:th>Data Fim</x:th>
+				        	<x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+					         <div children="@load(vm.subScribers)" id="list">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.employee.name}</x:td>
+							            <x:td>${each.sector.initials}</x:td>
+							            <x:td>${vm.sdf.format(each.startDate)}</x:td>
+							            <x:td>${vm.sdf.format(each.endDate)}</x:td>
+							            <x:td class="hidden-phone">
+							            <button iconSclass="fa fa-edit" zclass="btn btn-warning btn-xs" onClick="@command('edit', subScriberID = modelId)" ></button>
+							            	<separator orient="vertical" />
+							            	<button iconSclass="fa fa-eye"  zclass="btn btn-primary btn-xs"></button>
+							            	<custom-attributes modelId = "${each.id}"/>
+							            </x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

@@ -1,0 +1,98 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.RegistoOrcamentoRubricaVM')">
+
+	<div sclass="col-md-12">
+		<x:section class="panel">
+         
+        	<div sclass="panel-body">
+        	 <x:header class="panel-heading" >
+		             Registo do Orçamento da UEM
+		      </x:header>  
+        		<div sclass="form-horizontal" style="margin-top:20px">
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Fonte de Recurso</x:label>
+	                      <div sclass="col-sm-3">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		  </div>
+			      		  
+			      		  <x:label class="col-lg-1 col-sm-2 control-label">Área do governo</x:label>
+	                      <div sclass="col-sm-3">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		  </div>
+	                     
+	                      <x:label class="col-lg-1 col-sm-2 control-label">Grande Rúbrica</x:label>
+	                      <div sclass="col-sm-3">
+								<listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+			              </div>
+	                  </div>
+	             </div>
+	             
+	             <x:header class="panel-heading" >
+		             Rúbricas e seus Orçamentos
+		      	</x:header> 
+	            
+             	<div sclass="form-group col-lg-12">
+	             	
+		            <div >
+	                    	<listbox id="" checkmark="true" rows="4" multiple="true" emptyMessage="Sem dados pesquisados no momento">
+								<listhead>
+									<listheader label="#" width="6%" />
+									<listheader label="Código" sort="auto(name)" width="25%"/>
+									<listheader label="Designação" sort="auto(description)" />
+									<listheader label="Activa" />
+									<listheader label="Valor Provosto" />
+									<listheader label="Valor Aprovado" />
+									<listheader label="Cativa" />
+									<listheader label="Distribuição" />
+								</listhead>
+									<listitem>
+										<listcell></listcell>
+										<listcell label="" />
+										<listcell label="" />
+										<listcell label="" />
+										<listcell label=""/>
+										<listcell label=""/>
+										<listcell label=""/>
+										<listcell>
+											<button iconSclass="fa fa-gears"  zclass="btn btn-primary btn-xs" label="Configurar"
+											onClick="@command('configurar', cycleId = modelId, tgt = mainlayout, bc = breadcrumb)"></button>
+										</listcell>
+									</listitem>
+							</listbox>
+							</div>
+				     
+				           <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="right">
+	                       		<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="btnPrint" onClick="@command('printSup')" label="Imprimir"></button>
+	                   		    <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="" onClick="@command('printSup')" label="Gravar"></button>
+                       		
+                       </div>
+                  </div>
+                  
+			     </div>
+			     
+			     
+			         
+			          
+			         
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>

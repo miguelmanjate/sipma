@@ -1,0 +1,53 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.RoleVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Papeis
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">
+           <!-- <div sclass="row col-lg-12" form="@id('fx') @load(vm.role) @save(vm.role, before='save')">
+             	 <div sclass="form-group col-lg-4">
+	                 <x:label>Papel</x:label>
+	                 <textbox sclass="form-control" value="@bind(fx.designation)" constraint="no empty"></textbox>
+	             </div>
+	             <div sclass="col-lg-6">
+	             	<separator height="23px"></separator>
+	             	<button zclass="btn btn-success btn-sm" onClick="@command('save')" iconSclass="fa fa-check">Registar</button>
+	             </div>
+             </div><x:br/>  -->  
+             <div sclass="form-group col-lg-12">
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Papel</x:th>
+				            <x:th>Data de Registo</x:th>
+				            <x:th>Data de Actualização</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+					        <div children="@load(vm.roles)">
+							    <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.designation}</x:td>
+							            <x:td>${vm.sdf.format(each.created)}</x:td>
+							            <x:td>${vm.sdf.format(each.updated)}</x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

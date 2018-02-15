@@ -1,0 +1,46 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row">
+	    <div sclass="col-md-12">
+	        <div sclass="panel">
+	            <x:header class="panel-heading">
+	                Notificações - Email/SMS
+	            </x:header>
+	            <div sclass="panel-body">
+	              	<div sclass="col-sm-12">
+	             		<div sclass="form-group col-lg-12">
+			                 <x:label>Registo de um ciclo</x:label>
+			                 <button label="Mudar" zclass="btn btn-xs btn-default"></button><separator></separator>
+			                 <textbox sclass="form-control" value="Foi integrado no ciclo #{ciclo_nome} que vai decorrer de #{ciclo_inicio} até #{ciclo_fim}." readonly="true"></textbox>
+			                 <x:span><x:code>Parâmetros: </x:code>#{ciclo_nome}, #{ciclo_inicio}, #{ciclo_fim}</x:span>
+			             	 <x:hr/>
+			             </div>
+			             <div sclass="form-group col-lg-12">
+			                 <x:label>Alocação de uma actividade ao sector</x:label>
+			                 <button label="Mudar" zclass="btn btn-xs btn-default"></button><separator></separator>
+			                 <textbox sclass="form-control" value="Foi alocado a actividade #{act_nome} que inicia no dia #{act_inicio} e termina no dia #{act_fim} pelo Orgão #{nome_orgao}." readonly="true"></textbox>
+			                 <x:span><x:code>Parâmetros: </x:code>#{act_nome}, #{act_inicio}, #{act_fim}, #{nome_orgao}</x:span><x:hr/>
+			             </div>
+			             <div sclass="form-group col-lg-12">
+			                 <x:label>Alocação de uma actividade ao funcionário</x:label>
+			                 <button label="Mudar" zclass="btn btn-xs btn-default"></button><separator></separator>
+			                 <textbox sclass="form-control" value="Foi alocado a actividade #{act_nome} que inicia no dia #{act_inicio} e termina no dia #{act_fim} pelo Sector #{nome_sector}." readonly="true"></textbox>
+			                 <x:span><x:code>Parâmetros: </x:code>#{act_nome}, #{act_inicio}, #{act_fim}, #{nome_sector}</x:span><x:hr/>
+			             </div>
+			             <div sclass="form-group col-lg-12">
+			                 <x:label>Execução de uma actividade</x:label>
+			                 <button label="Mudar" zclass="btn btn-xs btn-default"></button><separator></separator>
+			                 <textbox sclass="form-control" readonly="true"></textbox>
+			                 <x:span><x:code>Parâmetros: </x:code>#{ciclo_nome}, #{ciclo_inicio}, #{ciclo_fim}</x:span><x:hr/>
+			             </div>
+			             <div sclass="form-group col-lg-12">
+			                 <x:label>Relatório de uma actividade</x:label>
+			                 <button label="Mudar" zclass="btn btn-xs btn-default"></button><separator></separator>
+			                 <textbox sclass="form-control" readonly="true"></textbox>
+			                 <x:span><x:code>Parâmetros: </x:code>#{ciclo_nome}, #{ciclo_inicio}, #{ciclo_fim}</x:span><x:hr/>
+			             </div>
+	         		</div>
+         		</div>
+	        </div>
+	    </div>
+	</div>
+</zk>

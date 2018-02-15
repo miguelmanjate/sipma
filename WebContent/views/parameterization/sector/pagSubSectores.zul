@@ -1,0 +1,99 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.SubSectorVM')">>
+        <div sclass="col-md-12">
+	        <div sclass="panel">
+	        	<x:header class="panel-heading">
+	              Sub - Sectores
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	            <div sclass="panel-body">
+	                <div sclass="form-horizontal" form="@id('fx') @load(vm.subSector) @save(vm.subSector, before='saveSubSector') @save(vm.subSector, before='update')">
+		             	<div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Sigla</x:label>
+		                      <div sclass="col-sm-4">
+		                          <textbox sclass="form-control uppercase" constraint="no empty" value="@bind(fx.initials)"></textbox>
+		                      </div>
+		                      
+		                      
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Orgão</x:label>
+		                      <div sclass="col-sm-4">
+		                          <listbox mold="select" sclass="form-control m-bot15"  model="@load(vm.organs)"
+		                          onSelect="@command('onSelectOrgan', organ_id = self.selectedItem.value)">
+				                 	<template name="model" var="o">
+				                 		<listitem label="${o.designation}" value="${o.id}"></listitem>
+				                 	</template>
+				                 </listbox>
+		                      </div>
+		                  </div>
+		                  
+		                  <div sclass="form-group">
+		                  	<x:label class="col-lg-2 col-sm-2 control-label">Designação</x:label>
+		                      <div sclass="col-sm-4">
+		                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.designation)"></textbox>
+		                      </div>
+		                  
+		                  
+		                  	<x:label class="col-lg-2 col-sm-2 control-label"> Departamento/Sector</x:label>
+		                      <div sclass="col-sm-4">
+		                          <listbox mold="select" sclass="form-control m-bot15" model="@load(vm.sectors)" selectedItem="@bind(vm.subSector.sector)">
+				                 	<template name="model" var="s">
+				                 		<listitem label="${s.designation}"></listitem>
+				                 	</template>
+				                 </listbox>
+		                      </div>
+		                  </div>
+		                  <div sclass="form-group" >
+		                  	<div sclass="col-lg-2 col-lg-2"></div>
+		                      <div sclass="col-lg-2 col-lg-2">
+		                          <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" label="Registar" onClick="@command('saveSubSector')"></button>
+		                      </div>
+		                      <div sclass="col-lg-1 col-lg-2">
+		                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+		                      </div>
+		                      <div sclass="col-lg-2 col-lg-2">
+			                      <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+			                  </div>
+		                  </div>
+	             	</div>
+	             	<div sclass="form-group col-lg-12">
+		             	<x:header class="panel-heading"></x:header>
+			             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")' id="organList">
+				          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+						        <x:thead>
+						        <x:tr>
+						            <x:th>Sigla</x:th>
+						            <x:th>Designação</x:th>
+						            <x:th>Sector</x:th>
+						            <x:th>Data de Registo</x:th>
+						            <x:th></x:th>
+						        </x:tr>
+						        </x:thead>
+						        <x:tbody>
+						        <div children="@load(vm.subSectors)">
+			                        <template name="children">
+								        <x:tr class="gradeX">
+								            <x:td>${each.initials}</x:td>
+								            <x:td>${each.designation}</x:td>
+								            <x:td>${each.sector.designation}</x:td>
+								            <x:td>${vm.sdf.format(each.created)}</x:td>
+								            <x:td class="hidden-phone">
+								            	<button iconSclass="fa fa-edit" onClick="@command('edit', subSectorId = modelId)" zclass="btn btn-warning btn-xs"></button>
+								            	<separator orient="vertical" />
+								            	<button iconSclass="fa fa-eye"  zclass="btn btn-primary btn-xs"></button>
+								            	<custom-attributes modelId = "${each.id}"/>
+								            </x:td>
+								        </x:tr>
+							        </template>
+						        </div>
+						        </x:tbody>
+						     </x:table>
+					     </div>
+				     </div>
+	            </div>
+	        </div>
+        </div>
+	</div>
+</zk>

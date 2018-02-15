@@ -1,0 +1,48 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+			  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ArreacadacoesVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Arrecadações
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+        	<div sclass="panel-body">
+        		    
+	             <div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")' id="listPayments">
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th style="width:15%">Data de Pagamento</x:th>
+					            <x:th style="width:35%">Rubrica</x:th>
+					            <x:th style="width:20%">Serviço</x:th>
+					            <x:th style="width:20%">Valor</x:th>
+					            
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div children="@load(vm.listPayments)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.dataDePagamento}</x:td>
+							            <x:td>${each.rubrica}</x:td>
+							            <x:td>${each.servico}</x:td>
+							            <x:td>${each.totalArecadado}</x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+			     </div>
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>

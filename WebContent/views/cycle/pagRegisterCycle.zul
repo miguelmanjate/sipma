@@ -1,0 +1,106 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<zscript>		
+		mz.ciuem.sipma.entity.Cycle cycle = (mz.ciuem.sipma.entity.Cycle) Executions.getCurrent().getArg().get("cycle"); 
+		List cycles = (List) Executions.getCurrent().getArg().get("cycles");
+	</zscript>
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.CicleVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Registar Ciclo
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">
+          	 <div sclass="col-md-8">
+             <div sclass="form-horizontal" form="@id('fx') @load(vm.cycle) @save(vm.cycle, before='saveCycle')">
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Ciclo Ano</x:label>
+                      <div sclass="col-sm-3">
+                          <textbox sclass="form-control" constraint="no empty" value="@bind(vm.cycle.code)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Inicio</x:label>
+                      <div sclass="col-lg-4">
+                          <datebox width="100%" onChange="@command('limitEndDate', begin = self.value)" constraint="no empty" format="dd-MM-yyyy KK:mm:ss a" value="@bind(vm.cycle.startDate)"></datebox>
+                      </div>
+                       <x:label class="col-lg-2 col-sm-1 control-label">Fim</x:label>
+                      <div sclass="col-lg-4">
+                          <datebox width="100%" constraint="no empty" id="dbxEnd" disabled="true" format="dd-MM-yyyy KK:mm:ss a" value="@bind(vm.cycle.endDate)"></datebox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-3 control-label">Tipo</x:label>
+                      <div sclass="col-lg-2">
+                          <div sclass="btn-group">
+			                 <radiogroup id="rgTipo" selectedItem="@bind(fx.type)" onCheck="@command('checkCycletype', val = self.selectedItem.value)">
+			                 	<x:label class="btn btn-info btn-xs iradio_flat-red">
+			                 		<radio label="Normal" value="Normal" />
+			                 	</x:label><separator width="2px"></separator>
+			                 	<x:label class="btn btn-info btn-xs iradio_flat-red">
+			                 		<radio label="Especial" value="Especial"/>
+			                 	</x:label>
+			                 </radiogroup>
+		                 </div>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                   <div visible="false" id="specific">
+	                     <x:label class="col-lg-2 col-sm-2 control-label">Orgãos Especificos</x:label>
+	                     <div sclass="col-lg-10">
+	                     	<dualListBox id="selectedSpecifiedOrgans" model="@load(vm.organs)"></dualListBox>
+	                	</div>
+                	</div>
+                 </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Assunto</x:label>
+                      <div sclass="col-lg-10">
+                          <textbox sclass="form-control" constraint="no empty" value="@bind(vm.cycle.subject)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Descrição</x:label>
+                      <div sclass="col-lg-10">
+                          <textbox sclass="form-control no-resize" rows="5" value="@bind(vm.cycle.description)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-10">
+                       		<button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" onClick="@command('saveCycle')" label="Registar"></button>
+                       </div>
+                  </div>
+              </div>
+             </div>
+             <div sclass="col-md-4">
+                <div sclass="col-sm-12">                    
+                   <button id="btnUpload" zclass="btn btn-default btn-sm" label="Carregar" upload="true" onUpload="@command('doUpload')" />
+                    <separator height="10px"></separator>
+                    <x:table class="display table table-bordered table-striped dataTable" style="width 100%" id="tblList">
+                   		<x:th>Anexos</x:th>
+                   		<x:th></x:th>
+                   		<x:div children="@load(vm.filesList)">
+                   			<template name="children">
+                   				<x:tr>
+                   					<x:td style="width: 90%">${each.fileName}</x:td>
+                   					<x:td style="width: 10%">
+                   						<button iconSclass="fa fa-minus-circle" zclass="btn btn-xs btn-default" onClick="@command('onDelete', currentFile=each)" />
+                   					</x:td>
+                   				</x:tr>
+                   			</template>
+                   		</x:div>
+                    </x:table>
+                </div>
+             </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

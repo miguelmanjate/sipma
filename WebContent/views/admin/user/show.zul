@@ -1,0 +1,91 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vms')@init('mz.ciuem.sipma.vm.UserVM')">
+	<div sclass="col-md-12" id="tblRoles" form="@id('fx') @load(vms.user) @save(vms.user, before='update') @save(vms.user, before='setState')">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Utilizador#<label value="@load(fx.id)"></label> - <label value="@load(fx.username)"></label>
+              <x:span class="tools pull-right">
+                  <button zclass="btn btn-sm btn-success" iconSclass="fa fa-chevron-down" href="javascript:;" disabled="@load(fx.enabled)" onClick="@command('setState', state = true)">ON</button>
+                  <separator orient="vertical"></separator>
+                  <button zclass="btn btn-sm btn-danger" iconSclass="fa fa-times"  href="javascript:;" disabled="@load(!fx.enabled)" onClick="@command('setState', state = false)">OFF</button>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" >
+          	 <div sclass="form-horizontal" id="userForm">
+          	 	 <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Funcionário</x:label>
+                      <div sclass="col-sm-4">
+                     	<textbox sclass="form-control" value="@bind(fx.responsible)" readonly="true"></textbox>
+                      </div>
+                  </div>
+				 <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Email</x:label>
+                      <div sclass="col-sm-4">
+                          <textbox type="email" constraint="no empty, /.+@.+\.[a-z]+/: Endereço email inválido" readonly="true"
+                          	value="@bind(fx.username)" sclass="form-control"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-1 control-label">Senha</x:label>
+                      <div sclass="col-sm-8">
+                          <textbox constraint="no empty" readonly="true"  sclass="form-control" value="@bind(fx.password)"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                  	<separator></separator>
+                  	<div sclass="col-lg-2 col-lg-2"></div>
+                      <div sclass="col-lg-2 col-lg-2">
+                          <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" id="btnSave" label="Modificar" ></button>
+                      </div>
+                  </div>
+                  <div sclass="col-md-8">
+                      <div sclass="panel">
+                          <div sclass="panel-body">
+                          	<x:table class="table table-bordered table-striped table-condensed">
+                          		<x:tr>
+                          			<x:th>Perfils <label sclass="label label-danger" value="@load(vms.user.roles.size())"></label></x:th>
+                          			<x:th></x:th>
+                          		</x:tr>
+                       			<div children="@load(fx.roles)">
+                       				<template name="children" var="r">
+                       					<x:tr>
+                       						<x:td><x:i class="fa fa-dot-circle-o"></x:i> ${r}</x:td>
+                       						<x:td> <button iconSclass="fa fa-minus" 
+                       								onClick="@command('removeRole', roleId = role)" zclass="btn btn-xs btn-danger">
+                       								<custom-attributes role = "${r.id}"/>
+                       							   </button>
+                       					 	</x:td>
+                       					</x:tr>
+                       				</template>
+                       			</div>
+                          	</x:table>
+
+						  	<dualListBox id="selectedRoles" model="@load(vms.missingUserRoles)"></dualListBox>
+						  	<button zclass="btn btn-info btn-sm" onClick="@command('addNewRoles', userId = fx.id)" iconSclass="fa fa-plus">Adicionar</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div sclass="col-md-4">
+                      <div sclass="panel">
+                          <div sclass="panel-body">
+						  	<x:table class="table table-bordered table-striped table-condensed">
+                          		<x:tr>
+                          			<x:th>Pemrissões </x:th>
+                          		</x:tr>
+                       			<div children="@load(fx.permissions)">
+                       				<template name="children" var="perm">
+                       					<x:tr><x:td><x:i class="fa fa-mail-forward"> ${perm.permissionname}</x:i></x:td></x:tr>
+                       				</template>
+                       			</div>
+                          	</x:table>
+                          </div>
+                      </div>
+                  </div>
+             </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

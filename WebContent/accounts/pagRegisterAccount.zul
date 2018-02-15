@@ -1,0 +1,252 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.AccountVM')" id="projectList">
+			
+			<zscript>
+				import mz.ciuem.sipma.util.InterviewRoles;
+				ListModelList itvwRoles = new ListModelList(InterviewRoles.values());
+			</zscript>
+	        <div sclass="col-md-12">
+	        
+               <div sclass="panel">
+                   <x:header class="panel-heading">
+                       <x:span class="tools pull-right">
+                           <x:a href="javascript:;" class="fa fa-chevron-down"></x:a>
+                           <x:a href="javascript:;" class="fa fa-times"></x:a>
+                        </x:span>
+                   </x:header>
+                   <div sclass="panel-body" form="@id('fx') @load(vm.account) @save(vm.account, before='save')">
+					     <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+				                      <x:label class="col-lg-2 col-sm-1 control-label" style="margin-left:-50px">Orgão</x:label>
+				                      <div sclass="col-sm-3">
+				                          <listbox mold="select" selectedItem="@bind(vm.account.organ)" sclass="form-control" model="@load(vm.organs)">
+					                     		<template name="model" var="e">
+					                     			<listitem label="${e.initials}"></listitem>
+					                     		</template>
+					                     </listbox>
+				                      </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">Banco</x:label>
+				                      <div sclass="col-sm-2">
+				                          <listbox mold="select" selectedItem="@bind(vm.account.bank)" sclass="form-control" model="@load(vm.banks)">
+					                     		<template name="model" var="e">
+					                     			<listitem label="${e.bankInitials}"></listitem>
+					                     		</template>
+					                     	</listbox>
+									  </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">Balcão</x:label>
+				                      <div sclass="col-sm-2">
+				                         <listbox mold="select" selectedItem="@bind(vm.account.counter)" sclass="form-control" model="@load(vm.counters)">
+					                     		<template name="model" var="e">
+					                     			<listitem label="${e.counterNm}"></listitem>
+					                     		</template>
+					                    </listbox>
+				                      </div>
+				                  </div>
+				             </div>
+				         </div>
+				          <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+				                      <x:label class="col-lg-2 col-sm-1 control-label" style="margin-left:-50px">Finalidade</x:label>
+				                   		<div sclass="col-sm-3">
+				                          <listbox mold="select" selectedItem="@bind(vm.account.purpose)" sclass="form-control" model="@load(vm.purposes)">
+					                     		<template name="model" var="e">
+					                     			<listitem label="${e.porpose}"></listitem>
+					                     		</template>
+					                     	</listbox>
+									    </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">Moeda</x:label>
+				                      <div sclass="col-sm-2">
+				                          <listbox mold="select" selectedItem="@bind(vm.account.coin)" sclass="form-control" model="@load(vm.coins)">
+					                     		<template name="model" var="e">
+					                     			<listitem label="${e.coinInitials}"></listitem>
+					                     		</template>
+					                     	</listbox>
+									  </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">Tipo</x:label>
+				                      <div sclass="col-sm-2">
+				                         <listbox mold="select" selectedItem="@bind(vm.account.accountType)" sclass="form-control" model="@load(vm.accountTypes)">
+					                     		<template name="model" var="e">
+					                     			<listitem label="${e.type}"></listitem>
+					                     		</template>
+					                    </listbox>
+				                      </div>
+				                  </div>
+				             </div>
+				         </div>
+				         <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+				                      <x:label class="col-lg-2 col-sm-1 control-label" style="margin-left:-50px">Numero</x:label>
+				                   		<div sclass="col-sm-3">
+				                              <textbox sclass="form-control" constraint="no empty" value="@bind(fx.accountNumber)" ></textbox>
+									    </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">IBAN</x:label>
+				                         <div sclass="col-sm-2">
+					                       <textbox sclass="form-control" constraint="no empty" value="@bind(fx.accountIban)" ></textbox>
+									     </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">NIB</x:label>
+				                      <div sclass="col-sm-2">
+				                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.accountNib)" ></textbox>
+				                      </div>
+				                  </div>
+				             </div>
+				         </div>
+				         <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+				            	  <x:label class="col-lg-2 col-sm-1 control-label" style="margin-left:-50px">Denominação</x:label>
+				                   		<div sclass="col-sm-3">
+				                              <textbox sclass="form-control"  constraint="no empty" value="@bind(fx.name)" ></textbox>
+									    </div>
+				                  </div>
+				             </div>
+				              <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+				            	  <x:label class="col-lg-2 col-sm-1 control-label" style="margin-left:-50px">Movimentação</x:label>
+				                   		<div sclass="col-sm-3">
+				                              <textbox sclass="form-control" rows="2" constraint="no empty" value="@bind(fx.accountCondMov)" ></textbox>
+									    </div>
+									    
+									    
+				                  </div>
+				                  <div sclass="col-sm-2" style="margin-left:85%">
+									    	<button zclass="btn btn-sm btn-success" iconSclass="fa fa-check" onClick="@command('save')" label="Registar Conta"></button>
+									    </div>
+				             </div>
+				         </div>
+					     <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+						     	<div sclass="col-lg-6" form="@id('subScriber') @load(vm.subScriber) @save(vm.subScriber, before='addSubScriber')">
+						     	  <x:label><x:code>Adicionar Assinante: </x:code></x:label><x:br/><x:br/>
+				            	  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Número *</x:label>
+				                      <div sclass="col-sm-7">
+				                          <textbox sclass="form-control" value="@bind(subScriber.number)" constraint="no empty"></textbox>
+				                      </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label" >Assinante*</x:label>
+				                      <div sclass="col-sm-7">
+				                         <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(subScriber.employee)" model="@load(vm.employees)">
+						                 	<template name="model" var="f">
+						                 		<listitem label="${f.name}"></listitem>
+						                 	</template>
+						                 </listbox>
+				                      </div>
+				                  </div>
+				                   <div sclass="form-group">
+				                      <x:label sclass="col-lg-3 col-sm-2 control-label" >Sector*</x:label>
+				                      <div sclass="col-sm-7">
+				                         <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(subScriber.sector)" model="@load(vm.sectors)">
+						                 	<template name="model" var="f">
+						                 		<listitem label="${f.initials}"></listitem>
+						                 	</template>
+						                 </listbox>
+				                      </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label" >Data Inicio</x:label>
+				                      <div sclass="col-sm-7">
+				                          <datebox  constraint="no empty" width="100%" value="@bind(subScriber.startDate)"></datebox>
+				                      </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label" >Data Fim</x:label>
+				                      <div sclass="col-sm-7">
+				                          <datebox  constraint="no empty" width="100%" value="@bind(subScriber.endDate)"></datebox>
+				                      </div>
+				                  </div>
+				                   <div sclass="form-group col-lg-4">
+				                  	  <x:label class="col-lg-3 col-sm-2 control-label"></x:label>
+				                      <div sclass="col-sm-6">
+						             	<button  zclass="btn btn-info btn-sm" iconSclass="fa fa-plus" onClick="@command('addSubScriber')" label="Adicionar"></button>
+						            </div>
+				                  </div>
+						         </div>
+				                  <div sclass="col-lg-6">
+				                  	<x:label><html><![CDATA[&nbsp;]]></html></x:label><x:br/><x:br/>
+							     	<x:table class="table table-bordered" id="tblSubScriber">
+			                            <x:thead>
+				                            <x:tr>
+				                                <x:th>Assinante</x:th>
+				                                <x:th>Numero</x:th>
+				                                <x:th>Sector</x:th>
+				                                <x:th>Remover</x:th>
+				                            </x:tr>
+			                            </x:thead>
+			                            <x:tbody>
+			                            	<div children="@load(vm.subScribersAcount)">
+			                        			<template name="children" var ="sc">
+						                            <x:tr>
+						                                <x:td>${sc.number}</x:td>
+						                                <x:td>${sc.employee.name}</x:td>
+						                                <x:td>${sc.sector.initials}</x:td>
+						                                <x:td> 
+							                                <button iconSclass="fa fa-minus"   zclass="btn btn-xs btn-danger">
+	                       								           <custom-attributes sa = "${sa}"/>
+	                       							        </button>
+                       					               	</x:td>
+						                            </x:tr>
+					                            </template>
+				                            </div>
+			                            </x:tbody>
+			                        </x:table>
+							     </div>
+						     </div>
+					    </div>
+					   
+					    
+					    
+					    <div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+	             	<div sclass="col-lg-12" align="center">
+                       		<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="" onClick="@command('printCat')" label="Imprimir"></button>
+                       </div>
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")' id="acountList">
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th style="width:45%">Órgão</x:th>
+					            <x:th style="width:25%">Banco</x:th>
+					            <x:th style="width:15%">Número</x:th>
+					            <x:th style="width:10%">Tipo</x:th>
+					            <x:th style="width:5%">Moeda</x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div children="@load(vm.accounts)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.organ}</x:td>
+							            <x:td>${each.bank.bankDescription}</x:td>
+							            <x:td>${each.accountNumber}</x:td>
+							            <x:td>${each.accountType.accountTypeDesc}</x:td>
+							            <x:td>${each.coin.coinDescription}</x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+				     
+				       <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="center">
+                       		<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="btnPrint" onClick="@command('printCat')" label="Imprimir"></button>
+                       </div>
+                  </div>
+			     </div>
+					    
+					    
+					    
+					    
+					    
+					   
+					  </div>
+                   </div>
+               </div>
+           </div>
+</zk>

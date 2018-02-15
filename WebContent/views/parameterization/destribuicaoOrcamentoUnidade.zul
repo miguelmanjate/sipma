@@ -1,0 +1,165 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.RubricaUEMDespesasVM')" id="projectList">
+
+	<div sclass="col-md-12">
+		<x:section class="panel">
+         
+        	<div sclass="panel-body">
+        	 <x:header class="panel-heading" >
+		            Orçamento da Unidades
+		      </x:header>  
+        		<div sclass="form-horizontal" style="margin-top:20px">
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Rúbrica</x:label>
+	                      <div sclass="col-sm-4">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		 </div>
+	                     
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Área Prioritária</x:label>
+	                      <div sclass="col-sm-4">
+								<listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+			              </div>
+			              <x:label class="col-lg-2 col-sm-2 control-label">Rúbrica Específica</x:label>
+	                      <div sclass="col-sm-4">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		 </div>
+	                     
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Tipo de Unidade</x:label>
+	                      <div sclass="col-sm-4">
+								<listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+			              </div>
+			              <div sclass="col-lg-2 col-lg-2" style="margin-left:80%" align="right">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-search" id="" label="Procurar" onClick=""></button>
+	                      </div>
+	                  </div>
+	             </div>
+	            
+             	<div sclass="form-group col-lg-12">
+	             	
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th>Código</x:th>
+					            <x:th>Unidade</x:th>
+					            <x:th>Limite</x:th>
+					            <x:th>Valor</x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div >
+							        <x:tr class="gradeX">
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td></x:td>
+							        </x:tr>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+				     
+				           <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="center">
+                       		<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="btnPrint" onClick="@command('printSup')" label="Imprimir"></button>
+                       </div>
+                  </div>
+			     </div>
+			     
+			     <x:header class="panel-heading" style="margin-bottom:20px">
+		           Distribuir Orçamento para Unidade
+		          </x:header>  
+			     
+			     <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Rúbrica</x:label>
+	                      <div sclass="col-sm-4">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		 </div>
+	                     
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Área Prioritária</x:label>
+	                      <div sclass="col-sm-4">
+								<listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+			              </div>
+			              <x:label class="col-lg-2 col-sm-2 control-label">Rúbrica Específica</x:label>
+	                      <div sclass="col-sm-4">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		 </div>
+	                     
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Tipo de Unidade</x:label>
+	                      <div sclass="col-sm-4">
+								<listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+			              </div>
+	                  </div>
+			         
+			        <div sclass="form-group">
+	                  
+                          <div sclass="col-sm-8">
+	                    	<listbox id="lbx_projectos" checkmark="true" rows="4" multiple="true" emptyMessage="Sem dados pesquisados no momento">
+								<listhead>
+									<listheader label="#" width="6%" />
+									<listheader label="Código" sort="auto(name)" width="25%"/>
+									<listheader label="Unidade" sort="auto(description)" />
+									<listheader label="Limite" />
+									<listheader label="Valor" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell></listcell>
+										<listcell label="" />
+										<listcell label="" />
+										<listcell label="" />
+										<listcell label="" />
+									</listitem>
+								</template>
+							</listbox>
+							</div>
+							
+							 <div sclass="col-sm-4" style="margin-top:150px">
+							 	 <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" label="Gravar" ></button>
+							 </div>
+							
+			         </div>
+			         
+			          
+			         
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>

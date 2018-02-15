@@ -1,0 +1,92 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Monitorar Fases
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div sclass="row" style="margin-left: 40%">
+	          		<button label="Por Orgão" zclass="btn btn-info"></button><separator orient="vertical"/>
+	          		<button label="Por Fases" zclass="btn btn-info"></button>
+	          	</div>
+	          	<x:hr/>
+	          	<div class="adv-table" id="monitFases" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Ciclo</x:th>
+				            <x:th>Fase</x:th>
+				            <x:th>Data</x:th>
+				            <x:th class="hidden-phone">Orgao</x:th>
+				            <x:th class="hidden-phone">Acusar Recepcao?</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <x:tr class="gradeX">
+				            <x:td>2014</x:td>
+				            <x:td>Preparacao do Processo de Planificacao</x:td>
+				            <x:td>23/01/2014</x:td>
+				            <x:td>CIUEM</x:td>
+				        	<x:td class="center hidden-phone"><checkbox sclass="todo-check"></checkbox></x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>2014</x:td>
+				            <x:td>Elaborar e Submeter o Plano</x:td>
+				            <x:td>23/01/2014</x:td>
+				            <x:td>CEND</x:td>
+				        	<x:td class="center hidden-phone"><checkbox checked="true" sclass="todo-check" ></checkbox></x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>2014</x:td>
+				            <x:td>Elaborar e Submeter o Plano</x:td>
+				            <x:td>29/04/2014</x:td>
+				            <x:td>DRH</x:td>
+				        	<x:td class="center hidden-phone"><checkbox checked="true" sclass="todo-check"></checkbox></x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>2015</x:td>
+				            <x:td>Preparacao do Processo de Planificacao</x:td>
+				            <x:td>29/04/2014</x:td>
+				            <x:td>DP</x:td>
+				        	<x:td class="center hidden-phone"><checkbox sclass="todo-check"></checkbox></x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>2015</x:td>
+				            <x:td>Elaborar e Submeter o Plano</x:td>
+				            <x:td>29/04/2014</x:td>
+				            <x:td>Dir</x:td>
+				        	<x:td class="center hidden-phone"><checkbox checked="true" sclass="todo-check"></checkbox></x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>2015</x:td>
+				            <x:td>Elaborar e Submeter o Plano</x:td>
+				            <x:td>29/04/2014</x:td>
+				            <x:td>DMI</x:td>
+				        	<x:td class="center hidden-phone"><checkbox checked="true" sclass="todo-check"></checkbox></x:td>
+				        </x:tr>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+	<zscript>
+		void monitorarOrgao(){
+		 Window window = (Window)Executions.createComponents(
+	                "config_cicle.zul", null, null);
+	        window.doModal();
+        }
+        void monitorarFases(){
+		 Window window = (Window)Executions.createComponents(
+	                "config_cicle.zul", null, null);
+	        window.doModal();
+        }
+	</zscript>
+</zk>

@@ -1,0 +1,90 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<zscript>
+  import mz.ciuem.sipma.util.Gender;
+  ListModelList genders = new ListModelList(Gender.values());
+</zscript>
+	<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.UserVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Utilizadores
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<x:code><x:label>Utilizador #&160; Senha</x:label></x:code>
+	             <div sclass="form-horizontal">
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Utilizador</x:label>
+	                      <div sclass="col-sm-4">
+	                          <textbox sclass="form-control"></textbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Peso</x:label>
+	                      <div sclass="col-sm-4">
+	                          <textbox sclass="form-control"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Critério *</x:label>
+	                      <div sclass="col-sm-5">
+	                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.name)"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-1 control-label">Descrição</x:label>
+	                      <div sclass="col-lg-9">
+	                          <textbox sclass="form-control no-resize" rows="5" value="@bind(fx.description)"></textbox>
+	                      </div>
+	                  </div><x:hr/>
+	                  <div sclass="form-group">
+	                  	<separator></separator>
+	                  	<div sclass="col-lg-2 col-lg-2"></div>
+	                      <div sclass="col-lg-1 col-lg-2">
+	                          <button zclass="btn btn-success" id="btnSave" label="Gravar" onClick="@command('save')"></button>
+	                      </div>
+	                      <div sclass="col-lg-1 col-lg-2">
+	                          <button zclass="btn btn-default" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+	                      </div>
+	                      <div sclass="col-lg-2 col-lg-2">
+		                      <button zclass="btn btn-warning" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+		                  </div>
+	                  </div>
+	             </div>
+	             <div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+		             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th>Perfil</x:th>
+					            <x:th>Data de Registo</x:th>
+					            <x:th>Data de Actualização</x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <x:tr class="gradeX">
+					            <x:td>ORGAO</x:td>
+					            <x:td>2015-01-14 16:13:35.0</x:td>
+					            <x:td>2015-01-14 16:13:35.0</x:td>
+					        </x:tr>
+					        <x:tr class="gradeX">
+					            <x:td>FUNCIONARIO</x:td>
+					            <x:td>2015-01-14 16:15:15.0</x:td>
+					            <x:td>2015-01-14 16:15:15.0</x:td>
+					        </x:tr>
+					        <x:tr class="gradeX">
+					            <x:td>SECTOR</x:td>
+					            <x:td>2015-01-14 16:32:08.0</x:td>
+					            <x:td>2015-01-14 16:32:08.0</x:td>
+					        </x:tr>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+			     </div>
+	          </div>
+	        </x:section>
+		</div>
+	</div>
+</zk>

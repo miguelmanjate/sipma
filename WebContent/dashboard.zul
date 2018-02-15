@@ -1,0 +1,147 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk" >
+	<div  sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.DasboardVM')">
+		<div sclass="row">
+		    <div class="col-md-4" visible="@load((vm.loggedOrgan ne null and vm.actions.size() != 0))">
+	            <div sclass="panel">
+	                <x:header class="panel-heading">
+	                    Actividades - Niveis de Execuções
+	                </x:header>
+	                <div sclass="panel-body">
+	                    <x:ul class="goal-progress">
+	                        <x:li forEach="${vm.actions}">
+	                            <div sclass="prog-avatar">
+	                                <x:img src="images/activity.png" alt=""/>
+	                            </div>
+	                            <div sclass="details">
+	                                <div sclass="title">
+	                                    <x:a href="#">${vm.loggedOrgan.initials}</x:a> - ${each.designation}
+	                                </div>
+	                                <div sclass="progress progress-xs">
+	                                    <x:div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+	                                        <x:span class="">0%</x:span>
+	                                    </x:div>
+	                                </div>
+	                            </div>
+	                        </x:li>
+	                        <div sclass="text-center">
+			                	<x:a href="#" onClick="@command('registerAction', target = mainlayout, breadcrumb = breadcrumb)">Ver Todas</x:a>
+			                </div>
+	                    </x:ul>
+	                </div>
+	            </div>
+	        </div>
+		    <div sclass="col-md-4" if="${vm.loggedOrgan ne null and vm.allocations.size() > 0}">
+		        <div sclass="panel">
+		            <x:header class="panel-heading">
+		                Actividades Alocadas - Estado
+		            </x:header>
+		            <div sclass="panel-body">
+		                <x:ul class="to-do-list">
+		                    <x:li class="clearfix" forEach="${vm.allocations}">
+		                        <x:p class="todo-title">
+		                           ${each.taskAlso} - 
+		                           <x:label sclass="label label-warning" if="${each.rate() != 0}" >Pendente</x:label>
+		                           <x:label sclass="label label-success" if="${each.rate() == 0}">Iniciada</x:label>
+		                        </x:p>
+		                    </x:li>
+		                </x:ul>
+		                <div sclass="text-center">
+		                	<x:a href="#" onClick="@command('integAction', target = mainlayout, breadcrumb = breadcrumb)">Ver Todas Alocações</x:a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+<!-- 		    		    <div sclass="col-md-4" if="${vm.loggedOrgan ne null and vm.allocations.size() > 0}"> -->
+<!-- 		        <div sclass="panel"> -->
+<!-- 		            <x:header class="panel-heading"> -->
+<!-- 		                Actividades Alocadas - Estado -->
+<!-- 		            </x:header> -->
+<!-- 		            <div sclass="panel-body"> -->
+<!-- 		                <x:ul class="to-do-list"> -->
+<!-- 		                    <x:li class="clearfix" forEach="${vm.allocations}"> -->
+<!-- 		                        <x:p class="todo-title"> -->
+<!-- 		                           Plano Orcamental -->
+<!-- 		                           <x:label sclass="label label-warning" if="${each.rate() != 0}" >Pendente</x:label> -->
+<!-- 		                           <x:label sclass="label label-success" if="${each.rate() == 0}">Iniciada</x:label> -->
+<!-- 		                        </x:p> -->
+<!-- 		                    </x:li> -->
+<!-- 		                </x:ul> -->
+<!-- 		                <div sclass="text-center"> -->
+<!-- 		                	<x:a href="#" onClick="@command('integAction', target = mainlayout, breadcrumb = breadcrumb)">Ver Todas Alocações</x:a> -->
+<!-- 		                </div> -->
+<!-- 		            </div> -->
+<!-- 		        </div> -->
+<!-- 		    </div> -->
+
+		    <div sclass="col-md-4" if="${vm.loggedOrgan ne null and vm.cycles.size() > 0}">
+		        <div sclass="panel">
+		            <x:header class="panel-heading">
+		                Ciclos - Progresso
+		            </x:header>
+		            <div sclass="panel-body">
+		            	<x:ul class="to-do-list">
+			            	<x:li class="clearfix" forEach="${vm.cycles}">
+			            		<x:p>Ciclo ${each.code} - ${each.subject} - <x:label class="label label-success">${each.rate()}%</x:label></x:p><x:br/>
+			            		<div sclass="progress progress-striped active progress-sm">
+				            		<x:div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${each.rate()}" aria-valuemin="0" aria-valuemax="100" style="width: ${each.rate()}%">
+		                                <span class="sr-only">${each.rate()}%</span>
+		                            </x:div>
+	                            </div>
+			            	</x:li>
+		            	</x:ul>
+		            </div>
+		            <div sclass="panel-body" if="${vm.cycles.size() == 0}">
+		            	<div sclass="alert alert-info">
+		            		<x:strong>Ooops!</x:strong>
+		            		Não esta integrado a nenhum ciclo neste momento.
+		            	</div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<div class="col-md-12" if="${vm.allocatedActions.size() > 0}">
+		    	<div sclass="panel">
+		            <x:header class="panel-heading">
+		                Actividades Alocadas a outros Unidade/Orgãos
+		            </x:header>
+		            <div sclass="panel-body">
+		            	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+				          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+						        <x:thead>
+						        <x:tr>
+						            <x:th>Actividade</x:th>
+						            <x:th>Alocações</x:th>
+						        </x:tr>
+						        </x:thead>
+						        <x:tbody>
+						        <x:tr class="gradeX" forEach="${vm.allocatedActions}">
+						            <x:td>${each.designation}</x:td>
+						            <x:td>
+						            	<x:table class="table table-striped">
+						            		<x:tr>
+						            			<x:th>Unidade/Orgão</x:th>
+						            			<x:th>Tarefa</x:th>
+						            			<x:th>Prazo</x:th>
+						            			<x:th>Estado</x:th>
+						            		</x:tr>
+						            		<x:tr forEach="${each.allocations}">
+						            			<x:td>${each.organ.designation}</x:td>
+						            			<x:td>${each.taskAlso}</x:td>
+						            			<x:td>${vm.sdf.format(each.endDate)}</x:td>
+						            			<x:td>
+						            				<x:label if="${!each.state}" class="label label-info">Pendente</x:label>
+						            				<x:label if="${each.state}" class="label label-success">Iniciada</x:label>
+						            			</x:td>
+						            		</x:tr>
+						            	</x:table>					            	
+						            </x:td>
+						        </x:tr>
+						        </x:tbody>
+						     </x:table>
+					     </div>
+		            </div>
+		        </div>
+		    </div>
+	</div>
+</zk>

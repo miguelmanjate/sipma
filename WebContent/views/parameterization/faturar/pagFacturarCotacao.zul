@@ -1,0 +1,153 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.FacturarVM')" >
+
+		<div sclass="col-md-12">
+			<x:section class="panel">
+
+				<div sclass="panel-body">
+					<x:header class="panel-heading">
+						Pagar Cotacao
+					</x:header>
+
+					<div sclass="form-horizontal" id="" >
+						<div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Numero da Factura:</x:label>
+	                      <div sclass="col-sm-2">
+	                          <x:label class="col-lg-2 col-sm-2 control-label"></x:label>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Cliente</x:label>
+	                      <div sclass="col-sm-2">
+	                          <x:label class="col-lg-2 col-sm-2 control-label"></x:label>
+	                      </div>
+	                     <x:label class="col-lg-2 col-sm-2 control-label">telefone</x:label>
+	                      <div sclass="col-sm-2">
+	                          <x:label class="col-lg-2 col-sm-2 control-label"></x:label>
+	                      </div>
+	                  </div>
+	                  
+					</div>
+
+					<x:header class="panel-heading"
+						style="margin-bottom:20px">
+						Adicionar Itens a Fatura </x:header>
+
+					<div sclass="form-group">
+
+						<div sclass="col-sm-12">
+							<div sclass="form-group col-lg-12">
+
+								<div sclass="form-group">
+
+									<div sclass="col-lg-12" align="right">
+										<button
+											zclass="btn btn-primary btn-sm" iconSclass="fa fa-bars"
+											id="" onClick="" label="Servicos da Cotacao">
+										</button>
+										<button
+											zclass="btn btn-primary btn-sm" iconSclass="fa fa-bars"
+											id="" onClick="" label="Adicionar Servicos">
+										</button>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+					
+					     <div sclass="form-group">                         
+                            <div sclass="col-lg-12" align="right">   
+	                           <x:label class="col-lg-2 col-sm-2 control-label">Rubrica</x:label>
+	                              <div sclass="col-sm-2">
+                                    <listbox mold="select" sclass="form-control m-bot15" >
+			                 	      <template name="model" var="">
+			                 		    <listitem label=""></listitem>
+			                 	      </template>
+			                        </listbox>
+	                              </div>
+	                              <x:label class="col-lg-2 col-sm-2 control-label">Servico</x:label>
+	                               <div sclass="col-sm-2">
+                                     <textbox value=""  sclass="form-control" placeholder="designacao, codigo"></textbox>
+	                               </div>
+                                  </div> 
+							</div>
+
+					<div sclass="form-group">
+
+						<div sclass="col-sm-12">
+							<div sclass="form-group col-lg-12">
+
+								<div>
+									<listbox id="" checkmark="true"
+										rows="4" multiple="true"
+										emptyMessage="Sem dados pesquisados no momento">
+										<listhead>
+											<listheader label="#"
+												width="6%" />
+											<listheader
+												label="Descricao do servico" sort="auto(name)" width="20%" />
+											<listheader
+												label="Codigo" sort="auto(description)" />
+											<listheader label="Descricao do servico do do Cliente" />
+											<listheader label="Preco Unitario" />
+											<listheader label="Plano do pagamento" />
+											<listheader label="Quantidade" />
+											<listheader label="Total" />
+										</listhead>
+										<listitem>
+											<listcell></listcell>
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell label="" />
+											<listcell>
+
+											</listcell>
+										</listitem>
+
+									</listbox>
+								</div>
+
+								<div sclass="form-group">
+									<x:label
+										class="col-lg-2 col-sm-1 control-label">
+									</x:label>
+									<div sclass="col-lg-12"
+										align="right">
+										<button
+											zclass="btn btn-warning btn-sm" iconSclass=""
+											id="" onClick="@command('viewCotacoes', tgt = mainlayout, bc = breadcrumb)"
+											label="Cancelar">
+										</button>
+										<button
+											zclass="btn btn-default btn-sm" iconSclass=" "
+											id="btnPrint" onClick=""
+											label="Contituar">
+										</button>
+										<button
+											zclass="btn btn-success btn-sm" iconSclass="fa fa-plus"
+											 onClick=" " label="Adicionar">
+										</button>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+
+
+
+				</div>
+			</x:section>
+		</div>
+	</div>
+</zk>

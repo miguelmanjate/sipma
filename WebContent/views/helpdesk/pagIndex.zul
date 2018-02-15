@@ -1,0 +1,76 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="mail-box" apply="org.zkoss.bind.BindComposer"
+		  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.HelpDeskVM')">
+	    <x:aside class="mail-nav mail-nav-bg-color">
+	        <x:header class="header"> <x:h4>HELPDESK</x:h4> </x:header>
+	        <div sclass="mail-nav-body">	
+	            <x:ul class="nav nav-pills nav-stacked labels-info ">
+	                <x:li> <x:h5>SUPORTE</x:h5> </x:li>
+	                <x:li children="@load(vm.users)">
+	                	<template name="children" var="f">
+	                		<x:a onClick="@command('showUserProblems', userId = mdlId)" href="#" style="text-decoration: ${f.id == vm.selectedUser.id ? 'line-through' : ''}">
+		                		<x:i class="fa fa-warning"></x:i>
+		                		${f.responsible.fullName()}
+		                		<custom-attributes  mdlId= "${f.id}"/>
+		                	</x:a>
+	                	</template>
+	                </x:li>
+	            </x:ul>
+	        </div>
+	    </x:aside>
+	    <x:section class="mail-box-info">
+	        <x:header class="header">
+	            <div sclass="btn-toolbar">
+	                <x:h4 class="pull-left">
+	                    Ajudas submetidas ao Administrador...
+	                </x:h4>
+	            </div>
+	        </x:header>
+	        <x:section class="mail-list">
+	            <div sclass="mail-sender">
+	                <div sclass="row">
+	                	<div sclass="col-md-12">
+	                		<x:div class="alert alert-success fade in">
+	                    		<x:strong>Atenção! </x:strong>
+						        <x:p>Ajudas poderão ser submetidas apartir do perfil do utilizador para o administrador...</x:p>
+						    </x:div>
+	                	</div>
+	                    <div sclass="col-md-12" visible="@load(vm.problems.size() > 0)">
+	                        <x:img src="images/u70.png" alt=""/>
+	                        <x:strong><label value="@load(vm.selectedUser.responsible.fullName())"></label></x:strong>
+	                        <x:span> [<label value="@load(vm.selectedUser.getUsername())"></label>]</x:span>
+	                        para
+	                        <x:strong>Administrador</x:strong>
+	                    </div>
+	                </div>
+	            </div>
+	            <div children="@load(vm.problems)">
+		            <template name="children" var="p">
+			            <div sclass="view-mail">
+			            	<x:p class="date"><x:a style="cursor: pointer">
+			            	<span class="badge badge-info"><label value="@load(p.comments.size())"></label> - comentarios</span></x:a> Pedido de Suporte [<x:span style="color: #c7254e;">${vm.f.format(p.created)}</x:span>]</x:p>
+			                <x:p>${p.what}</x:p>
+			            </div>
+			            <div sclass="attachment-mail">
+			                <x:p if="${p.attach != null}">
+			                    <span><x:i class="fa fa-paperclip"></x:i> 1 anexo — </span>
+			                    <x:a href="#" onClick="@command('download', attachId = p.attach.id)">Baixar Anexo</x:a>
+			                </x:p>
+			                <div sclass="col-md-12" apply="org.zkoss.bind.BindComposer">
+				                <div sclass="panel">
+				                    <x:form>
+				                        <textbox sclass="form-control" rows="2" ></textbox>
+				                    </x:form>
+				                    <x:footer class="panel-footer">
+				                        <button zclass="btn btn-post btn-sm pull-right" disabled="true" onClick="@command('reply', helpId = p.id)">Comentar</button>
+				                        <x:ul class="nav nav-pills p-option"></x:ul>
+				                    </x:footer>
+				                </div>
+				            </div>
+			            </div>
+		            </template>
+	            </div>
+	        </x:section>
+	    </x:section>
+	</div>
+</zk>

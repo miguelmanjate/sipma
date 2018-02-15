@@ -1,0 +1,49 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window id="responsibleChooser" width="800px" mode="modal" position="center,center">
+		<div sclass="row">
+			<div sclass="col-md-12">
+				<div sclass="panel">
+				    <x:header class="panel-heading">
+				        ${vm.phaseCycle.phase.designacao}
+				        <x:span class="tools pull-right">
+				            <a href="javascript:;" onClick="responsibleChooser.detach()" iconSclass="fa fa-times"></a>
+				         </x:span>
+				    </x:header>
+				    <div sclass="panel-body" style="display: block;" form="@id('fx') @load(vm.phaseCycle) @save(vm.phaseCycle, before='updatePhase')">
+				    	<x:table class="table  table-hover general-table">
+				    		<x:tr>
+				    			<x:td>Constrangimento:</x:td>
+				    			<x:td>${vm.phaseOrganCycle.embarrassment.designation}</x:td>
+				    		</x:tr>
+				    		<x:tr>
+				    			<x:td>Ciclo</x:td>
+				    			<x:td>${vm.phaseOrganCycle.phaseCycle.cycle}</x:td>
+				    		</x:tr>
+				    		<x:tr>
+				    			<x:td>Orgão</x:td>
+				    			<x:td>${vm.phaseOrganCycle.organ.initials}</x:td>
+				    		</x:tr>
+				    		<x:tr>
+				    			<x:td>Fase</x:td>
+				    			<x:td>${vm.phaseCycle.phase.designacao}</x:td>
+				    		</x:tr>
+				    		<x:tr>
+				    			<x:td>Data de Inicio</x:td>
+				    			<x:td><datebox value="@bind(fx.startDate)" disabled="true"></datebox></x:td>
+				    		</x:tr>
+				    		<x:tr>
+				    			<x:td>Data de Fim</x:td>
+				    			<x:td><datebox value="@bind(fx.endDate)" constraint="no past: Data ultrapassada!"></datebox></x:td>
+				    		</x:tr>
+				    		<x:tr>
+				    			<x:td><button zclass="btn btn-default btn-sm" disabled="@load(fx.endDate eq null)" iconSclass="fa fa-calendar" id="btnSave" label="Prolongar" onClick="@command('updatePhase')"></button></x:td>
+				    			<x:td></x:td>
+				    		</x:tr>
+				    	</x:table>
+				    	<x:br/><x:br/>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</window>
+</zk>

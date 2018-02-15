@@ -1,0 +1,68 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ActionIntegrationVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Integrar Actividade
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		   <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Orgao</x:th>
+				            <x:th class="hidden-phone">Actividade Proposta</x:th>
+				            <x:th>Prazo</x:th>
+				            <x:th class="hidden-phone">Aceitar?</x:th>
+				            <x:th class="hidden-phone">Visto?</x:th>
+				            <x:th>Comentários</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.allocations)">
+				        	<template name="children" var="ao">
+						        <x:tr class="gradeX">
+						            <x:td>${ao.organ.designation}</x:td>
+						            <x:td>${ao.taskAlso}</x:td>
+						            <x:td>${vm.sdf.format(ao.endDate)}</x:td>
+						            <x:td>
+						            	<div sclass="btn-group" >
+							                 <checkbox sclass="todo-check" value="@bind(ao.state)" 
+							                 	onCheck="@command('checkAYesllocation', allocation = alloc, state = self.checked)">
+							                 	<custom-attributes alloc = "${ao}"/>
+							                 </checkbox>Sim
+						                 </div>
+						                 
+						                 	<div sclass="btn-group" >
+							                 <checkbox sclass="todo-check" value="@bind(ao.state)" 
+							                 	onCheck="@command('checkNoAllocation', allocation = alloc, state = self.checked)">
+							                 	<custom-attributes alloc = "${ao}"/>
+							                 </checkbox>Não
+						                 </div>
+						            </x:td>
+						            <x:td>
+						           <x:label if="${ao.seen==true}">Sim</x:label>
+						           <x:label if="${ao.seen==false}">Não</x:label> 
+						            </x:td>
+						            <x:td class="hidden-phone">
+						            	<button label="Comentar" id="alloc${ao.id}" disabled="@load(not ao.seen)" onClick="@command('comment', alloc = allocId)" iconSclass="fa fa-comment" sclass="btn btn-sm btn-default">
+						            		<custom-attributes allocId = "${ao.id}"/>
+						            	</button>
+						            </x:td>
+						        </x:tr>
+					        </template>
+				        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

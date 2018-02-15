@@ -1,0 +1,55 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.CicleVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Lista de Ciclos
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Ciclo ano</x:th>
+				            <x:th>Assunto</x:th>
+				            <x:th>Data de Inicio</x:th>
+				            <x:th class="hidden-phone">Data do fim</x:th>
+				            <x:th>Estado</x:th>
+				            <x:th></x:th>
+				            <x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <x:tr class="gradeX" forEach="${vm.cycles}">
+				        	<custom-attributes modelId = "${each.id}"/>
+				            <x:td>${each.code}</x:td>
+				            <x:td>${each.subject}</x:td>
+				            <x:td>${each.startDate}</x:td>
+				            <x:td>${each.endDate}</x:td>
+				        	<x:td class="center hidden-phone">
+				        		<x:label sclass="label label-warning" if="${each.state == 'Paused'}">Em pausa</x:label>
+				        		<x:label sclass="label label-info" if="${each.state == 'Started'}">Em Curso</x:label>
+				        		<x:label sclass="label label-danger" if="${each.state == 'Stopped'}">Parado</x:label>
+				        	</x:td>
+				        	<x:td><button label="Configurar" iconSclass="fa fa-wrench" 
+				        		onClick="@command('configCycle', cycleId = modelId, tgt = mainlayout, bc = breadcrumb)" 
+				        		zclass="btn btn-default btn-sm"></button></x:td>
+				        		
+				        	<x:td><button label="Editar" iconSclass="fa fa-wrench" 
+				        		onClick="@command('edit', cycleId = modelId, tgt = mainlayout, bc = breadcrumb)" 
+				        		zclass="btn btn-default btn-sm"></button></x:td>
+				        </x:tr>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

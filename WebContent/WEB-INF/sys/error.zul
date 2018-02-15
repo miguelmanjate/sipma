@@ -1,0 +1,29 @@
+<window width="700px" mode="modal" xmlns:x="xhtml" xmlns:zk="zk" action="show: slideDown">
+    <div sclass="panel" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ErrorLogVM')">
+	    <x:header class="panel-heading">
+	        <x:i class="fa fa-info"></x:i> Error ${requestScope['javax.servlet.error.status_code']}
+	        <x:span class="tools pull-right">
+	            <a href="javascript:;" class="fa fa-times" onClick="spaceOwner.detach()"></a>
+	         </x:span>
+	    </x:header>
+	    <div sclass="panel-body">
+	        <div sclass="alert alert-block alert-danger fade in">
+                <x:strong>Ocorreu um Erro! » Contacte o Administrador!</x:strong><x:br/>
+                <button zclass="btn btn-default" disabled="false" onClick="errorReason.setVisible(true)">Causa do Erro</button><x:br/>
+                <label value="${requestScope['javax.servlet.error.message']}" visible="false" id="errorReason"></label>
+                <zscript>org.zkoss.util.logging.Log.lookup("Fatal").error(requestScope.get("javax.servlet.error.exception"));</zscript>
+            </div>
+            <x:ul class="pager">
+            	<x:li class="next">
+            		<custom-attributes errorMessage = "${requestScope['javax.servlet.error.message']}"/>
+            		<custom-attributes errorException = "${requestScope['javax.servlet.error.exception_type']}"/>
+            		<button zclass="btn btn-default" id="reportError" 
+            			onClick="@command('report', message = errorMessage, type = errorException)" 
+            			iconSclass="fa fa-meh-o" disabled="false">Reportar</button>
+            		</x:li><separator orient="vertical"></separator>
+            	<x:li class="next"><button zclass="btn btn-default" iconSclass="fa fa-arrow-circle-right" disabled="false" onClick="spaceOwner.detach()">Continuar</button></x:li>
+            </x:ul>
+	    </div>
+	</div>
+</window>

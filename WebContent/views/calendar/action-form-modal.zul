@@ -1,0 +1,206 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<zscript>
+	import mz.ciuem.sipma.util.CriteriaTypes;;
+	import mz.ciuem.sipma.util.Nature;
+	
+	ListModelList cTypes = new ListModelList(CriteriaTypes.values());
+	ListModelList natures = new ListModelList(Nature.values());
+</zscript>
+	<window form="@id('fx') @load(vm.action) @save(vm.action, before='ok') @save(vm.action, before='updateActivity') @validator(vm.getDateValidator())"  id="modal"
+        allDay="@ref(vm.isAllDay(fx.beginDate,fx.endDate))" width="900px"
+        mode="modal" visible="@load(vm.visible)" position="center,center" apply="org.zkoss.bind.BindComposer"
+    		viewModel="@id('vm') @init('mz.ciuem.sipma.vm.ActionVM')" validationMessages="@id('vmsgs')">
+	    
+	    <zscript>
+        	import mz.ciuem.sipma.util.EventColors;
+        	ListModelList colors = new ListModelList(EventColors.values());
+        </zscript>
+	    <div sclass="row">
+			<div sclass="col-md-12">
+				<div sclass="panel">
+				    <x:header class="panel-heading">
+				        Detalhes da Actividade
+				        <x:span class="tools pull-right">
+				            <x:a href="javascript:;" onClick="@command('cancel')" class="fa fa-times"></x:a>
+				         </x:span>
+				    </x:header>
+				    <div sclass="panel-body" style="display: block;" visible="@load(empty fx.id)" id="div_actiReg">
+				        
+				        <div sclass="form-horizontal">
+				        	 <div sclass="form-group">
+			                      <x:label class="col-lg-2 col-sm-2 control-label">Data de Inicio</x:label>
+			                      <div sclass="col-sm-3">
+			                          <datebox disabled="@load(fx.id ne null)" width="100%" locale="en" timeZone="GMT+0" format="@load(allDay ? 'long' : 'long+medium')"
+                            				value="@bind(fx.beginDate)" errorMessage="@load(vmsgs.beginDate)" id="dtx_dataInicio"></datebox>
+			                      </div>
+			                      <x:label class="col-lg-2 col-sm-2 control-label">Data do Fim</x:label>
+			                      <div sclass="col-sm-3">
+			                          <datebox disabled="@load(fx.id ne null)" width="100%" locale="en" timeZone="GMT+0" format="@load(allDay ? 'long' : 'long+medium')"
+                            				value="@bind(fx.endDate)" errorMessage="@load(vmsgs.endDate)" id="dtx_fim"></datebox>
+			                      </div>
+			                 </div>
+			                 <div sclass="form-group">
+			                 	<x:label class="col-lg-2 col-sm-2 control-label">Actividade</x:label>
+			                 	<div sclass="col-sm-8">
+			                         <textbox readonly="@load(fx.id ne null)" sclass="form-control" value="@bind(fx.content)" id="tbx_descricao"/>
+			                      </div>
+			                 </div>
+							 <div sclass="form-group">
+			                      <x:label class="col-lg-2 col-sm-2 control-label">Ciclo</x:label>
+			                      <div sclass="col-sm-6">
+			                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(fx.cycle)"  model="@load(vm.cycles)">
+					                 	<template name="model" var="c">
+					                 		<listitem label="${c.code} - ${c.subject}" value="${c.id}"></listitem>
+					                 	</template>
+					                 </listbox>
+			                      </div>
+								<x:label class="col-lg-1 col-sm-1 control-label">Cor</x:label>
+								<colorbox value="@bind(fx.contentColor)"></colorbox>
+			                  </div>
+				               <div sclass="col-xs-6">
+								 <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Critério 1</x:label>
+				                      <div sclass="col-sm-8">
+				                          <listbox mold="select" selectedItem="@bind(fx.priorityLevel.firstCriteria)" sclass="form-control m-bot15" model="@load(vm.firstCriterias)" >
+						                 	<template name="model" var="c">
+						                 		<listitem label="${c.name}"></listitem>
+						                 	</template>
+						                 </listbox>
+					                  </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Critério 2</x:label>
+				                      <div sclass="col-sm-8">
+				                          <listbox mold="select"  selectedItem="@bind(fx.priorityLevel.secondCriteria)" sclass="form-control m-bot15" model="@load(vm.secondCriterias)">
+						                 	<template name="model" var="c">
+						                 		<listitem label="${c.name}"></listitem>
+						                 	</template>	
+						                 </listbox>
+				                      </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Critério 3</x:label>
+				                      <div sclass="col-sm-8">
+				                          <listbox mold="select" selectedItem="@bind(fx.priorityLevel.thirdCriteria)" sclass="form-control m-bot15" model="@load(vm.thirdCriterias)">
+						                 	<template name="model" var="c">
+						                 		<listitem label="${c.name}"></listitem>
+						                 	</template>
+						                 </listbox>
+				                      </div>
+				                  </div>
+			                  </div>
+			                  <div sclass="col-xs-6">
+								 <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">A.Prioritária</x:label>
+				                 <div sclass="col-sm-8">
+				                    <listbox mold="select" selectedItem="@bind(fx.criticalArea)" model="@load(vm.criticalAreas)" sclass="form-control m-bot15">
+					                 	<template name="model" var="ca">
+					                 		<listitem label="${ca.designation}"></listitem>
+					                 	</template>
+					                 </listbox>
+					              </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">O.Estrategico</x:label>
+				                      <div sclass="col-sm-8">
+				                       <listbox mold="select" selectedItem="@bind(fx.strategicObjective)" model="@load(vm.strategicObjectives)" sclass="form-control m-bot15">
+					                 	   <template name="model" var="so">
+					                 		   <listitem label="${so.designation}"></listitem>
+					                 	     </template>
+					                   </listbox>
+				                      </div>
+				                  </div>
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Natureza</x:label>
+				                      <div sclass="col-sm-8">
+				                          <listbox mold="select" selectedItem="@bind(fx.nature)" model="@load(natures)" sclass="form-control m-bot15">
+					                 	       <template name="model" var="so">
+					                 		       <listitem  label="${so.value}"></listitem>
+					                 	       </template>
+					                      </listbox>
+				                      </div>
+				                  </div>
+			                  </div>
+			                  
+
+
+
+
+			             </div>
+			             
+			             
+			             <div sclass="col-md-12">
+			             	 <div sclass="form-group" style="float: left">
+			             	 	<x:label class="col-lg-1 col-sm-2 control-label"></x:label>
+			             	 </div>
+				             <div sclass="form-group" style="float: right">
+				             	<x:label class="col-lg-1 col-sm-2 control-label"></x:label>
+		                        <x:label class="col-lg-1 col-sm-2 control-label"></x:label>
+				                <div sclass="col-lg-2 col-lg-2">
+				                  <button zclass="btn btn-success btn-sm" disabled="@bind(empty fx.cycle)" iconSclass="fa fa-check" onClick="@command('ok')" label="Registar"></button>
+				              	
+                                  <button zclass="btn btn-primary btn-sm" disabled="@bind(empty fx.cycle)" iconSclass="fa fa-refresh" onClick="@command('update')" label="Actualizar" visible="false"></button>
+                                  				              	
+				              	</div>
+				              	<x:label class="col-lg-1"></x:label>
+				             </div>
+			             </div>
+				    </div>
+				    
+				    
+				    
+				    
+				    
+				    <div sclass="panel-body" style="display: block;" visible="@load(not empty fx.id)" id="div_actiDetail">
+				    	<x:table class="table table-striped">
+							<x:tbody>
+								<x:tr>
+									<x:td>Data de Inicio:</x:td>
+									<x:td class="hidden-phone"><label value="@load(fx.beginDate)"></label></x:td>
+								</x:tr>
+								<x:tr>
+									<x:td>Data de Fim:</x:td>
+									<x:td class="hidden-phone"><label value="@load(fx.endDate)"></label></x:td>
+								</x:tr>
+								<x:tr>
+									<x:td>Actividade:</x:td>
+									<x:td class="hidden-phone"><label value="@load(fx.content)"></label></x:td>
+								</x:tr>
+								<x:tr>
+									<x:td>Ciclo:</x:td>
+									<x:td class="hidden-phone"><label value="@load(fx.cycle.subject)"></label></x:td>
+								</x:tr>
+								<x:tr>
+									<x:td>Area de Gestão:</x:td>
+									<x:td class="hidden-phone"><label value="@load(fx.criticalArea.designation)"></label></x:td>
+								</x:tr>
+								<x:tr>
+									<x:td>Ojectivo Estratégico:</x:td>
+									<x:td class="hidden-phone"><label value="@load(fx.strategicObjective.designation)"></label></x:td>
+								</x:tr>
+							</x:tbody>
+						</x:table>
+				    </div>
+				</div>	
+		    </div>
+		 </div>
+		 <div sclass="col-md-12">
+           	 <div sclass="form-group" style="float: left">
+           	 	<x:span visible="@load(empty fx.id)" id="sp_nome">Orgão: ${vm.loggedOrgan}</x:span>
+           	 </div>
+           </div>
+		 <label value="@load(fx.id)" id="paramId" visible="false"></label>
+		 <div sclass="col-lg-6 col-lg-10" visible="@load(not empty fx.id)" style="margin-bottom:20px" id="div_button">
+		       <button visible="@load(not empty fx.id)" zclass="btn btn-info btn-sm" class="access" iconSclass="fa fa-edit" id="btnUpdateActiv"
+              	onClick="@command('updateActivity', actionId = paramId.value, target = mainlayout, bread = breadcrumb)"
+              	label="Actividade">
+              </button>
+              
+              
+              <button visible="@load(not empty fx.id)" zclass="btn btn-success btn-sm" class="access" iconSclass="fa fa-mail-forward" id="btnSpecifAct"
+              	onClick="@command('specificActions', actionId = paramId.value, target = mainlayout, bread = breadcrumb)"
+              	label="Act. Específicas">
+              </button>
+         </div>
+	</window>
+</zk>

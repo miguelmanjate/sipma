@@ -1,0 +1,175 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	    <div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vms')@init('mz.ciuem.sipma.vm.ConfigCycleVM')">
+	  		
+	  		<custom-attributes startDate="${vms.format(vms.cycle.startDate)}"/>
+			<custom-attributes endDate="${vms.format(vms.cycle.endDate)}"/>
+			<div sclass="col-md-12">
+				<x:section class="panel">
+		          <x:header class="panel-heading">
+		          
+		              Configurar Ciclo - #${vms.cycle.id} (<x:code>${vms.sdf.format(vms.cycle.startDate)}</x:code> - <x:code>${vms.sdf.format(vms.cycle.endDate)}</x:code>)
+		              -
+		              <x:label sclass="label label-warning" if="${vms.cycle.state == 'Paused'}">Em pausa</x:label>
+	        		  <x:label sclass="label label-info" if="${vms.cycle.state == 'Started'}">Em Curso</x:label>
+	        		  <x:label sclass="label label-danger" if="${vms.cycle.state == 'Stopped'}">Parado</x:label>
+		              <x:span class="tools pull-right">
+		                  <a class="fa fa-times" href="javascript:;" ></a>
+		              </x:span>
+		          </x:header>
+		          <div sclass="panel-body">
+		          	<div sclass="btn-toolbar">
+                        <div sclass="btn-group">
+                            <button zclass="btn btn-sm btn-primary" onClick="@command('updateState', state = 'Started')" disabled="@load(vms.cycle.state ne 'Stopped' and vms.cycle.state ne 'Paused')" iconSclass="fa fa-play"></button>
+                        </div>
+                        <div sclass="btn-group">
+                            <button zclass="btn btn-sm btn-primary" onClick="@command('updateState', state = 'Paused')" disabled="@load(vms.cycle.state ne 'Started')" iconSclass="fa fa-pause"></button>
+                        </div>
+                        <div sclass="btn-group">
+                            <button zclass="btn btn-sm btn-primary" onClick="@command('updateState', state = 'Stopped')" disabled="@load(vms.cycle.state ne 'Started' and vms.cycle.state ne 'Paused')" iconSclass="fa fa-stop"></button>
+                        </div>
+                        <div sclass="btn-group" style="float: right">
+                            <button zclass="btn btn-default btn-sm" iconSclass="fa fa-print" label="Imprimir"></button>
+                        </div>
+                    </div><x:hr></x:hr>
+		            <div sclass="form-group col-lg-12" form="@id('fx') @load(vms.phaseCycle) @save(vms.phaseCycle, before='addPhaseCycle')">
+		            	<x:code><x:label>Fases do Ciclo:</x:label></x:code><separator></separator>
+		            	<div sclass="form-group col-lg-4">
+			                 <x:label>Fase</x:label>
+			                 <listbox mold="select" sclass="form-control m-bot15" model="@load(vms.phases)"
+			                 	selectedItem="@bind(fx.phase)">
+			                 	<template name="model" var="p">
+			                 		<listitem label="${p.designacao}"></listitem>
+			                 	</template>
+			                 </listbox>
+			            </div>
+			             <div sclass="form-group col-lg-3">
+			                 <x:label>Data de Inicio</x:label>
+			                 <datebox width="100%" onChange="@command('limitEndDate', begin = self.value, end = endDate)"
+			                 	constraint="between ${startDate} and ${endDate}, no empty" value="@bind(fx.startDate)"></datebox>
+			             </div>
+			             <div sclass="form-group col-lg-3">
+			                 <x:label>Data do Fim</x:label>
+			                 <datebox width="100%" constraint="no empty" id="dbxEnd" disabled="true" value="@bind(fx.endDate)"></datebox>
+			             </div>
+			             <separator height="24px"></separator>
+			             <div sclass="form-group col-lg-2">
+			             	<button zclass="btn btn-default btn-sm" iconSclass="fa fa-plus" disabled="@load(vms.cycle.state ne 'Stopped')" onClick="@command('addPhaseCycle')" label="Adicionar"></button>
+			             </div>
+		             </div>
+		             <div sclass="col-lg-12 adv-table" onCreate='Clients.evalJavaScript("dataInit()")' id="phaseCyclesPanel">
+		             	<x:table class="display table table-bordered table-striped" id="phaseCycles">
+                            <x:thead>
+                            <x:tr>
+                                <x:th>Fase</x:th>
+                                <x:th>Data de Inicio</x:th>
+                                <x:th>Data de Fim</x:th>
+                                <x:th>%</x:th>
+                            </x:tr>
+                            </x:thead>
+                            <x:tbody>
+                            	<div children="@load(vms.phaseCycles)">
+                            		<template name="children">
+			                            <x:tr>
+			                            	<x:td>${each.phase.designacao}</x:td>
+			                                <x:td>${vm.sdf.format(each.startDate)}</x:td>
+			                                <x:td>${vm.sdf.format(each.endDate)}</x:td>
+			                                <x:td class="hidden-phone">
+			                                    ${each.rate()}%
+			                                </x:td>
+			                            </x:tr>
+		                            </template>
+	                            </div>
+                     		</x:tbody>
+                        </x:table>
+		             </div>
+		             <div sclass="form-group col-lg-12">
+		             <x:code><x:label>Informação Sobre Ciclo:</x:label></x:code><separator></separator>
+		             	<div sclass="form-horizontal">
+		             		<div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Ciclo Ano</x:label>
+		                      <div sclass="col-sm-2">
+		                     	<textbox sclass="form-control" value="@bind(vms.cycle.code)" readonly="true"></textbox>
+		                      </div>
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Tipo</x:label>
+		                      <div sclass="col-sm-2">
+		                     	<x:label sclass="label label-warning" if="${vms.cycle.type == 'Especial'}">Especial</x:label>
+				        		<x:label sclass="label label-info" if="${vms.cycle.type == 'Normal'}">Normal</x:label>
+		                      </div>
+		                    </div>
+		                    <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Assunto</x:label>
+		                      <div sclass="col-sm-6">
+		                     	<textbox sclass="form-control" value="@bind(vms.cycle.subject)" readonly="true"></textbox>
+		                      </div>
+		                    </div>
+		                    <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Descrição</x:label>
+		                      <div sclass="col-sm-10">
+		                     	<textbox sclass="form-control" value="@bind(vms.cycle.description)" readonly="true"></textbox>
+		                      </div>
+		                    </div>
+		                    <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Data de Inicio</x:label>
+		                      <div sclass="col-sm-2">
+		                     	<textbox sclass="form-control" value="@bind(vms.sdf.format(vms.cycle.startDate))" readonly="true"></textbox>
+		                      </div>
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Data de Término</x:label>
+		                      <div sclass="col-sm-2">
+		                     	<textbox sclass="form-control" value="@bind(vms.sdf.format(vms.cycle.endDate))" readonly="true"></textbox>
+		                      </div>
+		                    </div>
+		                    <div sclass="form-group" visible="@load(not empty vms.cycle.attachments)">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Anexos</x:label>
+		                      <div sclass="col-sm-10">
+		                     	<x:li forEach="${vms.cycle.attachments}">
+		                     		<custom-attributes modelId = "${each.id}" />
+		                     		<x:a href="#" onClick="@command('download', attachId = modelId)">${each.fileName}</x:a>
+		                     	</x:li>
+		                      </div>
+		                    </div>
+		                    <separator></separator>
+		                    <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Unidades Organicas</x:label>
+		                      <div sclass="col-sm-10">
+		                     	 <chosenbox model="@bind(vms.organNotInCycle)"   creatable="true" sclass="form-control" width="600px" /><separator />
+		                     	    <button label="Incluir" iconSclass="fa fa-wrench"  zclass="btn btn-default btn-sm" onClick="@command('addOrganInCycle')"/>                     	 
+		                      </div> 
+		                    </div>
+		                    <div sclass="form-group" onCreate='Clients.evalJavaScript("dataInit2()")'>
+		                      <separator></separator>
+		                      <x:table class="display table table-bordered table-striped" id="organs">
+		                      	<x:thead>
+	                            	<x:tr>
+		                                <x:th>Participantes <x:span class="badge">${vms.cycle.organs.size()}</x:span></x:th>
+		                            </x:tr>
+	                            </x:thead>
+						        <x:tbody>
+						        <x:tr class="gradeX" forEach="${vms.cycle.organs}">
+						        	<custom-attributes modelId = "${each.id}"/>
+						            <x:td>${each.designation}</x:td>
+						        </x:tr>
+						        </x:tbody>
+		                      </x:table>
+		                    </div>
+		             	</div>
+		             </div>
+		          </div><x:hr></x:hr>
+		        </x:section>
+		    </div>
+		 </div>
+		 <x:script>
+		 	function dataInit(){
+		 		$('#phaseCycles').dataTable( {
+		 		  "iDisplayLength": 4,
+			       "aLengthMenu": [[4, 5, 6, -1], [4, 5, 6, "Todos"]]
+			     } );
+		 	}
+		 	function dataInit2(){
+		 		$('#organs').dataTable( {
+		 		  "iDisplayLength": 4,
+			       "aLengthMenu": [[4, 5, 6, -1], [4, 5, 6, "Todos"]]
+			     } );
+		 	}
+		 </x:script>    
+</zk>

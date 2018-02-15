@@ -1,0 +1,54 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Relatório de Notificações
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">           
+			<div sclass="col-lg-12">
+				<div class="adv-table" id="notif" onCreate='Clients.evalJavaScript("dataInit()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="tblNotific">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Notificação</x:th>
+				            <x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.notifications)">
+				        	<template name="children">
+				        		<custom-attributes delId = "${each.id}"/>
+						        <x:tr class="gradeX">
+						            <x:td>${each.description}</x:td>
+						            <x:td>
+						            	<button zclass="btn btn-default btn-xs" tooltiptext="Marcar como visto!" 
+						            		onClick="@command('watched', notificationId = notifId, target = notif)" iconSclass="fa fa-eye">
+						            		<custom-attributes notifId = "${each.id}"/>
+						            	</button>
+						            </x:td>
+						        </x:tr>
+					        </template>
+				        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+			</div>
+		  </div>
+        </x:section>
+	</div>
+	<x:script>
+	 	function dataInit(){
+	 		$('#tblNotific').dataTable( {
+	 		  "iDisplayLength": 10,
+		       "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "Todos"]]
+		     } );
+	 	}
+	 </x:script>  
+</div>
+</zk>

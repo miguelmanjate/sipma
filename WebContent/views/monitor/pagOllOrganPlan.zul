@@ -1,0 +1,27 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row">
+	    <div class="col-md-12">
+            <div sclass="panel">
+                <x:header class="panel-heading">
+                    Plano de Actividades
+                </x:header>
+                <div sclass="panel-body" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.NewDasboardVM')">
+		            <hlayout sclass="z-valign-middle">
+		                <button onClick="@command('today')" zclass="btn btn-sm btn-default" label="Hoje" />
+		                <button onClick="@command('prev')"  zclass="btn btn-sm btn-default" iconSclass="fa fa-angle-double-left"/>
+		                <button onClick="@command('next')"  zclass="btn btn-sm btn-default" iconSclass="fa fa-angle-double-right"/>
+		                <separator width="50px" />
+		                <x:label><x:i class="fa fa-filter"></x:i>Filtrar :</x:label>
+		                <textbox id="filter" sclass="form-control"/>
+		                <button onClick="@command('applyFilter')" zclass="btn btn-sm btn-default" iconSclass="fa fa-search" label="Aplicar"/>
+		                <button onClick="@command('resetFilter')" zclass="btn btn-sm btn-default" label="Limpar"/>
+		            </hlayout><separator width="60px" />
+                   
+                    <calendars id="cal" height="500px" mold="month" firstDayOfWeek="Sunday" 
+                    	model="@load(vm.actionModel)"  onEventEdit="@command('showDetail', ev = event)">
+                    </calendars>
+                </div>
+            </div>
+        </div>
+   </div>
+</zk>

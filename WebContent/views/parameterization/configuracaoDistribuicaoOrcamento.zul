@@ -1,0 +1,92 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" id="projectList" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ConfiguracaoDistribuicaoOrcamentoVM')">
+
+	<div sclass="col-md-12">
+		<x:section class="panel">
+         
+        	<div sclass="panel-body">
+        	 <x:header class="panel-heading" >
+        	 		<hlayout>
+		            <div align="left">Nome Da Rúbrica:</div>  <div style="margin-left:500px">Código da Rúbrica:</div> 
+		            </hlayout>
+		            <hlayout>
+		            <div align="left">Valor Registado:</div>  <div style="margin-left:500px">Valor Desponivel na Rubrica:</div> 
+		            </hlayout>
+		     </x:header> 
+        		<div sclass="form-horizontal" style="margin-top:20px">
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Designação da conta</x:label>
+	                      <div sclass="col-sm-4">
+							<listbox mold="select" sclass="form-control m-bot15">
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>	
+			      		  </div>
+	                     
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Número da Conta</x:label>
+	                      <div sclass="col-sm-4">
+								<listbox mold="select" sclass="form-control m-bot15" >
+			                 	<template name="model" var="">
+			                 		<listitem label=""></listitem>
+			                 	</template>
+			                 </listbox>
+			              </div>
+			              <div sclass="col-lg-2 col-lg-2" style="margin-left:80%" align="right">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-search" id="" label="Procurar" onClick=""></button>
+	                      </div>
+	                  </div>
+	             </div>
+	             <x:header class="panel-heading" >
+	             	Rubricas Especificas e seus valores
+	             </x:header>
+	            
+             	<div sclass="form-group col-lg-12">
+	             	
+		             <div sclass="col-sm-8">
+	                    	<listbox id="lbx_projectos" checkmark="true" rows="4" multiple="true" emptyMessage="Sem dados pesquisados no momento">
+								<listhead>
+									<listheader label="#" width="6%" />
+									<listheader label="Código" />
+									<listheader label="Designação" sort="auto(name)" width="25%"/>
+									<listheader label="Activa" sort="auto(description)" />
+									<listheader label="Valor Aprovado" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell> </listcell>
+										<listcell label="re0001" />
+										<listcell label="Aulas Praticas" />
+										<listcell> <textbox> </textbox> </listcell>
+										<listcell label="" />
+										
+									</listitem>
+								</template>
+							</listbox>
+							</div>
+				     
+				           <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="center">
+	                       	<div sclass="col-lg-6" align="center">
+                       			<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="btnPrint" onClick="@command('printSup')" label="Imprimir"></button>
+	                       	</div>
+	                       	<div sclass="col-lg-6" align="right">
+		                       	<button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="" onClick="@command('printSup')" label="Registar"></button>
+		                      	<button zclass="btn btn-info btn-sm" iconSclass="fa fa-step-backward" id="" onClick="@command('voltar', cycleId = modelId, tgt = mainlayout, bc = breadcrumb)" label="Voltar"></button>
+	                       	</div>
+                       </div>
+                  </div>
+			     </div>
+			     
+			    
+			         
+			         
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>

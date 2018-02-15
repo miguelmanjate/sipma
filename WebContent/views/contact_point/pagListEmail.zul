@@ -1,0 +1,71 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+    <div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.EmailVM')">
+		<div sclass="col-md-9">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	             Contactos de Email 
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-list" href="javascript:;" ></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">   
+			      <x:table class="display table table-bordered table-striped">
+					        <x:thead>
+					        <x:tr>
+					            <x:th style="width:20%">ID</x:th>
+					            <x:th style="width:20%">Nome</x:th>
+					            <x:th style="width:30%">Email</x:th>
+					            <x:th style="width:20%"></x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div>
+							    <x:tr class="gradeX" forEach="${vm.emails}">
+							    <custom-attributes modelId = "${each.id}"/>
+							       <x:td>${each.id}</x:td>
+							       <x:td>${each.employee.fullName()}</x:td>
+							       <x:td>${each.value}</x:td>
+							       <x:td><x:label sclass="label label-warning">Ver Detalhes</x:label></x:td>
+							    </x:tr>
+					        </div>
+					    </x:tbody>
+				</x:table>
+				<button zclass="btn btn-sm btn-default" iconSclass="fa fa-download" label="Exportar"/><space/>
+	          </div>      
+	        </x:section>
+	    </div>
+	    <div sclass="col-md-3">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Filtros	 
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-filter" href="javascript:;" ></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">                    
+					<x:table class="display table table-bordered table-striped" id="dynamic-table">
+						<x:tbody>
+							<x:tr>
+								<x:td>
+									<label>Utilizador</label>
+									<separator/><textbox sclass="form-control"  id="txtUser"></textbox>
+								</x:td>				      
+							</x:tr>
+							<x:tr>
+								<x:td>
+									<label>Email</label>
+									<separator/><textbox sclass="form-control" id="txtEmail"></textbox>
+								</x:td>				      
+							</x:tr>
+							<x:tr>
+								<x:td>
+									<button zclass="btn btn-sm btn-default" iconSclass="fa fa-search" label="Aplicar"/>
+								</x:td>
+						    </x:tr>
+						</x:tbody>
+					</x:table>
+	          </div>
+	        </x:section>
+	    </div>
+	 </div> 
+</zk>

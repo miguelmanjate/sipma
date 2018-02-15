@@ -1,0 +1,64 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('mz.ciuem.sipma.vm.EmployeePfiVM')">
+		
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Funcionários
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	     	       <div sclass="form-group">
+		                    <x:label class="col-lg-2 col-sm-2 control-label">Departamento/Sector</x:label>
+	                      <div sclass="col-sm-10">
+	                          <listbox mold="select" sclass="form-control m-bot15" onSelect="@command('onSelectOrgan', sector_id = self.selectedItem.value)" model="@load(vm.sectors)">
+			                 	<template name="model" var="s">
+			                 		<listitem label="${s.designation}" value="${s.id}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+		         </div>
+		         
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Nome Completo</x:th>
+				            <x:th>Cargo</x:th>
+				            <x:th class="hidden-phone">Ensino</x:th>
+				            <x:th class="hidden-phone">Sector</x:th>
+				            <x:th>Subsector</x:th>
+				             <x:th></x:th>
+				            
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        
+				           <div children="@load(vm.employees)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.name}</x:td>
+							            <x:td><x:code><x:label>${each.profession.name}</x:label></x:code></x:td>
+							            <x:td>${each.academicLevel}</x:td>
+				                        <x:td>${each.sector.designation}</x:td>
+				                        <x:td>${each.subSector.designation}</x:td>
+				                        <custom-attributes modelId = "${each.id}"/>
+							            <x:td>
+				                         <button iconSclass="fa fa-edit" onClick="@command('edit', empId = modelId, tgt = mainlayout)"   zclass="btn btn-warning btn-xs"></button>
+				                        </x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+				       
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

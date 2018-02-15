@@ -1,0 +1,98 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.RegistoCustomerVM')" >
+
+	<div sclass="col-md-12">
+		<x:section class="panel">
+         
+        	<div sclass="panel-body">
+
+        	 <x:header class="panel-heading" >
+		             Pesquisar Cliente
+		      </x:header>  
+        		<div sclass="form-horizontal" style="margin-top:20px">
+                                   
+                  <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Cliente</x:label>
+                      	  <div sclass="col-sm-2">
+	                          <textbox value=""  sclass="form-control" placeholder="nome, codigo ou nuit"></textbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Apelido</x:label>
+	                      <div sclass="col-sm-2">
+	                          <textbox value=""  sclass="form-control" placeholder=" "></textbox>
+	                      </div>
+                  </div>
+
+                  	<div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Nome do Cliente</x:label>
+	                      <div sclass="col-sm-2">
+	                          <textbox value=""  sclass="form-control" placeholder=" "></textbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Nuit</x:label>
+	                      <div sclass="col-sm-2">
+	                          <textbox value=""  sclass="form-control" placeholder=" "></textbox>
+	                      </div>
+
+	                  </div>
+
+	             </div>
+	            
+             	<div sclass="form-group col-lg-12">
+	              <x:header class="panel-heading" >
+		             Clientes Registados
+		           </x:header>
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th>N Cliente</x:th>
+					            <x:th>Nome </x:th>
+					            <x:th>Nuit</x:th>
+					            <x:th>Telefone</x:th>
+					            <x:th>Email</x:th>
+					            <x:th>Servicos</x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div >
+							        <x:tr class="gradeX">
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td></x:td>
+							            <x:td>
+							            	<button iconSclass="fa fa-ayes"  zclass="btn btn-primary btn-xs" label="Detalhes"
+											onClick=""></button>
+							            </x:td>
+							        </x:tr>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+				     
+				   <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="right">
+                       					<button
+											zclass="btn btn-primary btn-sm" iconSclass="fa fa-plus"
+											id="" onClick="@command('viewAddCliente')" label="Novo Cliente">
+										</button>
+										<button
+											zclass="btn btn-default btn-sm" iconSclass="fa fa-bars"
+											id=""  label="Imprimir Lista">
+										</button>
+                       		            <button 
+                       		                zclass="btn btn-success btn-sm" iconSclass="fa fa-print" 
+                       		                id="btnPrint" onClick="@command('novaFatura', tgt = mainlayout, bc = breadcrumb)" label="Faturar">
+                       		            </button>
+                       </div>
+                  </div>
+			     </div>	         
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>

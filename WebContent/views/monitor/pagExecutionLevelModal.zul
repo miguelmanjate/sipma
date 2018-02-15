@@ -1,0 +1,196 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window id="winConfig" width="80%"
+	    position="center" action="show: slideDown({duration: 100}); hide: slideUp({duration: 100})">
+	    
+	    <div sclass="row">
+			<div sclass="col-md-12">
+				<x:section class="panel">
+		          <x:header class="panel-heading">
+		              Nivel de Execução - Orgão #2
+		              <x:span class="tools pull-right">
+		                  <a class="fa fa-times" href="javascript:;" onClick="winConfig.detach()"></a>
+		              </x:span>
+		          </x:header>
+		          <div sclass="panel-body">
+		             <div sclass="row col-lg-12">
+		            	<x:label>UNIDADE/ORGÃO: </x:label> <label value=" Faculdade de Economia"></label><separator height="15px"/>
+		            	<x:label>ÁREA PRIORITÁRIA: </x:label> <label value=" ENSINO APRENDIZAGEM"></label><separator height="15px"/>
+		            	RELATÓRIO DE MONITORIA<separator height="15px"/>
+		            	<x:label>ANO: </x:label> <label value=" 2014"></label><separator height="15px"/>
+		             </div>
+		             <div sclass="row">
+		             	<x:table class="table table-bordered">
+                            <x:thead>
+                            <x:tr>
+                                <x:th style="width: 25%">Acção</x:th>
+                                <x:th style="width: 55%">Acção Específica</x:th>
+                                <x:td style="width: 20%">
+                                	<x:table class="table-bordered without-border" style="width:100%" >
+                                		<x:tr style="text-align: center"><x:td colspan="7">Prazos</x:td></x:tr>
+                                		<x:tr>
+                                			<x:td>Jul</x:td>
+                                			<x:td>Ago</x:td>
+                                			<x:td>Set</x:td>
+                                			<x:td>Out</x:td>
+                                			<x:td>Nov</x:td>
+                                			<x:td>Dez</x:td>
+                                			<x:td>Jan</x:td>
+                                		</x:tr>
+                                	</x:table>
+                                </x:td>
+                            </x:tr>
+                            </x:thead>
+                            <x:tbody>
+	                            <x:tr>
+	                                <x:td>Reforma Curricular</x:td>
+	                                <x:td>
+	                                	<x:table class="table-bordered" style="width:100%;">
+		                                	<x:tr><x:td>Identificar constragimentos no curriculo e no processo do E-A</x:td></x:tr>
+		                                	<x:tr><x:td>Implementar melhorias no curriculo e no processo do E-A</x:td></x:tr>
+	                                	</x:table>
+	                                </x:td>
+	                                <x:td>
+	                                	<x:table class="table-bordered" style="width:100%">
+		                                	<x:tr>
+		                                		<x:td style="background-color: #f0ad4e;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #f0ad4e;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+	                                	</x:table>
+	                                </x:td>
+	                            </x:tr>
+	                            <x:tr>
+	                                <x:td>Alocar recursos tecnológicos aos Orgãos</x:td>
+	                                <x:td>
+		                                <x:table class="table-bordered" style="width:100%">
+		                                	<x:tr><x:td>Identificar Órgãos que carrecem de recuros tecnológicos</x:td></x:tr>
+		                                	<x:tr><x:td>Distribuir de forma racional os recursos tecnológicos aos Órgãos</x:td></x:tr>
+		                               	</x:table>
+	                               	</x:td>
+	                                <x:td>
+	                                	<x:table class="table-bordered" style="width:100%">
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #5cb85c;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #5cb85c;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+	                                	</x:table>
+	                                </x:td>
+	                            </x:tr>
+	                            <x:tr>
+	                                <x:td>Promover actividades extra-curriculares</x:td>
+	                                <x:td>
+		                                <x:table class="table-bordered" style="width:100%">
+		                                	<x:tr><x:td>Identificar actividades de interesse dos estudantes</x:td></x:tr>
+		                                	<x:tr><x:td>Estabelecer plataformas de intercâmbio social</x:td></x:tr>
+	                                	</x:table>
+                                	</x:td>
+	                                <x:td>
+	                                	<x:table class="table-bordered" style="width:100%">
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #5bc0de;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #5bc0de;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+	                                	</x:table>
+	                                </x:td>
+	                            </x:tr>
+	                            <x:tr>
+	                                <x:td>Criar oportunidades de estágios pre-profissionais</x:td>
+	                                <x:td>
+		                                <x:table class="table-bordered" style="width:100%">
+		                                	<x:tr><x:td>Identificar potencias parceiros</x:td></x:tr>
+		                                	<x:tr><x:td>Organizar grupo de estudantes</x:td></x:tr>
+		                                	<x:tr><x:td>Avaliar e monitorar sistematicamente o processo corporativo</x:td></x:tr>
+	                                	</x:table>
+                                	</x:td>
+	                                <x:td>
+	                                	<x:table class="table-bordered" style="width:100%">
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #d9534f;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #d9534f;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+		                                	<x:tr>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td><html><![CDATA[&nbsp;]]></html></x:td>
+		                                		<x:td style="background-color: #d9534f;"><html><![CDATA[&nbsp;]]></html></x:td>
+		                                	</x:tr>
+	                                	</x:table>
+	                                </x:td>
+	                            </x:tr>
+                     		</x:tbody>
+                        </x:table>
+                        <separator height="20px"></separator>
+                        <div sclass="col-lg-4">
+                        	<x:fieldset>
+                        		<x:legend>Legenda:</x:legend>
+		                        <label value="Nova Acção" width="100%" sclass="label white-color label-warning"></label><separator/>
+		                        <label value="Acção em Curso" width="100%" sclass="label white-color label-success"></label><separator/>
+		                        <label value="Acção Suspensa" width="100%" sclass="label white-color label-info"></label><separator/>
+		                        <label value="Acção fora do Prazo" width="100%" sclass="label white-color label-danger"></label>
+	                        </x:fieldset>
+                        </div>
+		             </div>
+		          </div>
+		        </x:section>
+		    </div>
+		 </div>    
+	</window>
+</zk>

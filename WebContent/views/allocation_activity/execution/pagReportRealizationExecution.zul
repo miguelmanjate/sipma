@@ -1,0 +1,89 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+    <div sclass="row" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ReportRealizationVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Registar a Realização da Fase
+	          </x:header>
+	          <div sclass="panel-body" form="@id('fx') @load(vm.phaseOrganCycle) @save(vm.phaseOrganCycle, before='report')">
+	          	<div sclass="form-horizontal col-lg-12">
+		             <div sclass="form-horizontal">
+		             	 <div sclass="form-group">
+		             	 	<x:label class="col-lg-2 col-sm-2 control-label" >Funcionario</x:label>
+		                      <div sclass="col-sm-4">
+		                          <textbox sclass="form-control" value="@load(vm.loggedEmployee().fullName())" readonly="true"></textbox>
+		                      </div>
+		                     <x:label class="col-lg-2 col-sm-2 control-label" >Ciclo</x:label>
+		                      <div sclass="col-sm-4">
+		                          <listbox sclass="form-control" id="cycles" mold="select" model="@load(vm.cycles)"
+		                          	onSelect="@command('findPhasesByCycle', cycleId = self.selectedItem.value)">
+		                          	<template name="model" var="c">
+		                          		<listitem label="${c.code} - ${c.subject}" value="${c.id}"></listitem>
+		                          	</template>
+		                          </listbox>
+		                      </div>
+		             	 </div>
+		             	 <div sclass="form-group" id="tbl">
+		             	 	<x:label class="col-lg-2 col-sm-2 control-label" >Fase</x:label>
+		                      <div sclass="col-sm-4">
+		                          <listbox sclass="form-control" mold="select" model="@load(vm.phaseCycles)" selectedItem="@bind(fx.phaseCycle)">
+		                          	<template name="model" var="pc">
+		                          		<listitem label="${pc.phase.designacao}"></listitem>
+		                          	</template>
+		                          </listbox>
+		                      </div>
+		                     <x:label class="col-lg-2 col-sm-2 control-label" >Data</x:label>
+		                      <div sclass="col-sm-2">
+		                          <datebox width="100%" constraint="no empty: Campo Obrigatório!"  id="dbxBegin" format="dd-MM-yyyy" onCreate="self.value = new Date()" disabled="true"></datebox>
+		                      </div>
+		             	 </div>
+		                  <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Informacao a Reportar:</x:label>
+		                      <div sclass="col-sm-10">
+		                          <textbox sclass="form-control" rows="3" value="@bind(fx.executedActivity)"></textbox>
+		                      </div>
+		                  </div>
+		                  <div sclass="form-group">
+		                      <div id="embarrassment" visible="false">
+			                      <x:label class="col-lg-2 col-sm-1 control-label">Constragimento</x:label>
+			                      <div sclass="col-sm-5">
+			                          <textbox sclass="form-control" value="@bind(vm.embarrassment.designation)"></textbox>
+			                      </div>
+		                      </div>
+		                  </div>
+		                  <div sclass="form-group">
+		                  	<x:label class="col-lg-2 col-sm-2 control-label"></x:label>
+		                  	<button zclass="btn btn-default btn-sm" disabled="@load(empty fx.phaseCycle)" iconSclass="fa fa-info-circle" onClick="@command('report')"  label="Reportar"></button>
+		                  </div>
+		             </div> 
+				 </div>
+				 <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Ciclo</x:th>
+				            <x:th>Fase</x:th>
+				            <x:th class="hidden-phone">Data</x:th>
+				            <x:th class="hidden-phone">Informacao Reportada</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <div children="@load(vm.phasesOrganCycle)">
+				        	<template name="children">
+				        		<x:tr class="gradeX">
+						            <x:td>${each.phaseCycle.cycle.code} - ${each.phaseCycle.cycle.subject}</x:td>
+						            <x:td>${each.phaseCycle.phase.designacao}</x:td>
+						            <x:td>${vm.sdf.format(each.realizationDate)}</x:td>
+						            <x:td>${each.executedActivity}</x:td>
+						        </x:tr>
+				        	</template>
+				        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	 </div> 
+</zk>

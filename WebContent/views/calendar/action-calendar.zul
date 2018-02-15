@@ -1,0 +1,29 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+    <window>
+        <!-- Calendars Body -->
+        <div apply="mz.ciuem.sipma.controller.ActionCalendarController" >
+            <!-- Control Menu -->
+            <hlayout sclass="z-valign-middle">
+                <button id="today" zclass="btn btn-sm btn-default" label="Hoje" />
+                <button id="prev" zclass="btn btn-sm btn-default" iconSclass="fa fa-angle-double-left"/>
+                <button id="next" zclass="btn btn-sm btn-default" iconSclass="fa fa-angle-double-right"/>
+                <separator width="50px" />
+                <button id="pageDay" zclass="btn btn-sm btn-default" label="Dia" />
+                <button id="pageWeek" zclass="btn btn-sm btn-default" label="Semana"/>
+                <button id="pageMonth" zclass="btn btn-sm btn-default" label="Mes"/>
+                <separator width="50px" />
+                <x:label><x:i class="fa fa-filter"></x:i>Filtrar :</x:label>
+                <textbox id="filter" sclass="form-control"/>
+                <button id="applyFilter" zclass="btn btn-sm btn-default" iconSclass="fa fa-search" label="Aplicar"/>
+                <button id="resetFilter" zclass="btn btn-sm btn-default" label="Limpar"/>
+            </hlayout>
+            <separator height="10px"/>
+            <calendars id="calendars" firstDayOfWeek="Sunday" height="500px"
+                timeZone="Main=GMT+0" mold="month"/>
+        </div>
+ 
+        <!-- Create/Update Event Popup -->
+        <include src="views/calendar/action-form-modal.zul" />
+
+    </window>
+</zk>

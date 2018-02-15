@@ -1,0 +1,17 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window mode="modal" position="center,center" width="600px" id="changeRoles">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Adicionar/Remover Perfis
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-times" href="javascript:;" onClick="changeRoles.detach()"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	
+	          </div>
+	        </x:section>
+	    </div>
+	</window>
+</zk>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estudantes_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5d2627a-7009-4979-ab80-ff612100861f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="orgao" class="java.lang.String"/>
+	<parameter name="areaPrioritaria" class="java.lang.String"/>
+	<parameter name="ano" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imagemLogo" class="java.io.InputStream"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="created" class="java.sql.Timestamp"/>
+	<field name="id" class="java.lang.Long"/>
+	<group name="aCTIVIDADES">
+		<groupExpression><![CDATA[""]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="127" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="126" width="555" height="1" uuid="46599ef9-36b3-4000-93db-67ec2e5daf35"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" hAlign="Center">
+				<reportElement x="254" y="0" width="61" height="55" uuid="e4372a52-50fa-4f3b-9065-c99419bdb48e"/>
+				<imageExpression><![CDATA[$P{imagemLogo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="35" y="75" width="478" height="20" uuid="3a3c5444-5380-4936-b88e-d2c5e660659c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{orgao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="55" width="478" height="20" uuid="595a3d69-a599-4482-8ed0-837a39a94960"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidade Eduardo Mondlane]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="106" width="555" height="1" uuid="e16080b9-e963-423b-bc99-0c6b6f667794"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="108" width="551" height="19" uuid="4a3ca652-e39e-4efe-b612-9a9944b091f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTA DE SUPER RÚBRICAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="46" height="23" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="8c9faadf-3433-4da2-887e-636658d7f269"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="52" y="3" width="100" height="20" uuid="106d039a-a664-48d4-a65b-f033461884e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="3" width="288" height="20" uuid="014173c5-f47c-41bf-96ae-61f1f1a853b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="3" width="100" height="20" uuid="2b1436a4-72e1-4c1a-a5a1-96ecfe4fc102"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="3" width="40" height="20" uuid="56c2fd1d-0850-4602-bf71-3066c0670789"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="5e85bed1-5ecd-4d31-90d7-4cdee7043db3"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="-1" width="1" height="26" uuid="818d49c3-f521-4c16-aee6-7a57973b9016"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="46" y="-1" width="1" height="24" uuid="c17b6d66-26bc-447b-89b9-55c2d79f483b"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="152" y="-1" width="1" height="24" uuid="5975325f-0e6f-49f7-bddc-f36abe51714e"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="447" y="0" width="1" height="23" uuid="7b853d09-33b4-4dda-823f-41508d6da1e2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21">
+			<rectangle>
+				<reportElement x="1" y="1" width="45" height="20" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="66a1a093-58f9-42f6-85c7-e2806e472deb"/>
+			</rectangle>
+			<textField>
+				<reportElement x="160" y="1" width="288" height="20" uuid="08e64d81-5e84-4582-af50-c5166e342a5b"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="1" width="100" height="20" uuid="e6ab2012-1ea2-49ab-beb7-e8b6d6f74b85"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{created}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="1" width="45" height="20" uuid="7d36b7f5-fa66-436b-bb63-734766e051aa"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="46" y="0" width="1" height="21" uuid="9807b275-8590-472c-92eb-0ac9cdd8af79"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="152" y="1" width="1" height="20" uuid="09971463-6d55-45da-adb1-9f33a39023fe"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="447" y="0" width="1" height="20" uuid="f536731c-7a17-4a44-a443-81c6b0f60b54"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="47" y="1" width="105" height="20" uuid="eb3485a1-c99a-4d81-98e1-90c573ec2049"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="91">
+			<rectangle radius="5">
+				<reportElement x="4" y="41" width="537" height="41" uuid="e45cbb35-bd21-4e7b-aa89-6138694aa348"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="51" width="239" height="15" uuid="7677f48e-40c7-4eea-b136-5a7a8d21b36a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Produzido por UEM(eCampus.uem.mz)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="64" width="238" height="18" uuid="3ab3dfdc-21ae-4281-8e07-cbbe9f02bad5"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Contactos: Telefone: +258848996037, email : ecampus@uem.mz]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="508" y="51" width="21" height="20" uuid="fa0230cc-a463-4322-8914-dcec5f4071e3"/>
+				<textElement textAlignment="Center">
+					<font size="6" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="10a73f7d-0250-41d3-8393-1c322dde0155"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

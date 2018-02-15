@@ -1,0 +1,68 @@
+ <zk xmlns:x="xhtml" xmlns:zk="zk">
+  	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Registar
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="phase">
+          	 <div sclass="form-horizontal">
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				        	<x:th>Documento</x:th>
+				        	<x:th>Actividade Alocadas</x:th>
+				        	<x:th>Orgaos</x:th>
+				        	<x:th>Data Inicio</x:th>
+				        	<x:th>Data Fim</x:th>
+				        	<x:th></x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+					         <div >
+							    <x:tr class="gradeX">
+							            <x:td>Plano Geral da UEM</x:td>
+							             <x:td>
+							                <x:li>Planeamento Corricular</x:li>
+							                <x:li>Melhoria Academica</x:li>
+							             </x:td>
+							            <x:td>
+							                <x:li>Centro de Informatica</x:li>
+							                <x:li>Gabinete de Planificacao</x:li>
+							                <x:li>Faculdade de Ciencia</x:li>
+							            </x:td>
+							            <x:td>24, Jan,2015</x:td>
+							            <x:td>24, Jan,2015</x:td>
+							            <x:td>
+							            	<button iconSclass="fa fa-edit"  zclass="btn btn-warning btn-xs"></button>
+							            </x:td>
+							     </x:tr>
+							        <x:tr class="gradeX">
+							            <x:td>Plano Orcamental da UEM</x:td>
+							             <x:td>
+							                <x:li>Orcamento Corricular</x:li>
+							                <x:li>Orcamento Academico</x:li>
+							             </x:td>
+							            <x:td>
+							                <x:li>Faculdade de Ciencias</x:li>
+							                <x:li>Faculdade de Medicina</x:li>
+							                <x:li>Faculdade de Letras</x:li>
+							            </x:td>
+							            <x:td>25, Fev,2015</x:td>
+							            <x:td>24, Mar,2015</x:td>
+							            <x:td>
+							            	<button iconSclass="fa fa-edit"  zclass="btn btn-warning btn-xs"></button>
+							            </x:td>
+							     </x:tr>
+					        </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+		</x:section>
+	</div>
+</zk>

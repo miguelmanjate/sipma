@@ -1,0 +1,55 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.PhaseVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Erros
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="phase">
+			<div sclass="form-group col-lg-12" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ErrorLogVM')">
+			       <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			     	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+			     <x:thead>
+			     <x:tr>
+			     	 <x:th>Tipo</x:th>
+			         <x:th>Erro</x:th>
+			         <x:th>Data do Acontecimento</x:th>
+			         <x:th>Estado</x:th>
+			         <x:th>Resolvido?</x:th>
+			     </x:tr>
+			     </x:thead>
+			     <x:tbody>
+			       <div children="@load(vm.errorLogs)">
+				        <template name="children">
+					        <x:tr class="gradeX">
+					            <x:td>${each.type}</x:td>
+					            <x:td>
+					            	${vm.desc(each)}
+					            </x:td>
+					            <x:td>${each.created}</x:td>
+					            <x:td>
+					            	<label value="Resolvido" sclass="label label-success" if="${each.status}"></label>
+					            	<label value="Não Resolvido" sclass="label label-danger" if="${!each.status}"></label>
+					            </x:td>
+					            <x:td class="hidden-phone">
+					            	<button if="${!each.status}" iconSclass="fa fa-check-square-o" onClick="@command('solvedError', errorId = modelId)" zclass="btn btn-default"></button>
+					            	<x:i class="fa fa-smile-o" if="${each.status}"></x:i>
+					            	<custom-attributes modelId = "${each.id}"/>
+					            </x:td>
+					        </x:tr>
+				       </template>
+			      </div>
+			     </x:tbody>
+			  </x:table>
+			 </div>
+			</div>
+			</div>
+		</x:section>
+		</div>
+	</div>
+</zk>

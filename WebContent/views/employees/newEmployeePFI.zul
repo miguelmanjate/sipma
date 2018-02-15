@@ -1,0 +1,135 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<zscript>
+		import mz.ciuem.sipma.util.EducationLevels;
+		import mz.ciuem.sipma.util.MaritalStatus;
+		import mz.ciuem.sipma.util.EmployeeResponsible;
+		
+		ListModelList edLevels = new ListModelList(EducationLevels.values());
+		ListModelList marStatus = new ListModelList(MaritalStatus.values());
+		ListModelList responsibilities = new ListModelList(EmployeeResponsible.values());
+		
+		mz.ciuem.sipma.entity.Employee employee = (mz.ciuem.sipma.entity.Employee) Executions.getCurrent().getArg().get("employee"); 
+		List employees = (List) Executions.getCurrent().getArg().get("employees");
+	</zscript>
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.EmployeePfiVM')">
+		<div sclass="col-md-12" id="panelFunc">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Registar novo Funcionário
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<x:code><x:label>Dados Pessoais:</x:label></x:code>
+	          	<div sclass="form-horizontal" id="emp" form="@id('fx') @load(vm.employee) @save(vm.employee, before='save') @save(vm.employee, before='update')" >
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Nome Completo:</x:label>
+	                      <div sclass="col-sm-4">
+	                          <textbox value="@bind(fx.name)" constraint="no empty" sclass="form-control" placeholder="Nome"></textbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Apelido</x:label>
+	                      <div sclass="col-sm-4">
+	                          <textbox value="@bind(fx.lastName)" constraint="no empty" sclass="form-control"  placeholder="Apelido"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Genero</x:label>
+	                      <div sclass="col-sm-2">
+	                          <div sclass="btn-group">
+				                 <radiogroup id="rgTipo" selectedItem="@bind(fx.gender)">
+				                 	<x:label class="btn btn-success btn-xs iradio_flat-red">
+				                 		<radio label="Masculino" value="Masculino" />
+				                 	</x:label><separator width="2px"></separator>
+				                 	<x:label class="btn btn-success btn-xs iradio_flat-red">
+				                 		<radio label="Femenino" value="Femenino"/>
+				                 	</x:label>
+				                 </radiogroup>
+			                 </div>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Data de Nascimento</x:label>
+	                      <div sclass="col-sm-2">
+	                          <datebox width="100%" format="dd-MM-yyyy" value="@bind(fx.birthday)"></datebox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <div sclass="col-sm-4">
+	                         <listbox mold="select" model="@load(vm.professions)" sclass="form-control m-bot15" selectedItem="@bind(vm.employee.profession)" >
+			                 	<template name="model">
+			                 		<listitem label="${each.name}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Estado Civil</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" model="@load(marStatus)" sclass="form-control m-bot15" selectedItem="@bind(fx.maritalStatus)">
+			                 	<template name="model">
+			                 		<listitem label="${each.value}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Nivel Acadêmico</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" model="@load(edLevels)" sclass="form-control m-bot15" selectedItem="@bind(fx.academicLevel)">
+			                 	<template name="model">
+			                 		<listitem label="${each.value}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Endereço </x:label>
+	                      <div sclass="col-sm-4">
+	                         <textbox sclass="form-control" value="@bind(fx.address)"></textbox>
+	                      </div>
+	                  </div>
+	                  <x:header class="panel-heading"></x:header>
+	                  <x:code><x:label>Departamento/Sector:</x:label></x:code>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Departamento/Sector</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" sclass="form-control m-bot15" onSelect="@command('getSubSectorsBySector', sector_id = self.selectedItem.value)" model="@load(vm.sectors)" selectedItem="@bind(vm.employee.sector)">
+			                 	<template name="model" var="s">
+			                 		<listitem label="${s.designation}" value="${s.id}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                      
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Subsector</x:label>
+	                      <div sclass="col-sm-4">
+	                          <listbox mold="select" sclass="form-control m-bot15" model="@load(vm.subSectors)" selectedItem="@bind(vm.employee.subSector)">
+			                 	<template name="model" var="s">
+			                 		<listitem label="${s.designation}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                      
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Telefone</x:label>
+	                      <div sclass="col-sm-4">
+	                         <textbox sclass="form-control" value="@bind(fx.cellPhone)" placeholder="258840101784"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="col-md-12">
+	                  	<div sclass="col-lg-1 col-lg-2"></div>
+			             <div sclass="form-group">
+			                
+			                <div sclass="col-lg-2 col-lg-2">
+			                  <button zclass="btn btn-success btn-sm" id="btnSave" onClick="@command('save')" label="Registar"></button>
+			                  </div>
+		                        <div sclass="col-lg-2 col-lg-2">  
+		                          
+		                      <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+</div>
+<div sclass="col-lg-2 col-lg-2">
+			                  <button zclass="btn btn-warning btn-sm" id="btnEdit" onClick="@command('update')" label="Actualizar"></button>
+			              	</div>
+			             </div>
+		             </div>
+	             </div> 
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

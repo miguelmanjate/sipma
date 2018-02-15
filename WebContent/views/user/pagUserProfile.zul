@@ -1,0 +1,151 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row">
+	    <div sclass="col-md-4">
+	        <div sclass="row">
+	            <div sclass="col-md-12">
+	                <div sclass="panel">
+	                    <div sclass="panel-body">
+	                        <div sclass="profile-pic text-center">
+	                            <image width="150px" height="150px" src="images/User_Circle.png"/>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div sclass="col-md-12">
+	                <div sclass="panel">
+	                    <div sclass="panel-body">
+	                        <x:ul class="p-info">
+	                            <x:li>
+	                                <div sclass="title fontLab">Genero</div>
+	                                <div sclass="desk fontLab">${vm.loggedEmployee().gender}</div>
+	                            </x:li>
+	                            <x:li>
+	                                <div sclass="title fontLab">Educação</div>
+	                                <div sclass="desk fontLab">${vm.loggedEmployee().academicLevel}</div>
+	                            </x:li>
+	                            <x:li>
+	                                <div sclass="title fontLab">Endereço</div>
+	                                <div sclass="desk fontLab">${vm.loggedEmployee().address}</div>
+	                            </x:li>
+	                            <x:li visible="@load(vm.findAutenticatedSector() ne null)">
+	                                <div sclass="title fontLab">Sector</div>
+	                                <div sclass="desk fontLab">${vm.findAutenticatedSector()}</div>
+	                            </x:li>
+	                        </x:ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div sclass="col-md-12" if="${vm.notifications.size() != 0}">
+	                <div sclass="panel">
+	                    <div sclass="panel-body">
+	                        <x:code><x:i class="fa fa-info-circle"></x:i> Notificações</x:code>
+	                        <x:hr/>
+	                        <x:ul class="dropdown-list normal-list">
+	                        <x:li class="new" forEach="${vm.notifications}">
+                                 <x:a href="" onClick="@command('allNotifications')">
+                                     <x:span class="thumb"></x:span>
+                                     <x:span class="desc">
+                                       <x:span class="name">${each.title}</x:span>
+                                       <x:span class="msg">${each.description}</x:span>
+                                     </x:span>
+                                 </x:a>
+                             </x:li>
+                            </x:ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div sclass="col-md-8">
+	        <div sclass="row">
+	            <div sclass="col-md-12">
+	                <div sclass="panel">
+	                    <div sclass="panel-body">
+	                        <div sclass="profile-desk">
+	                            <x:h1>${vm.loggedEmployee().fullName()}</x:h1>
+	                            <x:span class="designation">${vm.loggedEmployee().profession.name} (${vm.loggedEmployee().since()})</x:span>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div sclass="row">
+	        	<div sclass="col-md-12" apply="org.zkoss.bind.BindComposer"
+		  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.HelpDeskVM')">
+	                <div sclass="panel" form="@id('fx') @load(vm.problem) @save(vm.problem, before='submitHelp')">
+	                    <x:form>
+	                        <textbox constraint="no empty: Qual a sua duvida?" value="@bind(fx.what)" sclass="form-control" rows="3" placeholder="Qual a sua duvida?"></textbox>
+	                    </x:form>
+	                    <x:footer class="panel-footer">
+	                        <button zclass="btn btn-sm btn-post pull-right" onClick="@command('submitHelp')">Enviar</button>
+	                        <x:ul class="nav nav-pills p-option">
+	                        	<x:li>
+	                        		<div sclass="row">
+	                        		<div sclass="col-md-2">
+		                        		<button id="btnUpload" iconSclass="fa fa-upload" zclass="btn btn-default btn-sm" upload="true" onUpload="@command('doUpload')" />
+		                        	</div>
+		                        	<div sclass="col-md-3">
+		                        		<label value="@bind(vm.fileName)"></label>
+		                        	</div>
+		                        	</div>
+	                        	</x:li>
+	                        </x:ul>
+	                    </x:footer>
+	                </div>
+	            </div>
+	            <div sclass="col-md-12">
+	                <div sclass="panel">
+	                    <x:header class="panel-heading">
+	                        Actividades Recentes
+	                    </x:header>
+	                    <div sclass="panel-body"  style="display: block; height: 650px; overflow: scroll;">
+	                       	<div sclass="col-sm-12 nicescroll-rails" >
+			                    <div sclass="timeline" id="timeline" children="@load(vm.logs)">
+			                    	<template name="children" var="l">
+				                        <x:article class="timeline-item alt"
+				                        	if="${lStatus.index == 0 or 
+				                        	(lStatus.index != 0 and vm.sdf.format(l.created) ne 
+				                        	vm.sdf.format(vm.logs.get(lStatus.index - 1).created))}">
+				                            <div sclass="text-right">
+				                                <div sclass="time-show first">
+				                                    <x:a href="#" class="btn btn-primary">${vm.sdf.format(l.created)}</x:a>
+				                                </div>
+				                            </div>
+				                        </x:article>
+				                        <x:article class="timeline-item alt" if="${lStatus.index%2 eq 0}">
+				                            <div sclass="timeline-desk dark">
+				                                <div sclass="panel">
+				                                    <div sclass="panel-body timeColor">
+				                                        <x:span class="arrow-alt"></x:span>
+				                                        <x:span class="timeline-icon"></x:span>
+				                                        <x:span class="timeline-date">08:25 am</x:span>
+				                                        <x:h1 class="green">${vm.hour.format(l.created)}</x:h1>
+				                                        <x:p>${l.description}</x:p>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                        </x:article>
+				                        <x:article class="timeline-item"  if="${!(lStatus.index%2 eq 0)}">
+				                            <div sclass="timeline-desk dark">
+				                                <div sclass="panel">
+				                                    <div sclass="panel-body timeColor">
+				                                        <x:span class="arrow"></x:span>
+				                                        <x:span class="timeline-icon"></x:span>
+				                                        <x:span class="timeline-date">08:25 am</x:span>
+				                                        <x:h1 class="green">${vm.hour.format(l.created)}</x:h1>
+				                                        <x:p>${l.description}</x:p>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                        </x:article>
+			                        </template>
+			                    </div>
+			                </div>
+		                </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</zk>

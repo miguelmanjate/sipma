@@ -1,0 +1,59 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Perfil
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">
+             <div sclass="row col-lg-12">
+             	 <div sclass="form-group col-lg-4">
+	                 <x:label for="exampleInputEmail1">Perfil</x:label>
+	                 <textbox sclass="form-control"></textbox>
+	             </div>
+	             <div sclass="col-lg-6">
+	             	<separator height="23px"></separator>
+	             	<button zclass="btn btn-success" iconSclass="fa fa-check">Registar</button>
+	             </div>
+             </div><x:br/>
+             <div sclass="form-group col-lg-12">
+             	<x:header class="panel-heading"></x:header>
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Perfil</x:th>
+				            <x:th>Data de Registo</x:th>
+				            <x:th>Data de Actualização</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        <x:tr class="gradeX">
+				            <x:td>ORGAO</x:td>
+				            <x:td>2015-01-14 16:13:35.0</x:td>
+				            <x:td>2015-01-14 16:13:35.0</x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>FUNCIONARIO</x:td>
+				            <x:td>2015-01-14 16:15:15.0</x:td>
+				            <x:td>2015-01-14 16:15:15.0</x:td>
+				        </x:tr>
+				        <x:tr class="gradeX">
+				            <x:td>SECTOR</x:td>
+				            <x:td>2015-01-14 16:32:08.0</x:td>
+				            <x:td>2015-01-14 16:32:08.0</x:td>
+				        </x:tr>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

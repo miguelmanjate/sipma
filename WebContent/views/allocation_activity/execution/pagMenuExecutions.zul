@@ -1,0 +1,20 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window apply="org.zkoss.bind.BindComposer"
+			  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ExecutionVM')">
+		<x:nav class="navbar navbar-default" role="navigation">
+		    <div sclass="container-fluid">
+		        <x:div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		            <x:ul class="nav navbar-nav">
+		                <x:li><x:a href="#"><button onClick="@command('employeeExecution')" zclass="btn btn-default" label="Execução do Funcionario"></button></x:a></x:li>
+		                <x:li><x:a href="#"><button onClick="@command('organExecution')" zclass="btn btn-default" label="Execução do Orgao" ></button></x:a></x:li>
+		                <x:li><x:a href="#"><button onClick="@command('sectorChiefExecution')" zclass="btn btn-default" label="Execução do Chefe do Sector"></button></x:a></x:li>
+		                <x:li><x:a href="#"><button onClick="@command('reportExecution')" zclass="btn btn-default" label="Reportar Realização da Fase"></button></x:a></x:li>
+		            </x:ul>
+		        </x:div>
+		    </div>
+		</x:nav>
+		<div sclass="wrapper" id="targetExecutions">
+			
+		</div>
+	</window>
+</zk>

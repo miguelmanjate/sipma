@@ -1,0 +1,94 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<window id="responsibleChooser" width="1300px" height="85%" mode="modal" position="center,top">
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.AlocVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Gestao Orcamental	
+              <x:span class="tools pull-right">
+              <a href="javascript:;" onClick="responsibleChooser.detach()" iconSclass="fa fa-times"></a>
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">
+          	 <div sclass="form-horizontal">
+          	 <x:label class="col-lg-1 col-sm-1 control-label">T. Orgao</x:label>
+          	 <div sclass="col-sm-2">
+          	      <listbox sclass="form-control m-bot15"  mold="select"   model="@load(vm.organTypes)" onSelect="@command('getOrgansByType')" >
+                   	        <template name="model" var="ot">
+                   		        <listitem label="${ot.title}" value="${ot.title}"></listitem>
+                   		   </template>
+                 </listbox>
+             </div>
+              <div sclass="form-group">
+                      <div sclass="col-sm-11">
+                      	  <dualListBox id="selectedPermissions" model="@load(vm.organs)">
+                      	  	<template name="model" var="p">
+                     			<listitem label="${p.title}"></listitem>
+                     		</template>
+                      	  </dualListBox>
+                      </div>
+                  </div>
+                  <button zclass="btn btn-sm btn-success" iconSclass="fa fa-check" onClick="@command('save')" label="Alocar"></button>
+             </div>
+             <div sclass="form-group col-lg-12">
+             	<x:header class="panel-heading"></x:header>
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				        	<x:th>Actividade</x:th>
+				        	<x:th>Orgao</x:th>
+				        	<x:th>Papel</x:th>
+				        	<x:th>Data Inicio</x:th>
+				        	<x:th>Data Fim</x:th>
+				        </x:tr>
+				        </x:thead>
+					         <div >
+							     <x:tr class="gradeX">
+							            <x:td>Melhoria Curricular</x:td>
+							            <x:td>Faculdade de Ciencias</x:td>
+						            	<x:td>Principal</x:td>
+						            	<x:td>20, Jan, 2015</x:td>
+						            	<x:td>20, Marc, 2015</x:td>
+							     </x:tr>
+					        </div>
+					         <div>
+							     <x:tr>
+							            <x:td>Qualidade Academica</x:td>
+							            <x:td>Faculdade de Letras</x:td>
+						            	<x:td>Principal</x:td>
+						            	<x:td>20, Jan, 2015</x:td>
+						            	<x:td>20, Marc, 2015</x:td>
+							     </x:tr>
+					        </div>
+					         <div>
+							     <x:tr class="gradeX">
+							            <x:td>Planificacao Orcamental</x:td>
+							            <x:td>Gabinete de Planificacao</x:td>
+						            	<x:td>Principal</x:td>
+						            	<x:td>20, Jan, 2015</x:td>
+						            	<x:td>9, Marc, 2015</x:td>
+							     </x:tr>
+					        </div>
+					         <div>
+							     <x:tr class="gradeX">
+							            <x:td>Gestao Orcamental</x:td>
+							            <x:td>Direcao de Financas</x:td>
+						            	<x:td>Principal</x:td>
+						            	<x:td>14, Jan, 2015</x:td>
+						            	<x:td>30, Marc, 2015</x:td>
+							     </x:tr>
+					        </div>
+					        
+				     </x:table>
+			     </div>
+		     </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</window>
+</zk>

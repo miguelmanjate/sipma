@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReport_basedCalculating" pageWidth="380" pageHeight="900" columnWidth="380" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5f64751b-4450-4eb9-9a80-3fc765ac7416">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="designation" class="java.lang.String"/>
+	<field name="cost" class="java.lang.Float"/>
+	<field name="font.designation" class="java.lang.String"/>
+	<variable name="costSum" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{cost}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="165" y="0" width="215" height="20" forecolor="#FFFFFF" backcolor="#F2F2F2" uuid="7772512a-f674-4fd1-ac22-5639b500cd26"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="164" height="20" uuid="7f4392cf-f4ce-49a9-b7f2-1d8d0546c9d6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="-1" width="94" height="21" uuid="b9ec6635-4d61-436f-9cf2-fc2bbcc2175c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="121" height="20" uuid="faf58311-59f1-41c4-a22f-1193f5592385"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{font.designation}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="259" height="17" forecolor="#FFFFFF" backcolor="#E8E8E8" uuid="814be479-2e22-41ca-aeea-34f228837a6e"/>
+			</rectangle>
+			<textField>
+				<reportElement x="165" y="2" width="94" height="15" uuid="24636d63-6db3-4e0d-8046-0f715b462f8f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costSum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="17" uuid="dcce2494-87fb-406c-bb1c-8a735cd3dbb8"/>
+				<text><![CDATA[SubTotal:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

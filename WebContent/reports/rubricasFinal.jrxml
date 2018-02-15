@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estudantes_report" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5d2627a-7009-4979-ab80-ff612100861f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="78"/>
+	<property name="ireport.y" value="184"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="orgao" class="java.lang.String"/>
+	<parameter name="areaPrioritaria" class="java.lang.String"/>
+	<parameter name="ano" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imagemLogo" class="java.io.InputStream"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="superRubric.description" class="java.lang.String"/>
+	<field name="subRubrics" class="java.util.List"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="superRubric.categoria.description" class="java.lang.String"/>
+	<field name="superRubric.name" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="superRubric.categoria.code" class="java.lang.String"/>
+	<group name="Rubricas" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{superRubric.categoria.description}]]></groupExpression>
+		<groupHeader>
+			<band height="54">
+				<rectangle>
+					<reportElement x="83" y="30" width="637" height="21" forecolor="#000000" backcolor="#000000" uuid="7f8d5e35-7323-4e43-9e85-eccbfbaec0c8"/>
+				</rectangle>
+				<line>
+					<reportElement x="83" y="1" width="637" height="1" uuid="92622f49-7d06-4365-8c74-4ac8ac3b0fa0"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="178" y="31" width="543" height="17" forecolor="#FFFFFF" uuid="320118d7-c017-4ba1-a474-53263e5be6bd"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{superRubric.categoria.description}.toUpperCase()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="83" y="2" width="69" height="29" uuid="7b9233f3-7fa5-43a9-9dde-e803d615710e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[CÓDIGO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="178" y="2" width="542" height="28" uuid="daa88daf-747c-4a2d-97da-cef6be2dab3b"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[DESCRIÇÃO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="85" y="32" width="67" height="20" forecolor="#FFFFFF" uuid="b56c5a5e-465f-46ea-87bb-11ccdf25910f"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{superRubric.categoria.code}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="83" y="1" width="1" height="52" uuid="814dbb67-77d6-4798-b392-013d4762efa4"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="720" y="1" width="1" height="51" uuid="2b0378c1-2dea-4d4c-a2a4-4a2d89983e6a"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="152" y="1" width="1" height="52" uuid="ea1594e1-bd50-44ca-8a0c-ae3cb4314874"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="83" y="29" width="637" height="1" uuid="21bd238d-ba09-4265-a778-c44efbff7568"/>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="SuperRubrica2">
+		<groupExpression><![CDATA[$F{superRubric.description}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<rectangle>
+					<reportElement x="81" y="1" width="637" height="21" forecolor="#FFFFFF" backcolor="#666666" uuid="f6b3ac16-20d7-4aa9-aede-9745b6753818"/>
+				</rectangle>
+				<line>
+					<reportElement x="82" y="19" width="637" height="1" uuid="fa5a8383-9d01-4677-a494-e32127cf4400"/>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="176" y="2" width="543" height="17" forecolor="#FFFFFF" uuid="8a675d37-046e-4818-8be1-12f484274bb3"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{superRubric.description}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="81" y="1" width="69" height="18" forecolor="#FFFFFF" uuid="57bb373e-0b6e-4416-be30-f3c7bd8060c4"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{superRubric.name}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="151" y="0" width="1" height="20" uuid="e7dbafde-f517-484f-8779-2b13b4947c00"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="83" y="0" width="636" height="1" uuid="c1560621-db13-4c73-a6ea-852b26f4d8f4"/>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="82" y="0" width="1" height="20" uuid="be824823-02f2-4d71-8dad-e24ba619ac07"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="719" y="2" width="1" height="24" uuid="993404b2-59dd-4949-a1fb-592d928b769e"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="209" splitType="Stretch">
+			<image scaleImage="FillFrame" hAlign="Center">
+				<reportElement x="368" y="25" width="61" height="68" uuid="e4372a52-50fa-4f3b-9065-c99419bdb48e"/>
+				<imageExpression><![CDATA[$P{imagemLogo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="107" width="800" height="19" uuid="4a3ca652-e39e-4efe-b612-9a9944b091f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DIRECÇÃO  DE FINANÇAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="133" width="800" height="19" uuid="9205a0ce-3452-4ff0-a752-5251970415c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLASSIFICADOR ECONÓMICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="152" width="791" height="15" uuid="521224bc-c9e8-45e0-972b-ff8d9c44e6b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Diploma Ministerial nº 221/2013 de 30 de Agosto)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="80">
+			<rectangle>
+				<reportElement x="84" y="0" width="637" height="26" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="760f86cd-24d2-4704-b38c-2445d2c8b10f"/>
+			</rectangle>
+			<textField>
+				<reportElement x="178" y="4" width="542" height="21" uuid="4489693e-a09d-439b-bdb8-094ed4206d65"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="83" y="26" width="637" height="19" uuid="7f1dcd5d-913d-4483-8833-1bf38f8faa23"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{subRubrics})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"/subReport_planoOrcamental.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="84" y="25" width="636" height="1" uuid="660cf08b-f082-4a3f-87fd-bd918818b67c"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="87" y="6" width="51" height="14" uuid="90ea1629-7dff-4444-89f3-3169713410e7"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="151" y="26" width="1" height="19" uuid="4a024922-80b9-4f6a-9355-8b9941e4f828"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="720" y="25" width="1" height="20" uuid="22f71367-2eb7-4645-b624-82cc55837285"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="83" y="26" width="1" height="19" uuid="b56d8275-0f48-4994-8105-8f500453fc78"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="84" y="0" width="1" height="26" uuid="af77ea8d-528a-477c-95f5-12aa238cb4a8"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="151" y="0" width="1" height="25" uuid="abd67fa1-9f1a-4105-aaf8-41b6d3785f22"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="720" y="1" width="1" height="25" uuid="55d5587a-d4c2-4215-bd1a-4368d8c9964b"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="91">
+			<rectangle radius="5">
+				<reportElement x="0" y="43" width="800" height="41" uuid="e45cbb35-bd21-4e7b-aa89-6138694aa348"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="51" width="239" height="15" uuid="7677f48e-40c7-4eea-b136-5a7a8d21b36a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Produzido por UEM(eCampus.uem.mz)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="64" width="238" height="18" uuid="3ab3dfdc-21ae-4281-8e07-cbbe9f02bad5"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Contactos: Telefone: +258848996037, email : ecampus@uem.mz]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="775" y="62" width="21" height="20" uuid="fa0230cc-a463-4322-8914-dcec5f4071e3"/>
+				<textElement textAlignment="Center">
+					<font size="6" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

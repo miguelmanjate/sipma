@@ -1,0 +1,42 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window id="responsibleChooser" width="800px" mode="modal" position="center,center">
+		<div sclass="row">
+			<div sclass="col-md-12">
+				<div sclass="panel">
+				    <x:header class="panel-heading">
+				        ${vm.selectedSector.designation} - Responsável
+				        <x:span class="tools pull-right">
+				            <a href="javascript:;" onClick="responsibleChooser.detach()" iconSclass="fa fa-times"></a>
+				         </x:span>
+				    </x:header>
+				    <div sclass="panel-body" style="display: block;">
+				    	<div sclass="form-horizontal">
+				    	  <div sclass="form-group">
+				    	  	  <x:label class="col-lg-3 col-sm-2 control-label">Actual Responsável</x:label>
+		                      <div sclass="col-sm-7">
+		                          <textbox sclass="form-control" placeholder="Nenhum Responsável" value="@bind(vm.selectedSector.responsible.fullName())" readonly="true"></textbox>
+		                      </div>
+		                  </div>
+		                  <div sclass="form-group">
+		                      <x:label class="col-lg-3 col-sm-2 control-label">Selecionar Novo</x:label>
+		                      <div sclass="col-sm-7">
+		                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(vm.selectedSector.responsible)" model="@load(vm.sectorEmployees)">
+				                 	<template name="model" var="emp">
+				                 		<listitem label="${emp.fullName()}"></listitem>
+				                 	</template>
+				                 </listbox>
+		                      </div>
+	                      </div>
+	                      <div sclass="form-group">
+		                  	<div sclass="col-lg-3 col-lg-2"></div>
+		                      <div sclass="col-lg-2 col-lg-2">
+		                          <button zclass="btn btn-success btn-sm" disabled="@load(empty vm.selectedSector.responsible)" iconSclass="fa fa-check" id="btnSave" label="Gravar" onClick="@command('updateSector')"></button>
+		                      </div>
+		                  </div>
+		                </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</window>
+</zk>

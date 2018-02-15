@@ -1,0 +1,273 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.SpecificActionVM')">
+			
+			<zscript>
+				import mz.ciuem.sipma.util.InterviewRoles;
+				ListModelList itvwRoles = new ListModelList(InterviewRoles.values());
+			</zscript>
+	        <div sclass="col-md-12">
+	        	<custom-attributes endDate="${vm.format(vm.action.endDate)}"/>
+				<custom-attributes beginDate="${vm.format(vm.action.beginDate)}"/>
+               <div sclass="panel">
+                   <x:header class="panel-heading">
+                       Actividade: ${vm.action.content}    
+                    
+                       <label style="margin-left:75px">*</label>Data de início: ${vm.action.beginDate}
+                      
+                       <label style="margin-left:75px">*</label> Data de Fim:${vm.action.endDate}
+                       <x:span class="tools pull-right">
+                           <x:a href="javascript:;" class="fa fa-chevron-down"></x:a>
+                           <x:a href="javascript:;" class="fa fa-times"></x:a>
+                        </x:span>
+                   </x:header>
+                   <div sclass="panel-body" form="@id('fx') @load(vm.specifiedAction) @save(vm.specifiedAction, before='save')">
+						<div sclass="form-group">
+				             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+					          	 <x:table class="display table table-bordered " id="hidden-table-info">
+							        <x:thead>
+							        <x:tr>
+							        	<x:th>Act. Especifica</x:th>
+							            <x:th>Inicio</x:th>
+							            <x:th>Fim</x:th>
+							        </x:tr>
+							        </x:thead>
+							        <x:tbody id="list">
+								         <div children="@load(vm.specifiedActions)">
+					                        <template name="children">
+										        <x:tr class="gradeX" id="tr${each.id}">
+										            <x:td class="hidden-phone">${each.designation}</x:td>
+										            <x:td class="hidden-phone">${vm.sdf.format(each.beginDate)}</x:td>
+										            <x:td class="hidden-phone">${vm.sdf.format(each.endDate)}</x:td>
+										        </x:tr>
+									        </template>
+								        </div>
+							        </x:tbody>
+							     </x:table>
+						     </div>
+					     </div>
+					     <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+				                      <x:label class="col-lg-2 col-sm-1 control-label" style="margin-left:-50px">Actividade Específica</x:label>
+				                      <div sclass="col-sm-4">
+				                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.designation)" ></textbox>
+				                      </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">Início</x:label>
+				                      <div sclass="col-sm-2">
+				                          <datebox width="100%" instant="true" onChange="@command('limitEndDate', begin = self.value, end = endDate)"
+				                          	constraint="between ${beginDate} and ${endDate}, no empty" value="@bind(fx.beginDate)">
+				                          </datebox>
+				                      </div>
+				                      <x:label class="col-lg-1 col-sm-1 control-label">Fim</x:label>
+				                      <div sclass="col-sm-2">
+				                          <datebox width="100%" constraint="no empty" disabled="true" id="dbxEnd" value="@bind(fx.endDate)">
+				                          </datebox>
+				                      </div>
+				                  </div>
+				             </div>
+				             
+				          <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal">
+				            	  <div sclass="form-group">
+						             <x:label>Orcamental</x:label>
+						             <radio id="radio1" value="@bind(fx.budget)" label="SIM" onClick="divBaseCalc.setVisible(true); radio2.setValue(null)"></radio>
+						             <radio id="radio2" value="@bind(fx.budget)" label="Nao" onClick="divBaseCalc.setVisible(false); radio1.setValue(null)"></radio>
+				                 </div>
+				            </div>
+				       </div>
+				     </div>
+					     <div sclass="col-lg-12">
+						     <div sclass="col-lg-12 form-horizontal"  visible="false" id="divBaseCalc">
+						     	<div sclass="col-lg-6" form="@id('baseCalcForm') @load(vm.basedCalc) @save(vm.basedCalc, before='addCalBase')" >
+						     	  <x:label><x:code>Base Cálculo: </x:code></x:label><x:br/><x:br/>
+				            	  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Descrição *</x:label>
+				                      <div sclass="col-sm-9">
+				                          <textbox sclass="form-control" value="@bind(baseCalcForm.designation)" constraint="no empty"></textbox>
+				                      </div>
+				                  </div>
+				           
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label" >Quantidade*</x:label>
+				                      <div sclass="col-sm-3">
+				                          <intbox sclass="form-control" value="@bind(baseCalcForm.quantity)" constraint="no empty" ></intbox>
+				                      </div>
+				                      
+				                      <x:label class="col-lg-3 col-sm-2 control-label" >Super Rúbrica*</x:label>
+				                         <div sclass="col-sm-3">
+				                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(baseCalcForm.superRubric)"  model="@load(vm.superRubrics)" onSelect="@command('onSelectSuperRubrica', superRubric_id = self.selectedItem.value)">
+						                 	<template name="model" var="f">
+						                 		<listitem label="${f.description}" value="${f.id}"></listitem>
+						                 	</template>
+						                 </listbox>
+				                      </div>
+				                  </div>
+				                   <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label" >PreçoUnitário*</x:label>
+				                      <div sclass="col-sm-3">
+				                          <doublebox sclass="form-control" value="@bind(baseCalcForm.unitCost)" constraint="no empty" ></doublebox>
+				                      </div>
+				                      
+				                       <x:label class="col-lg-3 col-sm-2 control-label" >Rúbrica*</x:label>
+				                         <div sclass="col-sm-3">
+				                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(baseCalcForm.rubric)" model="@load(vm.rubrics)" onSelect="@command('onSelectRubrica', rubric_id = self.selectedItem.value)">
+						                 	<template name="model" var="f">
+						                 		<listitem label="${f.description}" value="${f.id}"></listitem>
+						                 	</template>
+						                 </listbox>
+				                      </div>
+				                  </div>
+				            
+				                  <div sclass="form-group">
+				                      <x:label class="col-lg-3 col-sm-2 control-label">Fonte </x:label>
+				                      <div sclass="col-sm-3">
+				                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(baseCalcForm.font)" model="@load(vm.fonts)" onSelect="@command('onSelectRubrica', rubric_id = self.selectedItem.value)">
+						                 	<template name="model" var="f">
+						                 		<listitem label="${f.designation}" value="${f.id}"></listitem>
+						                 	</template>	
+						                 </listbox>
+				                      </div>
+				                      
+				                       <x:label class="col-lg-3 col-sm-2 control-label" >Sub Rúbrica*</x:label>
+				                         <div sclass="col-sm-3">
+				                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(baseCalcForm.subRubric)"  model="@load(vm.subRubrics)"  >
+						                 	<template name="model" var="f">
+						                 		<listitem label="${f.description}"></listitem>
+						                 	</template>
+						                 </listbox>
+				                      </div>
+				                  </div>
+				                  <div sclass="form-group col-lg-4">
+				                  	  <x:label class="col-lg-3 col-sm-2 control-label"></x:label>
+				                      <div sclass="col-sm-6">
+						             	<button disabled="@bind(empty baseCalcForm.font)"  zclass="btn btn-info btn-sm" iconSclass="fa fa-plus" onClick="@command('addCalBase')" label="Adicionar"></button>
+						             </div>
+				                  </div>
+				                  </div>
+				                  <div sclass="col-lg-6">
+				                  	<x:label><html><![CDATA[&nbsp;]]></html></x:label><x:br/><x:br/>
+							     	<x:table class="table table-bordered" id="tblBaseCal">
+			                            <x:thead>
+				                            <x:tr>
+				                                <x:th>Base Calculo</x:th>
+				                                <x:th>Custo</x:th>
+				                                <x:th>Fonte</x:th>
+				                                <x:th>SubRúbrica</x:th>
+				                                <x:th>Remover</x:th>
+				                            </x:tr>
+			                            </x:thead>
+			                            <x:tbody>
+			                            	<div children="@load(vm.specifiedBaseCalcs)">
+			                        			<template name="children" var="sa">
+						                            <x:tr>
+						                                <x:td>${sa.designation}</x:td>
+						                                <x:td>${sa.cost}</x:td>
+						                                <x:td>${sa.font.designation}</x:td>
+						                                <x:td>${sa.subRubric.name}</x:td> 
+						                                <x:td> <button iconSclass="fa fa-minus" zclass="btn btn-xs btn-danger">
+                       								          <custom-attributes sa = "${sa}"/>
+                       							                </button>
+                       					               	</x:td>
+						                            </x:tr>
+					                            </template>
+				                            </div>
+			                            </x:tbody>
+			                        </x:table>
+							     </div>
+						     </div>
+						     <div sclass="col-lg-12 form-horizontal">
+						     	  <div sclass="col-lg-5" form="@id('allocForm') @load(vm.allocation) @save(vm.allocation, before='addOtherInterviews')">
+							     	  <x:label><x:code>Orgãos Intervinientes:</x:code></x:label><x:br/><x:br/>
+					            	  <div sclass="form-group">
+					                      <x:label class="col-lg-3 col-sm-2 control-label">Orgão</x:label>
+					                      <div sclass="col-sm-9">
+					                          <listbox mold="select" selectedItem="@bind(allocForm.organ)" sclass="form-control m-bot15" model="@load(vm.organs)">
+							                 	<template name="model" var="o">
+							                 		<listitem label="${o.designation}"></listitem>
+							                 	</template>
+							                 </listbox>
+					                      </div>
+					                  </div>
+					                  <div sclass="form-group">
+					                      <x:label class="col-lg-3 col-sm-2 control-label">Papel</x:label>
+					                      <div sclass="col-sm-9">
+					                          <listbox mold="select" selectedItem="@bind(allocForm.role)" sclass="form-control m-bot15" model="@load(vm.roles)">
+							                 	<template name="model" var="r">
+							                 		<listitem label="${r.designation}"></listitem>
+							                 	</template>
+							                 </listbox>
+					                      </div>
+					                  </div>
+					                  <div sclass="form-group">
+					                      <x:label class="col-lg-3 col-sm-2 control-label">Tarrefa *</x:label>
+					                      <div sclass="col-sm-9">
+					                          <textbox zclass="form-control" constraint="no empty" value="@bind(allocForm.taskAlso)"></textbox>
+					                      </div>
+					                  </div>
+					                  <div sclass="form-group">
+					                      <x:label class="col-lg-3 col-sm-2 control-label">Prazo *</x:label>
+					                      <div sclass="col-sm-6">
+					                          <datebox width="100%" value="@bind(allocForm.endDate)" constraint="no empty, between ${beginDate} and ${endDate}"></datebox>
+					                      </div>
+					                  </div>
+					                  <div sclass="form-group">
+					                      <div sclass="form-group col-lg-4">
+					                      	<x:label class="col-lg-3 col-sm-2 control-label"></x:label>
+					                      	<div sclass="col-sm-6">
+							             	<button disabled="@bind(empty allocForm.role)" zclass="btn btn-info btn-sm" iconSclass="fa fa-plus" onClick="@command('addOtherInterviews')" label="Adicionar"></button>
+							             	</div>
+							             </div>
+					                  </div>
+				                  </div>
+				                  <div sclass="col-lg-7">
+				                  	<x:label><html><![CDATA[&nbsp;]]></html></x:label><x:br/><x:br/>
+							     	<x:table class="table table-bordered" id="tblOtherItw">
+			                            <x:thead>
+				                            <x:tr>
+				                                <x:th>Orgão</x:th>
+				                                <x:th>Papel</x:th>
+				                                <x:th>Tarrefa</x:th>
+				                                <x:th>Prazo</x:th>
+				                            </x:tr>
+			                            </x:thead>
+			                            <x:tbody>
+				                            <div children="@load(vm.allocationOrgans)">
+			                        			<template name="children" var="ao">
+						                            <x:tr>
+						                                <x:td>${ao.organ.designation}</x:td>
+						                                <x:td>${ao.role.designation}</x:td>
+						                                <x:td>${ao.taskAlso}</x:td>
+						                                <x:td>${vm.sdf.format(ao.endDate)}</x:td>
+						                            </x:tr>
+					                            </template>
+				                            </div>
+			                            </x:tbody>
+			                        </x:table>
+							     </div>
+						     </div>
+					    </div>
+					    <div sclass="col-lg-12" style="float:right;">
+					    	<x:hr/>
+					    	<button zclass="btn btn-sm btn-success" iconSclass="fa fa-check" onClick="@command('save')" label="Registar Ac. Esp."></button>
+					    	<separator orient="vertical" width="50px"></separator>
+					    	<button zclass="btn btn-sm btn-default" iconSclass="fa fa-print" onClick="@command('printPlanWithBudget')" disabled="true" label="Plano de Actividade com orçamento"></button>
+					    	<button zclass="btn btn-sm btn-default" iconSclass="fa fa-print" onClick="@command('printPlanWithInterviews')" disabled="true" label="Plano de Actividade com parceiros"></button>
+					    </div>
+					    <div sclass="col-lg-12">
+					    	<separator></separator>
+					    	<div sclass="col-lg-1"></div>
+					    	<div sclass="col-lg-10">
+					    	<jasperreport id="report" height="400px" sclass="profile-pic text-center"
+						        src="@load(vm.reportConfig.source, after='printPlanWithBudget')"
+						        parameters="@load(vm.reportConfig.parameters, after='printPlanWithBudget')"
+						        type="pdf"
+						        datasource="@load(vm.reportConfig.dataSource, after='printPlanWithBudget')"/>
+						     </div>
+						    <div sclass="col-lg-1"></div>
+					    </div>
+                   </div>
+               </div>
+           </div>
+	</div>
+</zk>

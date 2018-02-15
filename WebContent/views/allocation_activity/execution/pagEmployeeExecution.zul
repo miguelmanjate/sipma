@@ -1,0 +1,116 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+    <div sclass="row" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('mz.ciuem.sipma.vm.EmployeeExecutionVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Registar Execucao de Funcionario
+	          </x:header>
+	          <div sclass="panel-body">
+	             <div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+	             	<x:table class="display table table-bordered table-striped" id="dynamic-table">
+                           <x:thead>
+                           <x:tr>
+                           	   <x:th></x:th>
+                               <x:th>Tarefa</x:th>
+                               <x:th class="hidden-phone">Data de Inicio</x:th>
+                               <x:th>Data de Fim</x:th>
+                               <x:th>Percentagem</x:th>
+                           </x:tr>
+                           </x:thead>
+                           <x:tbody>
+                           	<radiogroup id="rgChosed">
+                           	<div children="@load(vm.allocations)">
+                           		<template name="children" var="alloc">
+                           			<x:tr>
+                           				<x:td><x:center>
+                           					<custom-attributes actId = "${alloc.id}"/>
+                           					<x:label class="btn-success iradio_flat-red" style="margin-top: 35%">
+                           						<separator height="1.5px"></separator>
+						                 		<radio onCheck="@command('chooseEmpAllocation', allocId = actId)"/>
+						                 	</x:label>
+                           				</x:center></x:td>
+		                                <x:td>${alloc.task}</x:td>
+		                                <x:td class="hidden-phone">${vm.sdf.format(alloc.startDate)}</x:td>
+		                                <x:td>${vm.sdf.format(alloc.endDate)}</x:td>
+		                                <x:td>
+		                                	<x:div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="${alloc.rate()}" aria-valuemin="0" aria-valuemax="100" style="width: ${alloc.rate()}%">
+		                                        <x:span class="">${alloc.rate()}%</x:span>
+		                                    </x:div>
+		                                </x:td>
+		                            </x:tr>
+                           		</template>
+                           	</div></radiogroup>
+                    		</x:tbody>
+                       </x:table>
+	             </div>
+	             <div sclass="form-horizontal col-lg-12"
+			        form="@id('fx') @load(vm.employeeExecution) @save(vm.employeeExecution, before='save')">
+		             <div sclass="form-horizontal">
+		             	 <div sclass="form-group">
+		             	 	<x:label class="col-lg-2 col-sm-2 control-label" >Data</x:label>
+		                      <div sclass="col-sm-2">
+		                          <datebox width="100%" constraint="no empty" id="dbxBegin" format="dd-MM-yyyy" onCreate="self.value = new Date()" disabled="true"></datebox>
+		                      </div>
+		                     <x:label class="col-lg-2 col-sm-2 control-label" >Percentagem(%)</x:label>
+		                      <div sclass="col-sm-2">
+		                          <spinner value="@bind(fx.rate)" constraint="min 0, max 100"></spinner>
+		                      </div>
+		             	 </div>
+		                  <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Actividade Realizada</x:label>
+		                      <div sclass="col-sm-6">
+		                          <textbox constraint="no empty" sclass="form-control" width="570px" rows="3" value="@bind(fx.taskAlso)"></textbox>
+		                      </div>
+		                  </div>
+		                  <div sclass="form-group">
+		                      <x:label class="col-lg-2 col-sm-2 control-label">Anexos</x:label>
+		                      <div sclass="col-sm-6">                    
+				                   <button id="btnUpload" zclass="btn btn-default btn-sm" label="Carregar" upload="true" onUpload="@command('doUpload')" />
+				                    <separator height="10px"></separator>
+				                    <x:table class="display table table-bordered table-striped dataTable" style="width 100%" id="tblList">
+				                   		<x:th>Anexos</x:th>
+				                   		<x:th></x:th>
+				                   		<x:div children="@load(vm.filesList)">
+				                   			<template name="children">
+				                   				<x:tr>
+				                   					<x:td style="width: 90%">${each.fileName}</x:td>
+				                   					<x:td style="width: 10%">
+				                   						<button iconSclass="fa fa-minus-circle" zclass="btn btn-xs btn-default" onClick="@command('onDelete', currentFile=each)" />
+				                   					</x:td>
+				                   				</x:tr>
+				                   			</template>
+				                   		</x:div>
+				                    </x:table>
+				                </div>
+		                  </div><separator height="20px"></separator>
+		                  <div sclass="form-group">
+		                  	<button zclass="btn btn-success btn-sm" disabled="@load(empty vm.employeeExecution.allocationEmployee)" iconSclass="fa fa-plus-square" onClick="@command('save')"  label="Adicionar"></button>
+		                  </div>
+		             </div> 
+				 </div>
+				 <div sclass="adv-table" id="tbl">
+				 	<x:table class="table table-bordered">
+				 		<x:tr>
+				 			<x:th>Tarefa</x:th>
+				 			<x:th>Data</x:th>
+				 			<x:th>Actividades Realizadas</x:th>
+				 			<x:th>%</x:th>
+				 		</x:tr>
+				 		<div children="@load(vm.employeeExecutions)">
+				 			<template name="children" var="ee">
+						 		<x:tr>
+						 			<x:td>${ee.allocationEmployee.task}</x:td>
+						 			<x:td>${vm.sdf.format(ee.date)}</x:td>
+						 			<x:td>${ee.taskAlso}</x:td>
+						 			<x:td>${ee.rate}</x:td>
+						 		</x:tr>
+					 		</template>
+				 		</div>
+				 	</x:table>
+				 </div>
+	          </div>
+	        </x:section>
+	    </div>
+	 </div>
+</zk>

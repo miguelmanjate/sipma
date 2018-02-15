@@ -1,0 +1,136 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.SubRubricVM')" id="modal">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Nova Rúbrica
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+        	<div sclass="panel-body">
+        		<div sclass="form-horizontal" form="@id('fx') @load(vm.subRubric) @save(vm.subRubric, before='save') @save(vm.subRubric, before='update')">
+					     <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Grande Rúbrica</x:label>
+	                      <div sclass="col-sm-8">
+	                          <listbox mold="select" sclass="form-control m-bot15" selectedItem="@bind(vm.subRubric.rubric)" model="@load(vm.rubrics)" >
+			                 	<template name="model" var="ot">
+			                 		<listitem label="${ot.description}   ----------------   ${ot.superRubric.description}"></listitem>
+			                 	</template>
+			                 </listbox>
+	                      </div>
+	                  </div>
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Código</x:label>
+	                      <div sclass="col-sm-2">
+	                          <textbox sclass="form-control uppercase" constraint="no empty" value="@bind(fx.name)"></textbox>
+	                      </div>
+	                
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Descricao</x:label>
+	                      <div sclass="col-sm-4">
+	                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.description)"></textbox>
+	                      </div>
+	                  </div>
+	                  
+	                  <div sclass="form-group">
+	                    <div class="col-lg-2 col-sm-2 control-label">
+	                    .
+	                    </div>
+	                  <div class="col-lg-8 col-sm-8">
+	                   <div sclass="form-group">
+	                   <x:header class="panel-heading">
+                          Projecto de Investimento
+                        </x:header>
+                          </div>
+	                    	<listbox id="lbx_projectos" checkmark="true" rows="4" multiple="true">
+								<listhead>
+									<listheader label="#" width="5%" />
+									<listheader label="Código" sort="auto(name)" width="25%"/>
+									<listheader label="Descriçaõ" sort="auto(description)" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell></listcell>
+										<listcell label="${each.name}" />
+										<listcell label="${each.description}" />
+									</listitem>
+								</template>
+							</listbox>
+	                   
+	                    	<listbox id="lbx_projectosRubricas" checkmark="true" rows="4" visible="false">
+								<listhead>
+									<listheader label="#" width="5%" />
+									<listheader label="Código" sort="auto(name)" width="25%"/>
+									<listheader label="Descriçaõ" sort="auto(description)" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell></listcell>
+										<listcell label="${each.projectInvestment.name}" />
+										<listcell label="${each.projectInvestment.description}" />
+									</listitem>
+								</template>
+							</listbox>
+	                    </div>
+	                  </div>
+	              
+	                  <div sclass="form-group">
+	                  	<div sclass="col-lg-2 col-lg-2"></div>
+	                      <div sclass="col-lg-2 col-lg-2">
+	                          <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" label="Registar" onClick="@command('save')" ></button>
+	                      </div>
+	                      <div sclass="col-lg-1 col-lg-2">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+	                      </div>
+	                      <div sclass="col-lg-2 col-lg-2">
+		                      <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+		                  </div>
+	                  </div>
+	             </div>
+             	<div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th>Código</x:th>
+					            <x:th>Descricao</x:th>
+					            <x:th>Rúbrica</x:th>
+					            <x:th></x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div children="@load(vm.subRubrics)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.name}</x:td>
+							            <x:td>${each.description}</x:td>
+							            <x:td>${each.rubric.name}</x:td>
+							            <x:td class="hidden-phone">
+							            	<button iconSclass="fa fa-edit" onClick="@command('edit', typeId = modelId)" zclass="btn btn-warning btn-xs"></button>
+							            	<separator orient="vertical" />
+							            	<button iconSclass="fa fa-eye" onClick="@command('view', typeId = modelId)" zclass="btn btn-primary btn-xs"></button>
+							            	<custom-attributes modelId = "${each.id}"/>
+							            </x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+				     
+				              <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="center">
+                       		<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="btnPrintpO" onClick="@command('printActpO')" label="Imprimir"></button>
+                       </div>
+                  </div>
+			     </div>
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>

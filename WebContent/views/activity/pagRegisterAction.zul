@@ -1,0 +1,31 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<zscript>
+	import mz.ciuem.sipma.util.CriteriaTypes;;
+	ListModelList cTypes = new ListModelList(CriteriaTypes.values());
+</zscript>
+<div sclass="row" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ActionVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Registar Actividade
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body">            
+             <div sclass="form-group col-lg-12" width="">
+	             <include src="views/calendar/action-calendar.zul"></include>
+		     </div>
+             <div sclass="col-md-12"><x:br/>
+             	<div children="@load(cTypes)">
+                    <template name="children" var="c">
+                    	<x:span><x:code>${c.value}:</x:code></x:span> <x:span> ${c.description}</x:span><x:br/>
+			        </template>
+		        </div>
+             </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

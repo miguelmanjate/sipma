@@ -1,0 +1,40 @@
+<?page title="UEM - Login"?>
+<?link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"?>
+<?link rel="icon" href="/images/favicon.ico" type="image/x-icon"?>
+<?link href="css/style.css" rel="stylesheet"?>
+<?link href="css/style-responsive.css" rel="stylesheet"?>
+<?link href="css/components.css" rel="stylesheet"?>
+<?link href="css/login.css" rel="stylesheet"?>
+<?link href="css/sipma.css" rel="stylesheet"?>
+
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div sclass="login-body" width="100%" height="100%">
+		<div sclass="container">
+			<x:form id="f" name="f" class="form-signin" action="j_spring_security_check" method="POST">
+		        <div sclass="form-signin-heading text-center">
+		            <image src="images/u4.jpg" width="100px"/><x:br/>
+		            <label value="Gestão de Plano e Orçamento" sclass="loginTitle"></label>
+		            <separator height="10px"></separator>
+		            <div sclass="alert alert-warning fade in" if="${empty param.login_error and empty param.loggedout}">
+                        <label value="Autentique com seu utilizador e senha!"></label>
+                    </div>
+                    <div sclass="alert alert-danger fade in" if="${not empty param.login_error}">
+                        <label value="Utilizador ou Senha errada. Tente de novo."></label>
+                    </div>
+                    <div sclass="alert alert-info fade in" if="${not empty param.loggedout}">
+                        <label value="Você foi desconectado com êxito."></label>
+                    </div>
+		        </div>
+		        <div sclass="login-wrap">
+		            <textbox name="j_username" sclass="form-control" placeholder="Utilizador"/>
+		            <textbox name="j_password" type="password" sclass="form-control" placeholder="Senha"/>
+		            <button zclass="btn btn-lg btn-login btn-block" iconSclass="fa fa-check" type="submit"/>
+		        </div>
+		    </x:form>
+		</div>
+	</div>
+	<x:script src="js/jquery-1.10.2.min.js"></x:script>
+	<x:script src="js/bootstrap.min.js"></x:script>
+	<x:script src="js/modernizr.min.js"></x:script>
+</zk>

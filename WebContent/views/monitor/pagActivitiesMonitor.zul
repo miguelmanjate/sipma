@@ -1,0 +1,59 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+	<div sclass="row" apply="org.zkoss.bind.BindComposer"
+			  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ActivitiesMonitorVM')">
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Monitorar Actividades Por Orgão
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div sclass="form-horizontal">
+             	 <div sclass="form-group">
+                     <x:label class="col-lg-1 col-sm-1 control-label" >Ciclo</x:label>
+                      <div sclass="col-sm-5">
+                          <listbox sclass="form-control" id="cycles" mold="select" model="@load(vm.cycles)"
+                          	onSelect="@command('findAllocations', cycleId = self.selectedItem.value)">
+                          	<template name="model" var="c">
+                          		<listitem label="${c.code} - ${c.subject}" value="${c.id}"></listitem>
+                          	</template>
+                          </listbox>
+                      </div>
+             	 </div>
+		         </div>
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Orgão</x:th>
+				            <x:th>Nivel de Execução</x:th>
+				            <x:th>Orçamento</x:th>
+				            <x:th class="hidden-phone">Cronograma</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+				        	<div children="@load(vm.organs)">
+				        		<template name="children" var="o">
+				        			<custom-attributes mdlId = "${o.id}" /> 
+				        			<x:tr class="gradeX">
+				        				<x:td>${o.designation}</x:td>
+				            			<x:td>
+				            				<button label="Ver" iconSclass="fa fa-eye" zclass="btn btn-sm btn-default"></button>
+				            			</x:td>
+				            			<x:td><button label="Ver" iconSclass="fa fa-eye"  zclass="btn btn-sm btn-default"></button></x:td>
+				            			<x:td><button label="Ver" iconSclass="fa fa-eye"  zclass="btn btn-sm btn-default"></button></x:td>
+				        			</x:tr>
+				        		</template>
+				        	</div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

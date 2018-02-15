@@ -1,0 +1,65 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<window id="winMonitFases" width="60%"
+	    position="center" action="show: slideDown({duration: 100}); hide: slideUp({duration: 100})">
+	    
+	    <div sclass="row">
+			<div sclass="col-md-12">
+				<x:section class="panel">
+		          <x:header class="panel-heading">
+		              <html><![CDATA[&nbsp;]]></html>
+		              <x:span class="tools pull-right">
+		                  <a class="fa fa-times" href="javascript:;" onClick="winMonitFases.detach()"></a>
+		              </x:span>
+		          </x:header>
+		          <div sclass="panel-body">
+		             <div sclass="row col-lg-12">
+		            	<x:center>
+		            		<image src="images/u4.jpg" width="70px"></image><x:br/>
+		            		<label value="GABINETE DE PLANIFICAÇÃO"></label><separator/>
+		            		<x:label>Execucao do Plano de Actividades Pelas Unidades Organica</x:label>
+		            	</x:center>
+		             </div>
+		             <separator height="30px"></separator>
+		             <div sclass="row col-lg-12">
+		             	<div sclass="form-group">
+			                 <x:label for="exampleInputPassword1">Ciclo</x:label>
+			                 <listbox mold="select" sclass="form-control" width="150px">
+			                 	<listitem label="2014"></listitem>
+			                 	<listitem label="2015"></listitem>
+			                 </listbox>
+			             </div>
+			             <div sclass="row col-lg-12">
+			             	<div sclass="col-lg-6">
+				             <separator height="20px"></separator>
+				             <x:label>Preparacao do Processo de Planificacao</x:label>
+				             <x:p>Centro de Informática</x:p>
+				             <x:p>Faculdade de Direito</x:p>
+				             <x:p>Faculdade de Agronomia</x:p>
+				             <x:p>Centro de Estudos Africanos</x:p>
+				           </div>
+				           <div sclass="col-lg-6">
+				             <separator height="20px"></separator>
+				             <x:label>Elaborar e Submeter o Plano</x:label>
+				             <x:p>Centro de Informática</x:p>
+				             <x:p>Faculdade de Direito</x:p>
+				             <x:p>Faculdade de Agronomia</x:p>
+				             <x:p>Centro de Estudos Africanos</x:p>
+				           </div>
+			             </div>
+			             <div sclass="row col-lg-12">
+			             	<div sclass="col-lg-6">
+				             <separator height="20px"></separator>
+				             <x:label>Execucao do Plano</x:label>
+				             <x:p>Centro de Informática</x:p>
+				             <x:p>Faculdade de Direito</x:p>
+				             <x:p>Faculdade de Agronomia</x:p>
+				             <x:p>Centro de Estudos Africanos</x:p>
+				           </div>
+			             </div>
+		             </div>
+		          </div>
+		        </x:section>
+		    </div>
+		 </div>    
+	</window>
+</zk>

@@ -1,0 +1,66 @@
+<?component name="dualListBox" extends="div" class="mz.ciuem.sipma.comps.DualListbox"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer" validationMessages="@id('vmsgs')"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.UserRoleVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Perfil#${vm.userRole.id}
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+          <div sclass="panel-body" id="tblPerms">
+          	 <div sclass="form-horizontal" id="userForm" form="@id('fx') @load(vm.userRole) @save(vm.userRole, before='update')">
+				 <div sclass="form-group">
+                      <x:label class="col-lg-2 col-sm-2 control-label">Perfil</x:label>
+                      <div sclass="col-sm-4">
+                          <textbox value="@bind(fx.rolename)" readonly="true" sclass="form-control"></textbox>
+                      </div>
+                  </div>
+                  <div sclass="form-group">
+                  	<separator></separator>
+                  	<div sclass="col-lg-2 col-lg-2"></div>
+                      <div sclass="col-lg-2 col-lg-2">
+                          <button zclass="btn btn-warning btn-sm" disabled="@load(not empty fx.rolename)" iconSclass="fa fa-edit" id="btnSave" label="Modificar" ></button>
+                      </div>
+                  </div>
+                  <div sclass="col-md-12">
+                      <div sclass="panel">
+                          <div sclass="panel-body">
+                          	<dualListBox id="selectedPermissions" model="@load(vm.missedPermissions)"></dualListBox>
+                          	<separator></separator>
+						  	<button zclass="btn btn-info btn-sm" onClick="@command('addNewPermissions')" iconSclass="fa fa-plus">Adicionar</button>
+						  	<div sclass="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+	                          	<x:table class="table table-bordered  table-striped table-condensed" id="dynamic-table">
+	                          		<x:thead><x:tr>
+	                          			<x:th>Permissões <label sclass="label label-danger" value="@load(vm.userRole.permissions.size())"></label></x:th>
+	                          			<x:th></x:th>
+	                          		</x:tr></x:thead>
+	                          		<x:tbody>
+	                       			<div children="@load(vm.userRole.permissions)">
+	                       				<template name="children" var="p">
+	                       					<x:tr>
+	                       						<x:td><x:i class="fa fa-dot-circle-o"></x:i> ${p.permissionname}</x:td>
+	                       						<x:td> <button iconSclass="fa fa-minus" 
+	                       								onClick="@command('removePermission', permId = perm)" zclass="btn btn-xs btn-danger">
+	                       								<custom-attributes perm = "${p.id}"/>
+	                       							   </button>
+	                       					 	</x:td>
+	                       					</x:tr>
+	                       				</template>
+	                       			</div>
+	                       			</x:tbody>
+	                          	</x:table>
+                          	</div>
+                          </div>
+                      </div>
+                  </div>
+             </div>
+          </div>
+        </x:section>
+	</div>
+</div>
+</zk>

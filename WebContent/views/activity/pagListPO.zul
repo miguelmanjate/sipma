@@ -1,0 +1,72 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('mz.ciuem.sipma.vm.ActionPOVM')" id="modal">
+		
+		<div sclass="col-md-12">
+			<x:section class="panel">
+	          <x:header class="panel-heading">
+	              Funcionários
+	              <x:span class="tools pull-right">
+	                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+	                  <a class="fa fa-times" href="javascript:;"></a>
+	              </x:span>
+	          </x:header>
+	          <div sclass="panel-body">
+	          	<div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+		          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+				        <x:thead>
+				        <x:tr>
+				            <x:th>Super Rúbricas</x:th>
+				             <x:th>Designação</x:th>
+				            <x:th>Grande Rúbrica</x:th>
+				            <x:th>Designação</x:th>
+				            <x:th>Rúbrica</x:th>	
+				            <x:th>Designação</x:th>	
+				              <x:th>Custo</x:th>
+				        </x:tr>
+				        </x:thead>
+				        <x:tbody>
+			          <div children="@load(vm.superRubrics)">
+		                    <template name="children">
+				               <x:tr class="gradeX">
+				                      <x:td>${each.name}</x:td>
+				                      <x:td>${each.description}</x:td>
+				                      <x:td>
+							              <x:li forEach="${each.rubrics}">${each.name}</x:li>
+							          </x:td>
+							            <x:td>
+							              <x:li forEach="${each.rubrics}">${each.description}</x:li>
+							          </x:td>
+							          <x:td>
+							              <x:li forEach="${each.rubrics}" ><x:li forEach="${each.subRubrics}">${each.name}</x:li></x:li>
+							          </x:td>
+							          <x:td>
+							              <x:li forEach="${each.rubrics}" ><x:li forEach="${each.subRubrics}" >${each.description}</x:li></x:li>
+							          </x:td>
+							           <x:td>
+							              <x:li forEach="${each.rubrics}" >
+							                   <x:li forEach="${each.subRubrics}"> 
+							                         <x:li forEach="${each.basedCalculatings}">${each.cost}</x:li>
+							                   </x:li>
+							              </x:li>
+							          </x:td>
+							         
+							         
+				                </x:tr>
+				            </template>
+				         </div>
+				        </x:tbody>
+				     </x:table>
+			     </div>
+			     
+                   <div sclass="form-group">
+                       <x:label class="col-lg-2 col-sm-1 control-label"> </x:label>
+                       <div sclass="col-lg-12" align="center">
+                       		<button zclass="btn btn-warning btn-sm" iconSclass="fa fa-print" id="btnPrintpO" onClick="@command('printActpO')" label="Imprimir"></button>
+                       </div>
+                  </div>
+	          </div>
+	        </x:section>
+	    </div>
+	</div>
+</zk>

@@ -1,0 +1,77 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+	  			viewModel="@id('vm')@init('mz.ciuem.sipma.vm.StrategicObjectiveVM')">
+	<div sclass="col-md-12">
+		<x:section class="panel">
+          <x:header class="panel-heading">
+              Objectivos Estratégicos
+              <x:span class="tools pull-right">
+                  <a class="fa fa-chevron-down" href="javascript:;"></a>
+                  <a class="fa fa-times" href="javascript:;"></a>
+              </x:span>
+          </x:header>
+        	<div sclass="panel-body">
+	        	<div sclass="form-horizontal" form="@id('fx') @load(vm.strategicObjective) @save(vm.strategicObjective, before='save') @save(vm.strategicObjective, before='update')">
+					 <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Código</x:label>
+	                      <div sclass="col-sm-2">
+	                          <textbox sclass="form-control uppercase" constraint="no empty" value="@bind(fx.code)"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                      <x:label class="col-lg-2 col-sm-2 control-label">Objectivo</x:label>
+	                      <div sclass="col-sm-5">
+	                          <textbox sclass="form-control" constraint="no empty" value="@bind(fx.designation)"></textbox>
+	                      </div>
+	                  </div>
+	                  <div sclass="form-group">
+	                  	<div sclass="col-lg-2 col-lg-2"></div>
+	                      <div sclass="col-lg-2 col-lg-2">
+	                          <button zclass="btn btn-success btn-sm" iconSclass="fa fa-check" id="btnSave" label="Registar" onClick="@command('save')"></button>
+	                      </div>
+	                      <div sclass="col-lg-1 col-lg-2">
+	                          <button zclass="btn btn-default btn-sm" iconSclass="fa fa-clear" disabled="true" id="btnCancel" label="Cancel" onClick="@command('cancelButton')"></button>
+	                      </div>
+	                      <div sclass="col-lg-2 col-lg-2">
+		                      <button zclass="btn btn-warning btn-sm" iconSclass="fa fa-edit" disabled="true" id="btnEdit" label="Actualizar" onClick="@command('update')"></button>
+		                  </div>
+	                  </div>
+	             </div>
+	             <div sclass="form-group col-lg-12">
+	             	<x:header class="panel-heading"></x:header>
+		             <div class="adv-table" onCreate='Clients.evalJavaScript("initDataTable()")'>
+			          	 <x:table class="display table table-bordered table-striped" id="dynamic-table">
+					        <x:thead>
+					        <x:tr>
+					            <x:th style="width:15%">Codigo</x:th>
+					            <x:th style="width:55%">Objectivo</x:th>
+					            <x:th style="width:10%">Data de Registo</x:th>
+					            <x:th style="width:20%"></x:th>
+					        </x:tr>
+					        </x:thead>
+					        <x:tbody>
+					        <div children="@load(vm.strategicObjectives)">
+		                        <template name="children">
+							        <x:tr class="gradeX">
+							            <x:td>${each.code}</x:td>
+							            <x:td>${each.designation}</x:td>
+							            <x:td>${vm.sdf.format(each.created)}</x:td>
+							            <x:td class="hidden-phone">
+							            	<button iconSclass="fa fa-edit" onClick="@command('edit', strategicObjectiveId = modelId)" zclass="btn btn-warning btn-xs"></button>
+							            	<separator orient="vertical" />
+							            	<button iconSclass="fa fa-eye"  zclass="btn btn-primary btn-xs"></button>
+							            	<custom-attributes modelId = "${each.id}"/>
+							            </x:td>
+							        </x:tr>
+						        </template>
+					        </div>
+					        </x:tbody>
+					     </x:table>
+				     </div>
+			     </div>
+			</div>
+        </x:section>
+	</div>
+</div>
+</zk>
